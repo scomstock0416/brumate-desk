@@ -52,9 +52,8 @@ const QuestionList = ({
                                         {question.question}
                                     </LinkMenu>
                                 )}
-                                <ImageIcon src={IconArrow} alt="arrow" />
+                                <ImageIcon src={IconArrow} opened={open.includes(question.id)} alt="arrow" />
                             </QuestionTitle>
-
                             {
                                 open.includes(question.id) && answer
                                 && (<AnswerContainer dangerouslySetInnerHTML={{ __html: answer.answer }} />)

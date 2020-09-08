@@ -59,7 +59,7 @@ const LinkMenu = styled.p`
 `;
 
 const ImageIcon = styled.img`
-    
+    transform: ${({ opened }) => (opened ? 'rotate(90deg)' : 'rotate(-90deg)')};
 `;
 
 const Banner = styled.img`
