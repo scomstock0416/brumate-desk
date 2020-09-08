@@ -15,7 +15,7 @@ const Chat = ({
     const breakpoints = useBreakpoint();
     return (
         <Container className={className}>
-            <H2>Chat with us</H2>
+            <H2>Don’t see your question or answer here? Contact us</H2>
             {breakpoints.md ? <Button src={chat} /> : <Button src={chatMobile} />}
         </Container>
     );

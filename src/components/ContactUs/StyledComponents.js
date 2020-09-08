@@ -20,6 +20,8 @@ const InformationField = styled.a`
     margin: 0 30px;
     display: flex;
     text-decoration: none;
+    cursor: ${({ hyperlink }) => (hyperlink ? 'pointer' : ' initial')};
+    pointer-events: ${({ hyperlink }) => (hyperlink ? 'auto' : ' none')};
 `;
 
 const ImageIcon = styled.img`

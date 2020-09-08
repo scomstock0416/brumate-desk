@@ -70,7 +70,7 @@ const H2 = styled.h2`
 
 const IndexPage = () => {
     const data = useStaticQuery(graphql`{
-            allContentfulQuestionType {
+            allContentfulQuestionType (sort: {fields: order}){
               edges {
                 node {
                   id
@@ -82,6 +82,8 @@ const IndexPage = () => {
                     answer {
                       answer
                     }
+                    featured
+                    popular
                   }
                   title
                   product {
@@ -95,11 +97,27 @@ const IndexPage = () => {
                 }
               }
             }
+            allContentfulQuestions(filter: {popular: {eq: true}}) {
+                nodes {
+                  id
+                  answer {
+                    answer
+                    id
+                  }
+                  featured
+                  popular
+                  question {
+                    id
+                    question
+                  }
+                  typeQuestion {
+                    title
+                  }
+              }
+            }
           }                  
       `);
 
-    const { questions: popularFAQ } = data.allContentfulQuestionType.edges
-      && data.allContentfulQuestionType.edges[3].node;
     return (
         <Layout>
             <Container>
@@ -109,12 +127,14 @@ const IndexPage = () => {
                     if (node.product) {
                         return (<></>);
                     }
+
                     const {
                         title,
                         id,
-                        questions,
                         icon,
+                        questions,
                     } = node;
+                    const filteredQuestions = questions && questions.filter(({ featured }) => (featured === true));
                     const {
                         file: {
                             url = '',
@@ -125,7 +145,7 @@ const IndexPage = () => {
                             <RectangleMenu
                                 title={title}
                                 key={id}
-                                questions={questions || []}
+                                questions={filteredQuestions || []}
                                 icon={url}
                             />
                         </Item>
@@ -135,7 +155,7 @@ const IndexPage = () => {
             <Container>
                 <LineContainer>
                     <H2>Check out the popular FAQ</H2>
-                    <QuestionList questions={popularFAQ} />
+                    {data.allContentfulQuestions && <QuestionList questions={data.allContentfulQuestions.nodes} />}
                 </LineContainer>
                 <LineContainer>
                     <H2>Contact us</H2>

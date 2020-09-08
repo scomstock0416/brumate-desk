@@ -23,11 +23,14 @@ const Image = styled.div`
     }
 `;
 
-const Title = styled.h1`
+const Title = styled.a`
     color: #ffffff;
     font-family: 'sharp_sans';
     font-size: 30px;
     font-weight: 700;
+    margin: 0.67em 0;
+    text-decoration: none;
+    cursor: pointer;
 `;
 
 const Banner = ({
@@ -39,7 +42,7 @@ const Banner = ({
     const breakpoints = useBreakpoint();
     return (
         <Image url={breakpoints.md ? tablet : user} className={className}>
-            <Title>{title}</Title>
+            <Title href="/">{title}</Title>
             <SearchBox setQuestionsList={setQuestionsList} questions={questions} />
         </Image>
     );

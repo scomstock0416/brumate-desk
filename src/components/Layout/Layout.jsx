@@ -41,7 +41,7 @@ const Main = styled.main`
 const Layout = ({ children }) => {
     const [questionList, setQuestionsList] = useState([]);
     const data = useStaticQuery(graphql`{
-            allContentfulQuestionType {
+            allContentfulQuestionType (sort: {fields: order}){
               edges {
                 node {
                   id
@@ -91,7 +91,7 @@ const Layout = ({ children }) => {
             <header>
                 <TopMenu />
                 <Menu />
-                {data && <Banner setQuestionsList={setQuestionsList} questions={data.allContentfulQuestions.nodes} title="Help desk" />}
+                {data && <Banner setQuestionsList={setQuestionsList} questions={data.allContentfulQuestions.nodes} title="Help Center" />}
             </header>
             <Main>
                 {questionList.length > 0 && (

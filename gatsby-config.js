@@ -8,7 +8,7 @@ require('dotenv').config({
 
 module.exports = {
     siteMetadata: {
-        title: 'Brumate Help desk',
+        title: 'Brumate Help Center',
         description: 'Brumate',
     },
     plugins: [
