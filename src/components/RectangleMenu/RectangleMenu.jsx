@@ -107,7 +107,6 @@ const RectangleMenu = ({
                 }}
                 >
                     {title}
-
                 </Title>
                 <Icon display="mobile" isSelectable={isSelectable} src={arrow} />
             </Header>

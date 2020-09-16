@@ -134,7 +134,19 @@ const IndexPage = () => {
                         icon,
                         questions,
                     } = node;
-                    const filteredQuestions = questions && questions.filter(({ featured }) => (featured === true));
+                    let filteredQuestions = [];
+                    if (title === 'Product FAQ') {
+                        const gettingNodesWithProducts = data.allContentfulQuestionType.edges.filter(({ node: nodeProducts }) => (nodeProducts.product));
+                        const questionsFromProducts = gettingNodesWithProducts.map(({ node: nodeProductsFiltered }) => ({
+                            question: {
+                                question: nodeProductsFiltered.title,
+                            },
+                        }));
+                        filteredQuestions = questionsFromProducts;
+                    } else {
+                        filteredQuestions = questions && questions.filter(({ featured }) => (featured === true));
+                    }
+                    console.log(filteredQuestions);
                     const {
                         file: {
                             url = '',

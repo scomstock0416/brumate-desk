@@ -62,7 +62,6 @@ const Question = ({ location }) => {
         title = '',
     } = location.state || {};
     const breakpoints = useBreakpoint();
-
     const data = useStaticQuery(graphql`{
             allContentfulQuestionType {
               edges {
