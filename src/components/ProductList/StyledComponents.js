@@ -73,7 +73,7 @@ const ProductNameNoLink = styled.p`
 const Icon = styled.img`
     max-height: 40px;
     @media (min-width: 768px) {  
-        max-width: 75px;
+        max-width: 120px;
         max-height: 100%;
     }
 `;

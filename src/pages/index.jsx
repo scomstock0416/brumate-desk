@@ -146,7 +146,6 @@ const IndexPage = () => {
                     } else {
                         filteredQuestions = questions && questions.filter(({ featured }) => (featured === true));
                     }
-                    console.log(filteredQuestions);
                     const {
                         file: {
                             url = '',
