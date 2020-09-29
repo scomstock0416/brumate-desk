@@ -12,6 +12,7 @@ const Header = styled.div`
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 18px;
+    overflow-y: scroll;
 `;
 
 const ProductsWrapper = styled.div`
@@ -50,6 +51,11 @@ const ProductName = styled(Link)`
     cursor: pointer;
     text-align: center;
     @media (min-width: 768px) {  
+        font-size: 9px;
+        font-weight: 700;
+    }
+
+    @media (min-width: 1024px) {  
         font-size: 15px;
         font-weight: 700;
     }
@@ -72,7 +78,13 @@ const ProductNameNoLink = styled.p`
 
 const Icon = styled.img`
     max-height: 40px;
+
     @media (min-width: 768px) {  
+        max-width: 70px;
+        max-height: 100%;
+    }
+
+    @media (min-width: 1024px) {  
         max-width: 120px;
         max-height: 100%;
     }
@@ -94,6 +106,12 @@ const Product = styled.div`
     background-color: #ffffff;
     margin-bottom: 16px;
     @media (min-width: 768px) {  
+        width: 89px;
+        height: 90px;
+        margin: 0px 10px 28px;
+    }
+
+    @media (min-width: 1024px) {  
         width: 155px;
         height: 147px;
         margin: 0px 10px 28px;

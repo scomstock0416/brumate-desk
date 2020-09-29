@@ -51,7 +51,7 @@ const Column = styled.div`
     :first-of-type{
       flex-shrink: 0;
       margin-right: 50px;
-      width:  407px;
+      width:  217px;
     }
   }
 `;

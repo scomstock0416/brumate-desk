@@ -72,7 +72,7 @@ const Li = styled.div`
 
 const Title = styled.h2`
     color: #000;
-    font-size: 18px;
+    font-size: 12px;
     padding: 11px 0;
     font-weight: 600;
     flex: 1;
@@ -80,6 +80,10 @@ const Title = styled.h2`
 
     &:hover {
         text-decoration: underline;
+    }
+
+    @media (min-width: 1024px) {
+        font-size: 18px;
     }
 `;
 

@@ -19,6 +19,7 @@ const Header = styled.div`
     margin-bottom: 18px;
     overflow-y: scroll;
     max-height: 250px;
+    overflow-y: scroll;
 `;
 
 const ProductsWrapper = styled.div`
