@@ -23,13 +23,16 @@ const ProductsWrapper = styled.div`
   align-content: ${({moreWidth}) => moreWidth && 'baseline'};
   max-width: ${({moreWidth}) => moreWidth && '40%'};
   justify-content: ${({moreWidth}) => moreWidth && 'center'};
+  flex-flow: wrap;
+  justify-content: space-between;
+}
 `
 
 const Title = styled.p`
   font-family: 'sharp_sans';
-  color: #000000;
+  color: ;
+  color: ${({active}) => (active ? '#000000' : '#D9D9D9')};
   cursor: pointer;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   text-align: center;
   font-size: 14px;
   font-weight: 600;
@@ -99,8 +102,8 @@ const Product = styled.div`
   flex-direction: column;
   justify-content: center;
 
-  width: 100px;
-  height: 88px;
+  width: 89px;
+  height: 90px;
   border: 1px solid #dadada;
   align-items: center;
   background-color: #ffffff;
@@ -118,6 +121,20 @@ const Product = styled.div`
   }
 `
 
+const TypesContainer = styled.div`
+  display: flex;
+  width: 88vw;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: space-around;
+`
+
+const ProductsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 export {
   BannerImage,
   Product,
@@ -128,4 +145,6 @@ export {
   Container,
   Title,
   Icon,
+  TypesContainer,
+  ProductsContainer,
 }
