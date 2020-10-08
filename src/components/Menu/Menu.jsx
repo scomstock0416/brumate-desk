@@ -152,10 +152,14 @@ const MenuContainer = styled.div`
 `
 
 const MenuContainerTitle = styled.div`
-  display: inline-block;
-  position: relative;
+  display: flex;
   width: calc(100% / 8);
-  height: 247px;
+  align-items: center;
+`
+
+const MenuContainerTitleGift = styled.div`
+  display: flex;
+  width: calc(100% / 8);
 `
 
 const MenuTitle = styled.p`
@@ -164,13 +168,15 @@ const MenuTitle = styled.p`
   font-weight: 700;
   position: absolute;
   top: 0;
-  left: 20px;
+  padding: 0;
+  margin: 0;
 `
 
 const Heading = styled.div`
   position: absolute;
   background: white;
   width: 100%;
+  display: flex;
 `
 
 const ImageMenu = styled.img`
@@ -376,10 +382,69 @@ const ButtonContainer = styled.div`
   margin-bottom: 0.5rem;
 `
 
+const SubLinks = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.6rem;
+`
+
+const SubLinksLi = styled.li`
+  background: ${({isActive}) => (isActive ? 'black' : 'white')};
+`
+
+const ShopContainer = styled.div`
+  display: flex;
+  flex-flow: wrap;
+  max-width: 200px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 10px;
+    max-height: 140px;
+}
+`
+
+const SubLinksA = styled.a`
+  color: ${({isActive}) => (isActive ? 'white' : 'black')};
+  font-weight: 700;
+  display: block;
+  padding: 1.5rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+`
+
+const ImageColor = styled.img`
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin: 0 auto;
+`
+
+const ColorContainer = styled.div`
+  width: 25%;
+  height: 36px;
+`
+
 const Menu = ({className}) => {
   const [active, setActive] = useState('')
-
+  const [menu, setMenu] = useState('')
+  const [subinnermenu, setSubInnerMenu] = useState('')
   const [isMenuActive, setIsMenuActive] = useState(false)
+
+  const showMenu = exp => {
+    setMenu(exp)
+  }
+
+  const closeMenu = () => {
+    setMenu('')
+  }
+
+  const showSubInnerMenu = exp => {
+    setSubInnerMenu(exp)
+  }
 
   const showInnerMenu = exp => {
     setActive(exp)
@@ -441,27 +506,40 @@ const Menu = ({className}) => {
         <Ul>
           <Li>
             <A
-              onMouseOver={() => showInnerMenu('wine')}
-              onMouseOut={() => showInnerMenu('')}
-              href="www.brumate.com#"
+              onClick={() => {
+                if (menu == '') {
+                  showMenu('shop')
+                  showInnerMenu('wine')
+                  return
+                }
+                closeMenu('')
+              }}
             >
               SHOP
             </A>
           </Li>
           <Li>
             <A
-              onMouseOver={() => showInnerMenu('beer')}
-              onMouseOut={() => showInnerMenu('')}
-              href="www.brumate.com#"
+              onClick={() => {
+                if (menu == '') {
+                  showMenu('gift')
+                  return
+                }
+                closeMenu('')
+              }}
             >
               Create Gift Set
             </A>
           </Li>
           <Li>
             <A
-              onMouseOver={() => showInnerMenu('spirits')}
-              onMouseOut={() => showInnerMenu('')}
-              href="www.brumate.com#"
+              onClick={() => {
+                if (menu == '') {
+                  showMenu('story')
+                  return
+                }
+                closeMenu('')
+              }}
             >
               OUR STORY
             </A>
@@ -490,97 +568,310 @@ const Menu = ({className}) => {
           <Icon displayInfo="desktop" src={shop} />
         </IconsWrapper>
       </Nav>
-      {active === 'wine' && (
+      {menu === 'shop' && (
         <Heading>
           <MenuContainerTitle>
-            <MenuTitle>
-              Brümate
-              <br />
-              Wine
-            </MenuTitle>
+            <SubLinks>
+              <SubLinksLi isActive={active === 'wine'}>
+                <SubLinksA
+                  isActive={active === 'wine'}
+                  onClick={() => {
+                    if (active === '' || active !== 'wine') {
+                      showInnerMenu('wine')
+                      return
+                    }
+                    showInnerMenu('')
+                  }}
+                  data-target="wine"
+                >
+                  Wine
+                </SubLinksA>
+              </SubLinksLi>
+
+              <SubLinksLi isActive={active === 'beer'}>
+                <SubLinksA
+                  isActive={active === 'beer'}
+                  onClick={() => {
+                    if (active === '' || active !== 'beer') {
+                      showInnerMenu('beer')
+                      return
+                    }
+                    showInnerMenu('')
+                  }}
+                  data-target="beer"
+                >
+                  Beer
+                </SubLinksA>
+              </SubLinksLi>
+
+              <SubLinksLi isActive={active === 'spirits'}>
+                <SubLinksA
+                  isActive={active === 'spirits'}
+                  onClick={() => {
+                    if (active === '' || active !== 'spirits') {
+                      showInnerMenu('spirits')
+                      return
+                    }
+                    showInnerMenu('')
+                  }}
+                  data-target="spirits"
+                >
+                  Spirits
+                </SubLinksA>
+              </SubLinksLi>
+
+              <SubLinksLi isActive={active === 'coolers'}>
+                <SubLinksA
+                  isActive={active === 'coolers'}
+                  onClick={() => {
+                    if (active === '' || active !== 'coolers') {
+                      showInnerMenu('coolers')
+                      return
+                    }
+                    showInnerMenu('')
+                  }}
+                  data-target="coolers"
+                >
+                  Coolers
+                </SubLinksA>
+              </SubLinksLi>
+
+              <SubLinksLi isActive={active === 'accesories'}>
+                <SubLinksA
+                  isActive={active === 'accesories'}
+                  onClick={() => {
+                    if (active === '' || active !== 'accesories') {
+                      showInnerMenu('accesories')
+                      return
+                    }
+                    showInnerMenu('')
+                  }}
+                >
+                  Accessories
+                </SubLinksA>
+              </SubLinksLi>
+
+              <SubLinksLi isActive={active === 'shop'}>
+                <SubLinksA
+                  isActive={active === 'shop'}
+                  onClick={() => {
+                    if (active === '' || active !== 'shop') {
+                      showInnerMenu('shop')
+                      return
+                    }
+                    showInnerMenu('')
+                  }}
+                >
+                  Shop by color
+                </SubLinksA>
+              </SubLinksLi>
+            </SubLinks>
           </MenuContainerTitle>
-          <MenuContainer>
-            <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/1_nav-gift_set_2x_1_3cc78cd3-a5f4-4dfc-a878-bb93c9088b5d_360x.png?v=1570796950" />
-            <ImageLegend>WINESULATOR</ImageLegend>
-          </MenuContainer>
-          <MenuContainer>
-            <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/0Y0A54872_360x.jpg?v=1575579975" />
-            <ImageLegend>GIFT SET</ImageLegend>
-          </MenuContainer>
-          <MenuContainer>
-            <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/1_nav-gift_set_2x_2_360x.png?v=1570796845" />
-            <ImageLegend>UNCORK&#39;D</ImageLegend>
-          </MenuContainer>
-          <MenuContainer>
-            <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/1_nav-gift_set_2x_3_360x.png?v=1570796834" />
-            <ImageLegend>CHAMPAGNE FLUTE</ImageLegend>
-          </MenuContainer>
+          {active === 'wine' && (
+            <>
+              <MenuContainer>
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/1_nav-gift_set_2x_1_3cc78cd3-a5f4-4dfc-a878-bb93c9088b5d_360x.png?v=1570796950" />
+                <ImageLegend>WINESULATOR</ImageLegend>
+              </MenuContainer>
+              <MenuContainer>
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/0Y0A54872_360x.jpg?v=1575579975" />
+                <ImageLegend>GIFT SET</ImageLegend>
+              </MenuContainer>
+              <MenuContainer>
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/1_nav-gift_set_2x_2_360x.png?v=1570796845" />
+                <ImageLegend>UNCORK&#39;D</ImageLegend>
+              </MenuContainer>
+              <MenuContainer>
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/1_nav-gift_set_2x_3_360x.png?v=1570796834" />
+                <ImageLegend>CHAMPAGNE FLUTE</ImageLegend>
+              </MenuContainer>
+            </>
+          )}
+
+          {active === 'beer' && (
+            <>
+              <MenuContainer>
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/1_nav-gift_set_2x_1_3cc78cd3-a5f4-4dfc-a878-bb93c9088b5d_360x.png?v=1570796950" />
+                <ImageLegend>HOPSULATOR SLIM</ImageLegend>
+              </MenuContainer>
+              <MenuContainer>
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/5_nav-slim_2x_47d4fde2-bf63-402f-ad92-e8206efce914_360x.png?v=1570797714" />
+                <ImageLegend>HOPSULATOR TRIO</ImageLegend>
+              </MenuContainer>
+              <MenuContainer>
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/5_nav-slim_2x_2_360x.png?v=1570797850" />
+                <ImageLegend>HOPSULATOR BOTTL</ImageLegend>
+              </MenuContainer>
+              <MenuContainer>
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/5_nav-slim_2x_3_360x.png?v=1570797872" />
+                <ImageLegend>HOPSULATOR JUGGERNAUT</ImageLegend>
+              </MenuContainer>
+              <MenuContainer>
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/5_nav-slim_2x_4_360x.png?v=1570797927" />
+                <ImageLegend>GROWL&#39;R</ImageLegend>
+              </MenuContainer>
+              <MenuContainer>
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/5_nav-slim_2x_5_360x.png?v=1570797953" />
+                <ImageLegend>IMPERIAL PINT</ImageLegend>
+              </MenuContainer>
+            </>
+          )}
+
+          {active === 'spirits' && (
+            <>
+              <MenuContainer>
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/10_nav-margtini_2x_98817161-a458-4abb-9371-05758314d824_360x.png?v=1570798691" />
+                <ImageLegend>MARGTINI</ImageLegend>
+              </MenuContainer>
+              <MenuContainer>
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/Shaker_360x.jpg?v=1571066363" />
+                <ImageLegend>SHAKER PINT</ImageLegend>
+              </MenuContainer>
+              <MenuContainer>
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/5_nav-slim_2x_2_360x.png?v=1570797850" />
+                <ImageLegend>NOS&#39;R</ImageLegend>
+              </MenuContainer>
+              <MenuContainer>
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/imperial-pint_360x.jpg?v=1561221533" />
+                <ImageLegend>IMPERIAL PINT</ImageLegend>
+              </MenuContainer>
+              <MenuContainer>
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/5_nav-slim_2x_4_360x.png?v=1570797927" />
+                <ImageLegend>GLITTER FLASK</ImageLegend>
+              </MenuContainer>
+            </>
+          )}
+
+          {active === 'coolers' && (
+            <>
+              <MenuContainer>
+                <ImageMenu src="//cdn.shopify.com/s/files/1/1114/2308/files/BackTapImage_e191ad6c-8b68-48d5-a65c-64aaee274a98_360x.jpg?v=1594935448" />
+                <ImageLegend>COOLERS</ImageLegend>
+              </MenuContainer>
+            </>
+          )}
+
+          {active === 'accesories' && (
+            <MenuContainer>
+              <SubLinks>
+                <SubLinksLi isActive={subinnermenu === 'accesories'}>
+                  <SubLinksA
+                    isActive={subinnermenu === 'accesories'}
+                    noBold
+                    onMouseEnter={() => {
+                      if (subinnermenu == '') {
+                        showSubInnerMenu('accesories')
+                        return
+                      }
+                      showSubInnerMenu('')
+                    }}
+                  >
+                    accesories
+                  </SubLinksA>
+                </SubLinksLi>
+
+                <SubLinksLi isActive={subinnermenu === 'parts'}>
+                  <SubLinksA
+                    noBold
+                    isActive={subinnermenu === 'parts'}
+                    onMouseEnter={() => {
+                      if (subinnermenu == '') {
+                        showSubInnerMenu('parts')
+                        return
+                      }
+                      showSubInnerMenu('')
+                    }}
+                  >
+                    replacement parts
+                  </SubLinksA>
+                </SubLinksLi>
+              </SubLinks>
+            </MenuContainer>
+          )}
+
+          {active === 'shop' && (
+            <>
+              <ShopContainer id="nav_shop_by_colors">
+                <ColorContainer class="w-1/4">
+                  <a href="/collections/shop-by-color?data-id=9&amp;data-themeid=1">
+                    <ImageColor src="https://custom-app.s3.amazonaws.com/uploads/swatch_image/merdiot_f90e4436-2c4c-4046-8276-8a90d3188954.png" />
+                  </a>
+                </ColorContainer>
+                <ColorContainer class="w-1/4">
+                  <a href="/collections/shop-by-color?data-id=10&amp;data-themeid=1">
+                    <ImageColor src="https://custom-app.s3.amazonaws.com/uploads/swatch_image/Rose_Gold_a8a9cf15-cf41-44b5-941f-3eddae46e9b3.png" />
+                  </a>
+                </ColorContainer>
+                <ColorContainer class="w-1/4">
+                  <a href="/collections/shop-by-color?data-id=11&amp;data-themeid=1">
+                    <ImageColor src="https://custom-app.s3.amazonaws.com/uploads/swatch_image/Peacock_dec3e425-379b-434d-9e8d-2600cb451d79.png" />
+                  </a>
+                </ColorContainer>
+                <ColorContainer class="w-1/4">
+                  <a href="/collections/shop-by-color?data-id=12&amp;data-themeid=1">
+                    <ImageColor src="https://custom-app.s3.amazonaws.com/uploads/swatch_image/Charcoal_9dc00feb-8f65-45de-825f-7a28b17f4265.png" />
+                  </a>
+                </ColorContainer>
+                <ColorContainer class="w-1/4">
+                  <a href="/collections/shop-by-color?data-id=13&amp;data-themeid=1">
+                    <ImageColor src="https://custom-app.s3.amazonaws.com/uploads/swatch_image/aqva_d1fb9f6d-dfca-4273-978b-9f813a8e3d49.png" />
+                  </a>
+                </ColorContainer>
+                <ColorContainer class="w-1/4">
+                  <a href="/collections/shop-by-color?data-id=14&amp;data-themeid=1">
+                    <ImageColor src="https://custom-app.s3.amazonaws.com/uploads/swatch_image/purple_2abee730-f1e9-47b3-9e07-28752823e1d9.png" />
+                  </a>
+                </ColorContainer>
+                <ColorContainer class="w-1/4">
+                  <a href="/collections/shop-by-color?data-id=16&amp;data-themeid=1">
+                    <ImageColor src="https://custom-app.s3.amazonaws.com/uploads/swatch_image/carara-gliter_c4a382ec-de68-43b7-aa00-2cc5f1d7a505.png" />
+                  </a>
+                </ColorContainer>
+                <ColorContainer class="w-1/4">
+                  <a href="/collections/shop-by-color?data-id=17&amp;data-themeid=1">
+                    <ImageColor src="https://custom-app.s3.amazonaws.com/uploads/swatch_image/roes-gold_a0b5131b-a4f8-4ed7-bb3d-42e68333dc97.png" />
+                  </a>
+                </ColorContainer>
+                <ColorContainer class="w-1/4">
+                  <a href="/collections/shop-by-color?data-id=18&amp;data-themeid=1">
+                    <ImageColor src="https://custom-app.s3.amazonaws.com/uploads/swatch_image/pink_a576d936-6491-434e-b60a-2c0d76006833.png" />
+                  </a>
+                </ColorContainer>
+                <ColorContainer class="w-1/4">
+                  <a href="/collections/shop-by-color?data-id=19&amp;data-themeid=1">
+                    <ImageColor src="https://custom-app.s3.amazonaws.com/uploads/swatch_image/gold_cfeba9dd-f42f-43b6-9110-b8e2169b7d93.png" />
+                  </a>
+                </ColorContainer>
+                <ColorContainer class="w-1/4">
+                  <a href="/collections/shop-by-color?data-id=48&amp;data-themeid=1">
+                    <ImageColor src="https://custom-app.s3.amazonaws.com/uploads/swatch_image/MERLOT_83b3c61a-dca7-4697-8423-e393310bddf3.png" />
+                  </a>
+                </ColorContainer>
+              </ShopContainer>
+            </>
+          )}
         </Heading>
       )}
-      {active === 'beer' && (
+
+      {menu === 'gift' && (
         <Heading>
-          <MenuContainerTitle>
-            <MenuTitle>
-              Brümate
-              <br />
-              beer
-            </MenuTitle>
-          </MenuContainerTitle>
-          <MenuContainer>
-            <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/1_nav-gift_set_2x_1_3cc78cd3-a5f4-4dfc-a878-bb93c9088b5d_360x.png?v=1570796950" />
-            <ImageLegend>HOPSULATOR SLIM</ImageLegend>
-          </MenuContainer>
-          <MenuContainer>
-            <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/5_nav-slim_2x_47d4fde2-bf63-402f-ad92-e8206efce914_360x.png?v=1570797714" />
-            <ImageLegend>HOPSULATOR TRIO</ImageLegend>
-          </MenuContainer>
-          <MenuContainer>
-            <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/5_nav-slim_2x_2_360x.png?v=1570797850" />
-            <ImageLegend>HOPSULATOR BOTTL</ImageLegend>
-          </MenuContainer>
-          <MenuContainer>
-            <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/5_nav-slim_2x_3_360x.png?v=1570797872" />
-            <ImageLegend>HOPSULATOR JUGGERNAUT</ImageLegend>
-          </MenuContainer>
-          <MenuContainer>
-            <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/5_nav-slim_2x_4_360x.png?v=1570797927" />
-            <ImageLegend>GROWL&#39;R</ImageLegend>
-          </MenuContainer>
-          <MenuContainer>
-            <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/5_nav-slim_2x_5_360x.png?v=1570797953" />
-            <ImageLegend>IMPERIAL PINT</ImageLegend>
-          </MenuContainer>
-        </Heading>
-      )}
-      {active === 'spirits' && (
-        <Heading>
-          <MenuContainerTitle>
-            <MenuTitle>
-              Brümate
-              <br />
-              spirits
-            </MenuTitle>
-          </MenuContainerTitle>
-          <MenuContainer>
-            <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/10_nav-margtini_2x_98817161-a458-4abb-9371-05758314d824_360x.png?v=1570798691" />
-            <ImageLegend>MARGTINI</ImageLegend>
-          </MenuContainer>
-          <MenuContainer>
-            <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/Shaker_360x.jpg?v=1571066363" />
-            <ImageLegend>SHAKER PINT</ImageLegend>
-          </MenuContainer>
-          <MenuContainer>
-            <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/5_nav-slim_2x_2_360x.png?v=1570797850" />
-            <ImageLegend>NOS&#39;R</ImageLegend>
-          </MenuContainer>
-          <MenuContainer>
-            <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/imperial-pint_360x.jpg?v=1561221533" />
-            <ImageLegend>IMPERIAL PINT</ImageLegend>
-          </MenuContainer>
-          <MenuContainer>
-            <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/5_nav-slim_2x_4_360x.png?v=1570797927" />
-            <ImageLegend>GLITTER FLASK</ImageLegend>
-          </MenuContainer>
+          <MenuContainerTitleGift>
+            <MenuTitle>GIFT SETS</MenuTitle>
+          </MenuContainerTitleGift>
+          <>
+            <MenuContainer>
+              <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/gift-img_360x_e72df0e0-0f53-4857-8c96-b2cfdd6681a4_360x.jpg?v=1572887573" />
+              <ImageLegend>WINE GIFT SETS</ImageLegend>
+            </MenuContainer>
+            <MenuContainer>
+              <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/growl_360x_93465b4b-5d3b-4b11-ad10-842272e8875b_360x.jpg?v=1572887303https://cdn.shopify.com/s/files/1/1114/2308/files/0Y0A54872_360x.jpg?v=1575579975" />
+              <ImageLegend>GROWL'R GIFT SET</ImageLegend>
+            </MenuContainer>
+            <MenuContainer>
+              <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/MargTini_360x_46ceb45e-56fe-4f12-96c8-ce01ead64b9f_360x.jpg?v=1572887373" />
+              <ImageLegend>MARGTINI GIFT SET</ImageLegend>
+            </MenuContainer>
+          </>
         </Heading>
       )}
 
