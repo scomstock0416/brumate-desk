@@ -6,6 +6,8 @@ const Container = styled.div`
   background: black;
   padding-bottom: 50px;
   padding-top: 50px;
+  padding-left: 15px;
+  padding-right: 15px;
 `
 
 const Image = styled.img`
@@ -15,7 +17,7 @@ const Image = styled.img`
 `
 
 const ContainerSpacing = styled.div`
-  padding: 0 20px;
+  padding: 0px;
   margin: 0 auto;
   @media (min-width: 640px) {
     display: flex;
@@ -33,61 +35,70 @@ const InputContainer = styled.div`
   justify-content: flex-start;
   position: relative;
   flex-grow: 1;
-  padding: 10px 6px;
+  padding: 0px;
+  justify-content: space-between;
+  padding: 10px 0px 5px;
+  border-bottom: 1px solid white;
 `
 
 const SuscribeContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 6px 10px;
+  padding: 0px;
   justify-content: center;
-  @media (min-width: 640px) {
-    flex-direction: row;
-  }
+  max-width: 500px;
+  margin: 0 auto;
 `
 
 const Input = styled.input`
   box-sizing: border-box;
-  padding-left: 16px;
-  padding-right: 0px;
-  padding-top: 0px;
-  padding-bottom: 0px;
+  border-radius: 2px;
+  padding: 0px 0px 0px 16px;
   height: 38px;
   text-align: left;
   color: rgb(0, 0, 0);
-  font-family: 'sharp_sans';
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 400;
   letter-spacing: 0px;
   background-color: rgb(255, 255, 255);
-  border-radius: 2px;
-  border-width: 1px;
-  border-style: solid;
-  border-image: initial;
-  border-color: rgb(208, 51, 31);
+  border: 1px solid rgb(208, 51, 31);
   height: 50px !important;
   border-radius: 0 !important;
-  display: flex;
-  -webkit-box-flex: 1;
-  flex-grow: 1;
-  flex-direction: column;
-  align-self: flex-end;
+  line-height: 50px !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  padding-left: 0 !important;
+  color: #fff !important;
 `
 
 const Button = styled.button`
+  position: relative;
+  padding: 11px 10px;
+  background: rgb(48, 59, 67);
+  border-radius: 2px;
+  border-style: none;
+  border-color: rgb(0, 0, 0);
+  border-width: 0px;
   color: rgb(255, 255, 255);
-  height: 50px !important;
-  border-radius: 100px !important;
-  padding: 0 !important;
-  background-color: #3b3b3b !important;
-  width: 160px !important;
-  text-transform: uppercase !important;
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 0px;
+  line-height: 1;
+  white-space: normal;
+  text-align: center;
+  word-break: break-word;
+  align-self: flex-end;
   cursor: pointer;
-  background: rgb(48, 59, 67);
-  border-color: rgb(0, 0, 0);
+  height: 50px !important;
+  border-radius: 100px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  width: 120px !important;
+  text-transform: uppercase !important;
+  line-height: 55px !important;
+  text-align: right !important;
 `
 
 const InnerContainer = styled.div`
@@ -115,6 +126,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
+  padding-bottom: 27px;
   @media (min-width: 1024px) {
     display: flex;
     flex-direction: row;
@@ -129,6 +141,12 @@ const UL = styled.ul`
   list-style-type: none;
   padding: 0;
   margin: 0;
+  text-align: left;
+  padding-left: 45px;
+  @media (min-width: 1024px) {
+    display: ${({isShop}) => (isShop ? 'none' : ' block')};
+    padding-left: 0px;
+  }
 `
 
 const LI = styled.li`
@@ -137,7 +155,7 @@ const LI = styled.li`
   display: block;
   /* display: none; */
   @media (min-width: 1024px) {
-    /* display: block; */
+    display: block;
   }
 `
 
@@ -161,35 +179,41 @@ const CopyRight = styled.p`
   color: white;
   text-align: center;
   text-transform: uppercase;
-  font-size: 1.25rem;
+  font-size: 11.25px;
 `
 
 const FollowText = styled.p`
-  font-family: 'sharp_sans';
-  font-size: 15px;
+  font-family: arial;
+  font-size: 13.5px;
   color: white;
-  text-align: center;
+  text-align: justify;
   margin: 0;
+  letter-spacing: 0.025em;
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: 100%;
+  font-weight: 400;
+  line-height: 1.5;
+  font-style: normal;
 `
 
 const LogoContainer = styled.div`
   text-align: center;
   width: 100%;
-  @media (min-width: 1024px) {
+  @media (min-width: 1025px) {
     width: 33.33%;
   }
 `
 
 const H4 = styled.h4`
-  margin: 0 0 2rem 0;
   font-family: 'sharp_sans';
-  font-size: 14.6px;
-  text-decoration: underline;
-  color: white;
-  text-transform: uppercase;
+  font-size: 20.25px;
+  text-align: left;
   margin-top: 2rem;
   margin-bottom: 2rem;
-  @media (min-width: 1024px) {
+  color: white;
+  text-transform: uppercase;
+  display: flex;
+  @media (min-width: 1025px) {
     margin-bottom: 0.5rem;
   }
 `
@@ -200,7 +224,7 @@ const ContainerMenu = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  @media (min-width: 1024px) {
+  @media (min-width: 1025px) {
     text-align: left;
     flex-direction: row;
     align-items: flex-start;
@@ -208,12 +232,28 @@ const ContainerMenu = styled.div`
   }
 `
 
+const SignUpContainer = styled.div`
+  margin-top: 9px;
+  border: 1px solid #e2e8f0;
+  padding-top: 9px;
+  padding-bottom: 9px;
+`
+
+const SignUpText = styled.a`
+  font-size: 1.6rem;
+  line-height: 30px;
+  color: white;
+  font-family: 'sharp_sans';
+  font-weight: 400;
+  font-style: normal;
+`
+
 const SVG = styled.svg`
     display: inline;
     width: 16px;
+    padding-right: 20px;
     margin-left: 10px;
-    display: none;
-     @media (min-width: 768px) {
+     @media (min-width: 769px) {
         display: none;
      }
 }
@@ -222,7 +262,7 @@ const SVG = styled.svg`
 const InnerMenu = styled.div`
   width: 100%;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1025px) {
     width: calc(100% / 4);
   }
 `
@@ -256,7 +296,6 @@ const Footer = () => {
           <ContainerMenu>
             <InnerMenu>
               <H4 onClick={() => handleClick('shop')}>
-                Shop
                 <SVG
                   height="30"
                   viewBox="0 0 512 512"
@@ -268,10 +307,11 @@ const Footer = () => {
                     d="M396.6 160l19.4 20.7L256 352 96 180.7l19.3-20.7L256 310.5z"
                   />
                 </SVG>
+                Shop
               </H4>
 
               {(!breakpoints.md || isActiveShop) && (
-                <UL className="uppercase ">
+                <UL isShop className="uppercase ">
                   <LI>
                     <A href="/collections">Collections</A>
                   </LI>
@@ -298,9 +338,21 @@ const Footer = () => {
                 </UL>
               )}
             </InnerMenu>
-
             <InnerMenu>
-              <H4 onClick={() => handleClick('help')}>HELP</H4>
+              <H4 onClick={() => handleClick('help')}>
+                <SVG
+                  height="30"
+                  viewBox="0 0 512 512"
+                  width="30"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill="white"
+                    d="M396.6 160l19.4 20.7L256 352 96 180.7l19.3-20.7L256 310.5z"
+                  />
+                </SVG>
+                HELP
+              </H4>
               {(!breakpoints.md || isActiveHelp) && (
                 <UL>
                   <LI>
@@ -330,7 +382,20 @@ const Footer = () => {
               )}
             </InnerMenu>
             <InnerMenu>
-              <H4 onClick={() => handleClick('brand')}>BRAND</H4>
+              <H4 onClick={() => handleClick('brand')}>
+                <SVG
+                  height="30"
+                  viewBox="0 0 512 512"
+                  width="30"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill="white"
+                    d="M396.6 160l19.4 20.7L256 352 96 180.7l19.3-20.7L256 310.5z"
+                  />
+                </SVG>
+                BRAND
+              </H4>
               {(!breakpoints.md || isActiveBrand) && (
                 <UL>
                   <LI>
@@ -350,6 +415,18 @@ const Footer = () => {
 
                   <LI>
                     <A href="/pages/warranty">Warranty</A>
+                  </LI>
+                  <LI>
+                    <A href="/pages/warranty">PRIVACY POLICY</A>
+                  </LI>
+                  <LI>
+                    <A href="/pages/warranty">TERMS AND CONDITIONS</A>
+                  </LI>
+                  <LI>
+                    <A href="/pages/warranty">INTEREST BASED ADVERTISING</A>
+                  </LI>
+                  <LI>
+                    <A href="/pages/warranty">DO NOT SHARE MY INFORMATION</A>
                   </LI>
                 </UL>
               )}
@@ -372,13 +449,14 @@ const Footer = () => {
                   tabIndex="0"
                   placeholder="Enter your email"
                 />
-              </InputContainer>
-              <ContainerSpacing>
                 <Button type="button" tabIndex="0">
                   Subscribe
                 </Button>
-              </ContainerSpacing>
+              </InputContainer>
             </SuscribeContainer>
+            <SignUpContainer>
+              <SignUpText>Sign up for VIP text messages</SignUpText>
+            </SignUpContainer>
           </LogoContainer>
         </Wrapper>
 
