@@ -96,6 +96,13 @@ const Image = styled.img`
   }
 `
 
+const ImageMenuMobile = styled.img`
+  margin: 0 auto;
+  max-width: 130px;
+  margin-top: 16px;
+  display: flex;
+`
+
 const A = styled.a`
   color: #000000;
   text-decoration: none;
@@ -199,8 +206,180 @@ const SVGaccount = styled.svg`
   }
 `
 
+const CloseSVG = styled.svg`
+  width: 20px;
+`
+
+const CloseContainer = styled.span`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  align-content: center;
+  margin-top: 3px;
+`
+
+const ScrollableMenu = styled.div`
+  height: 90vh;
+  overflow-x: hidden;
+  padding-bottom: 8rem;
+  margin-top: 5rem;
+  overflow-y: scroll;
+`
+
+const MenuMobile = styled.nav`
+  top: 0;
+  left: 0;
+  z-index: 100;
+  visibility: hidden;
+  width: 275px;
+  height: 100%;
+  background: #ffffff;
+  transition: all 0.5s;
+  visibility: visible;
+  transform: translate3d(0, 0, 0);
+  position: fixed !important;
+`
+
+const H3 = styled.p`
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.6rem;
+`
+
+const H3BYTYPE = styled.p`
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.6rem;
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+`
+
+const ULScrolleable = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.6rem;
+`
+
+const LIScrolleable = styled.li`
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  font-size: 2.25rem;
+  font-weight: 700;
+  text-align: center;
+`
+
+const AScrolleable = styled.a`
+  color: #000000;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  font-family: 'sharp_sans';
+`
+
+const ProductContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
+
+const Product = styled.div`
+  width: 50%;
+`
+
+const ProductImg = styled.img`
+    max-width: 100%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+`
+
+const Productitle = styled.h4`
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: black;
+  text-decoration: none;
+`
+
+const ProductLink = styled.a`
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: black;
+  text-decoration: none;
+  text-transform: uppercase;
+`
+
+const H3Product = styled.h3`
+  text-decoration: none;
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2.25rem;
+  margin-top: 2rem;
+`
+
+const AProduct = styled.a`
+  color: black;
+  text-decoration: none;
+  text-transform: uppercase;
+`
+
+const ButtonBottom = styled.a`
+  width: 210px;
+  --text-opacity: 1;
+  color: #000;
+  color: rgba(0, 0, 0, var(--text-opacity));
+  border: 1px solid black;
+  padding: 0 20px;
+  font-size: 13px;
+  line-height: 48px;
+  display: inline-block;
+  width: auto;
+  width: 210px;
+  height: auto;
+  margin: 0;
+  padding: 0 20px;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 48px;
+  color: black;
+  text-decoration: none;
+  letter-spacing: 1.2px;
+  background-image: none;
+  background-color: #fff;
+  cursor: pointer;
+  vertical-align: middle;
+  transition: all 0.5s ease-in-out;
+  outline: none;
+  /* border: none; */
+  text-align: center;
+  margin: 0 auto;
+`
+
+const LastContainer = styled.div`
+  margin-bottom: 8rem;
+`
+
+const ButtonContainer = styled.div`
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  margin-bottom: 0.5rem;
+`
+
 const Menu = ({className}) => {
   const [active, setActive] = useState('')
+
+  const [isMenuActive, setIsMenuActive] = useState(false)
 
   const showInnerMenu = exp => {
     setActive(exp)
@@ -208,7 +387,11 @@ const Menu = ({className}) => {
   return (
     <Container>
       <Nav className={className}>
-        <SVG viewBox="0 0 14.2 12.9" xmlns="http://www.w3.org/2000/svg">
+        <SVG
+          onClick={() => setIsMenuActive(true)}
+          viewBox="0 0 14.2 12.9"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <g>
             <g>
               <path
@@ -260,7 +443,7 @@ const Menu = ({className}) => {
             <A
               onMouseOver={() => showInnerMenu('wine')}
               onMouseOut={() => showInnerMenu('')}
-              href="#"
+              href="www.brumate.com#"
             >
               SHOP
             </A>
@@ -269,7 +452,7 @@ const Menu = ({className}) => {
             <A
               onMouseOver={() => showInnerMenu('beer')}
               onMouseOut={() => showInnerMenu('')}
-              href="#"
+              href="www.brumate.com#"
             >
               Create Gift Set
             </A>
@@ -278,7 +461,7 @@ const Menu = ({className}) => {
             <A
               onMouseOver={() => showInnerMenu('spirits')}
               onMouseOut={() => showInnerMenu('')}
-              href="#"
+              href="www.brumate.com#"
             >
               OUR STORY
             </A>
@@ -300,7 +483,7 @@ const Menu = ({className}) => {
           </Currency>
           <Ul isAccount>
             <Li>
-              <A href="#">ACCOUNT</A>
+              <A href="www.brumate.com#">ACCOUNT</A>
             </Li>
           </Ul>
           <Icon displayInfo="desktop" isSearch src={search} />
@@ -399,6 +582,175 @@ const Menu = ({className}) => {
             <ImageLegend>GLITTER FLASK</ImageLegend>
           </MenuContainer>
         </Heading>
+      )}
+
+      {isMenuActive && (
+        <MenuMobile>
+          <CloseContainer
+            id="cartClose2"
+            class="absolute"
+            aria-label="Close Menu"
+            aria-hidden="true"
+          >
+            <span onClick={() => setIsMenuActive(false)} class="relative">
+              CLOSE
+            </span>{' '}
+            <CloseSVG
+              class="icon"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M15.89 14.696l-4.734-4.734 4.717-4.717c.4-.4.37-1.085-.03-1.485s-1.085-.43-1.485-.03L9.641 8.447 4.97 3.776c-.4-.4-1.085-.37-1.485.03s-.43 1.085-.03 1.485l4.671 4.671-4.688 4.688c-.4.4-.37 1.085.03 1.485s1.085.43 1.485.03l4.688-4.687 4.734 4.734c.4.4 1.085.37 1.485-.03s.43-1.085.03-1.485z" />
+            </CloseSVG>
+          </CloseContainer>
+          <ImageMenuMobile src={logo} />
+          <ScrollableMenu>
+            <H3>Shop By Beverage </H3>
+            <ULScrolleable class="text-center mb-12">
+              <LIScrolleable class="uppercase text-4xl font-bold mb-2">
+                <AScrolleable href="www.brumate.com/collections/beer">
+                  Beer
+                </AScrolleable>
+              </LIScrolleable>
+
+              <LIScrolleable class="uppercase text-4xl font-bold mb-2">
+                <AScrolleable href="www.brumate.com/collections/wine">
+                  Wine
+                </AScrolleable>
+              </LIScrolleable>
+
+              <LIScrolleable class="uppercase text-4xl font-bold mb-2">
+                <AScrolleable href="www.brumate.com/collections/spirits">
+                  Spirits
+                </AScrolleable>
+              </LIScrolleable>
+
+              <LIScrolleable class="uppercase text-4xl font-bold mb-2">
+                <AScrolleable href="www.brumate.com/collections/accessories">
+                  Accessories
+                </AScrolleable>
+              </LIScrolleable>
+            </ULScrolleable>
+            <H3BYTYPE>Shop By Product Type </H3BYTYPE>
+            <ProductContainer>
+              <Product></Product>
+              <Product></Product>
+              <Product></Product>
+              <Product></Product>
+            </ProductContainer>
+
+            <ProductContainer class="flex flex-wrap">
+              <Product class="w-1/2 text-center">
+                <ProductLink href="www.brumate.com/collections/beer" class="">
+                  <ProductImg
+                    class="mx-auto"
+                    src="//cdn.shopify.com/s/files/1/1114/2308/files/2_765a51f6-dfa9-4dec-92bf-bec535c9edaa_640x.jpg?v=1593637015"
+                  />
+                  <Productitle class="text-2xl font-bold py-6 uppercase">
+                    Can Holders
+                  </Productitle>
+                </ProductLink>
+              </Product>
+
+              <Product class="w-1/2 text-center">
+                <ProductLink href="www.brumate.com/collections/wine" class="">
+                  <ProductImg
+                    class="mx-auto"
+                    src="//cdn.shopify.com/s/files/1/1114/2308/files/ww_640x.png?v=1594328100"
+                  />
+
+                  <Productitle class="text-2xl font-bold py-6 uppercase">
+                    Wine / Champagne
+                  </Productitle>
+                </ProductLink>
+              </Product>
+
+              <Product class="w-1/2 text-center">
+                <ProductLink
+                  href="www.brumate.com/collections/spirits"
+                  class=""
+                >
+                  <ProductImg
+                    class="mx-auto"
+                    src="//cdn.shopify.com/s/files/1/1114/2308/files/10-Hero1_720x_d9a34b05-4b1e-4963-91d2-1f568a12c277_640x.png?v=1594328342"
+                  />
+
+                  <Productitle class="text-2xl font-bold py-6 uppercase">
+                    Cocktail / Barware
+                  </Productitle>
+                </ProductLink>
+              </Product>
+
+              <Product class="w-1/2 text-center">
+                <ProductLink
+                  href="www.brumate.com/collections/gift-sets"
+                  class=""
+                >
+                  <ProductImg
+                    class="mx-auto"
+                    src="//cdn.shopify.com/s/files/1/1114/2308/files/5_b6c4df0e-de20-41cd-a1b5-6d7a0fbdd87d_640x.jpg?v=1593637124"
+                  />
+
+                  <Productitle class="text-2xl font-bold py-6 uppercase">
+                    Travel Sets
+                  </Productitle>
+                </ProductLink>
+              </Product>
+
+              <Product class="w-1/2 text-center">
+                <ProductLink
+                  href="www.brumate.com/products/meet-backtap"
+                  class=""
+                >
+                  <ProductImg
+                    class="mx-auto"
+                    src="//cdn.shopify.com/s/files/1/1114/2308/files/BT_640x.png?v=1594327623"
+                  />
+
+                  <Productitle class="text-2xl font-bold py-6 uppercase">
+                    Coolers
+                  </Productitle>
+                </ProductLink>
+              </Product>
+
+              <Product class="w-1/2 text-center">
+                <ProductLink href="www.brumate.com/collections/flasks" class="">
+                  <ProductImg
+                    class="mx-auto"
+                    src="//cdn.shopify.com/s/files/1/1114/2308/files/Canteen_640x.png?v=1594327292"
+                  />
+
+                  <Productitle class="text-2xl font-bold py-6 uppercase">
+                    Flasks
+                  </Productitle>
+                </ProductLink>
+              </Product>
+            </ProductContainer>
+            <H3Product class="text-center text-4xl font-bold uppercase mt-8 mb-12">
+              <AProduct href="www.brumate.com/collections/all">
+                All Products
+              </AProduct>
+            </H3Product>
+            <ButtonContainer class="text-center uppercase text-2xl mb-2">
+              <ButtonBottom
+                href="/pages/brumate-vip"
+                class="btn bg-transparent text-black font-black border border-solid border-black hover:text-white hover:bg-black"
+              >
+                Become BrüMate VIP
+              </ButtonBottom>
+            </ButtonContainer>
+            <LastContainer>
+              <ButtonContainer class="text-center uppercase text-2xl">
+                <ButtonBottom
+                  href="/pages/custom-gift-set"
+                  class="btn bg-transparent text-black font-black border border-solid border-black hover:text-white hover:bg-black"
+                >
+                  Create a Gift Set
+                </ButtonBottom>
+              </ButtonContainer>
+            </LastContainer>
+          </ScrollableMenu>
+        </MenuMobile>
       )}
     </Container>
   )
