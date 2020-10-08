@@ -144,7 +144,6 @@ const UL = styled.ul`
   text-align: left;
   padding-left: 45px;
   @media (min-width: 1024px) {
-    display: ${({isShop}) => (isShop ? 'none' : ' block')};
     padding-left: 0px;
   }
 `
