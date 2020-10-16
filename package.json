@@ -7,8 +7,10 @@
   "dependencies": {
     "@raygesualdo/gatsby-plugin-babel-styled-components": "^1.0.1",
     "babel-plugin-styled-components": "^1.10.7",
+    "bootstrap": "^4.5.3",
     "dotenv": "^8.2.0",
     "env-cmd": "^10.1.0",
+    "formik": "^2.2.0",
     "gatsby": "^2.20.25",
     "gatsby-image": "^2.3.4",
     "gatsby-plugin-breakpoints": "^1.1.2",
@@ -23,9 +25,10 @@
     "gatsby-transformer-sharp": "^2.4.6",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "react-helmet": "^6.0.0",
+    "reactstrap": "^8.6.0",
     "styled-components": "^5.1.0"
   },
   "devDependencies": {

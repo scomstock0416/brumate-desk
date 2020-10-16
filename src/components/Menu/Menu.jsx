@@ -75,6 +75,7 @@ const Li = styled.li`
   flex-direction: row;
   list-style-type: none;
   padding-right: 3rem;
+  cursor: pointer;
 
   @media (min-width: 1024px) {
     padding-right: 27px;
