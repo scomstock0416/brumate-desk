@@ -268,7 +268,6 @@ function IndexPage() {
             initialValues={{
               picked: '',
             }}
-            validate={validate}
           >
             {({values, isValid}) => (
               <FormikForm
