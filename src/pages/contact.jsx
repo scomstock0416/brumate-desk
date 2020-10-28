@@ -272,9 +272,9 @@ function IndexPage() {
           >
             {({values, isValid}) => (
               <FormikForm
-                name="contact-demo"
-                data-netlify-recaptcha="true"
-                data-netlify={true}
+                netlify-honeypot="bot-field"
+                data-netlify="true"
+                name="contact"
               >
                 <SpacingDiv role="group" aria-labelledby="my-radio-group">
                   <Label>Do you have your order number? </Label>
