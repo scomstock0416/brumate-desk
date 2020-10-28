@@ -269,23 +269,13 @@ function IndexPage() {
               picked: '',
             }}
             validate={validate}
-            onSubmit={(values, actions) => {
-              fetch('/', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-              })
-                .then(() => {
-                  alert('Success')
-                  actions.resetForm()
-                })
-                .catch(() => {
-                  alert('Error')
-                })
-                .finally(() => actions.setSubmitting(false))
-            }}
           >
             {({values, isValid}) => (
-              <FormikForm name="contact-demo" data-netlify={true}>
+              <FormikForm
+                name="contact-demo"
+                data-netlify-recaptcha="true"
+                data-netlify={true}
+              >
                 <SpacingDiv role="group" aria-labelledby="my-radio-group">
                   <Label>Do you have your order number? </Label>
                   <Label>
