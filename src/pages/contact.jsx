@@ -211,17 +211,18 @@ function IndexPage() {
   ) => {
     const errors = {}
 
+    console.log(values)
     if (values.picked === 'no') {
-      if (!values.name) {
-        errors.name = 'Required'
+      if (!values.nameClient) {
+        errors.nameClient = 'Required'
       }
 
-      if (!values.email) {
-        errors.email = 'Required'
+      if (!values.emailClient) {
+        errors.emailClient = 'Required'
       } else if (
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.emailClient)
       ) {
-        errors.email = 'Invalid email address'
+        errors.emailClient = 'Invalid email address'
       }
     }
 
@@ -246,6 +247,8 @@ function IndexPage() {
     if (values.description === '') {
       errors.description = 'Required'
     }
+
+    console.log('errors', errors)
     return errors
   }
 
@@ -256,6 +259,7 @@ function IndexPage() {
   }
 
   const handleSubmit = values => {
+    console.log('values', values)
     fetch('/', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -306,13 +310,13 @@ function IndexPage() {
                 </SpacingDiv>
                 {values.picked && values.picked === 'no' && (
                   <SpacingDiv>
-                    <Label htmlFor="name">Name: </Label>
-                    <Field name="name" />
-                    <ErrorMessage name="name" />
+                    <Label htmlFor="nameClient">Name: </Label>
+                    <Field name="nameClient" />
+                    <ErrorMessage name="nameClient" />
 
-                    <Label htmlFor="email">Email: </Label>
-                    <Field name="email" />
-                    <ErrorMessage name="email" />
+                    <Label htmlFor="emailClient">Email: </Label>
+                    <Field name="emailClient" />
+                    <ErrorMessage name="emailClient" />
                   </SpacingDiv>
                 )}
                 {values.picked && values.picked === 'yes' && (
