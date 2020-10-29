@@ -271,7 +271,7 @@ function IndexPage() {
             validate={validate}
           >
             {({values, isValid}) => (
-              <FormikForm name="contact-demo" data-netlify={true}>
+              <FormikForm name="contact-demo" data-netlify="true">
                 <SpacingDiv role="group" aria-labelledby="my-radio-group">
                   <Label>Do you have your order number? </Label>
                   <Label>
