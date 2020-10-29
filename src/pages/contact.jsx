@@ -255,16 +255,14 @@ function IndexPage() {
       .join('&')
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = values => {
     fetch('/', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: encode({'form-name': 'contact', ...this.values}),
+      body: encode({'form-name': 'contact', ...values}),
     })
       .then(() => alert('Success!'))
       .catch(error => alert(error))
-
-    e.preventDefault()
   }
 
   return (
