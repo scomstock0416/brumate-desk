@@ -131,7 +131,7 @@ const SpacingDiv = styled.div`
   padding-bottom: 16px;
 `
 
-const Button = styled.input`
+const Button = styled.button`
   color: white;
   padding: 10px;
   background-color: black;
@@ -271,7 +271,7 @@ function IndexPage() {
             validate={validate}
           >
             {({values, isValid}) => (
-              <FormikForm name="contact" data-netlify={true}>
+              <FormikForm name="contact-demo" data-netlify={true}>
                 <SpacingDiv role="group" aria-labelledby="my-radio-group">
                   <Label>Do you have your order number? </Label>
                   <Label>
