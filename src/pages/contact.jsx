@@ -250,6 +250,21 @@ function IndexPage() {
     return errors
   }
 
+  const handleSubmit = e => {
+    e.preventDefault()
+    const form = e.target
+    fetch('/', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: encode({
+        'form-name': form.getAttribute('name'),
+        ...state,
+      }),
+    })
+      .then(() => navigate(form.getAttribute('action')))
+      .catch(error => alert(error))
+  }
+
   return (
     <Layout>
       <Container>
@@ -269,9 +284,16 @@ function IndexPage() {
               picked: '',
             }}
             validate={validate}
+            onSubmit={handleSubmit}
           >
             {({values, isValid}) => (
-              <FormikForm name="contact-demo" data-netlify="true">
+              <FormikForm
+                name="contact"
+                method="post"
+                data-netlify="true"
+                data-netlify-honeypot="bot-field"
+              >
+                <input type="hidden" name="form-name" value="contact" />
                 <SpacingDiv role="group" aria-labelledby="my-radio-group">
                   <Label>Do you have your order number? </Label>
                   <Label>
