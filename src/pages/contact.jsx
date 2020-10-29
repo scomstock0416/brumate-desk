@@ -357,9 +357,7 @@ function IndexPage() {
                       <ErrorMessage name="description" />
                     </SpacingDiv>
                     <SpacingDiv>
-                      <Button disabled={!isValid} type="submit">
-                        Send
-                      </Button>
+                      <Button type="submit">Send</Button>
                     </SpacingDiv>
                   </>
                 )}
