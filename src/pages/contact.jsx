@@ -357,7 +357,7 @@ function IndexPage() {
                       <ErrorMessage name="description" />
                     </SpacingDiv>
                     <SpacingDiv>
-                      <Button type="submit">Send</Button>
+                      <button type="submit">Submit</button>
                     </SpacingDiv>
                   </>
                 )}
