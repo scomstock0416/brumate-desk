@@ -131,7 +131,7 @@ const SpacingDiv = styled.div`
   padding-bottom: 16px;
 `
 
-const Button = styled.button`
+const Button = styled.input`
   color: white;
   padding: 10px;
   background-color: black;
@@ -268,13 +268,10 @@ function IndexPage() {
             initialValues={{
               picked: '',
             }}
+            validate={validate}
           >
             {({values, isValid}) => (
-              <FormikForm
-                netlify-honeypot="bot-field"
-                data-netlify="true"
-                name="contact"
-              >
+              <FormikForm name="contact" data-netlify={true}>
                 <SpacingDiv role="group" aria-labelledby="my-radio-group">
                   <Label>Do you have your order number? </Label>
                   <Label>
@@ -360,7 +357,9 @@ function IndexPage() {
                       <ErrorMessage name="description" />
                     </SpacingDiv>
                     <SpacingDiv>
-                      <Button type="submit">Send</Button>
+                      <Button disabled={!isValid} type="submit">
+                        Send
+                      </Button>
                     </SpacingDiv>
                   </>
                 )}
