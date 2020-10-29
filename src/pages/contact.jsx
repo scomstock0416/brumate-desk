@@ -131,7 +131,7 @@ const SpacingDiv = styled.div`
   padding-bottom: 16px;
 `
 
-const Button = styled.button`
+const Button = styled.input`
   color: white;
   padding: 10px;
   background-color: black;
