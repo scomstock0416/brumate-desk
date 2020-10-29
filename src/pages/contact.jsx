@@ -106,10 +106,10 @@ const Column = styled.div`
   }
 `
 
-const FormikForm = styled(Form)`
-  display: flex;
-  flex-direction: column;
-`
+// const FormikForm = styled(Form)`
+//   display: flex;
+//   flex-direction: column;
+// `
 
 const H2 = styled.h2`
   font-family: 'sharp_sans';
@@ -243,26 +243,28 @@ function IndexPage() {
       }
     }
 
-    if (!values.description) {
+    if (values.description === '') {
       errors.description = 'Required'
     }
-
     return errors
   }
 
+  const encode = data => {
+    return Object.keys(data)
+      .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+      .join('&')
+  }
+
   const handleSubmit = e => {
-    e.preventDefault()
-    const form = e.target
     fetch('/', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: encode({
-        'form-name': form.getAttribute('name'),
-        ...state,
-      }),
+      body: encode({'form-name': 'contact', ...this.state}),
     })
-      .then(() => navigate(form.getAttribute('action')))
+      .then(() => alert('Success!'))
       .catch(error => alert(error))
+
+    e.preventDefault()
   }
 
   return (
@@ -287,9 +289,8 @@ function IndexPage() {
             onSubmit={handleSubmit}
           >
             {({values, isValid}) => (
-              <FormikForm
+              <Form
                 name="contact"
-                method="post"
                 data-netlify="true"
                 data-netlify-honeypot="bot-field"
               >
@@ -371,11 +372,8 @@ function IndexPage() {
                 {values.selectType !== 'selecting' && (
                   <>
                     <SpacingDiv>
-                      <TextField
-                        name="description"
-                        as="textarea"
-                        placeholder="Description"
-                      />
+                      <label htmlFor="Description">Provide description:</label>
+                      <Field name="description" />
                       <ErrorMessage name="description" />
                     </SpacingDiv>
                     <SpacingDiv>
@@ -383,7 +381,7 @@ function IndexPage() {
                     </SpacingDiv>
                   </>
                 )}
-              </FormikForm>
+              </Form>
             )}
           </Formik>
         </Column>
