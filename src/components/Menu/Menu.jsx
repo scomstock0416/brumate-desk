@@ -1,6 +1,4 @@
 /* eslint-disable max-len */
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable jsx-a11y/mouse-events-have-key-events */
 import React, {useState} from 'react'
 import styled from 'styled-components'
 import logo from '../../images/menulogo.svg'
@@ -462,34 +460,34 @@ const Menu = ({className}) => {
             <g>
               <path
                 d="m0.6 0.925h13"
-                fill-opacity="0"
-                fill-rule="evenodd"
+                fillOpacity="0"
+                fillRule="evenodd"
                 stroke="#000"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.2"
               />
             </g>
             <g>
               <path
                 d="m0.6 6.125 9.5477 1e-15"
-                fill-opacity="0"
-                fill-rule="evenodd"
+                fillOpacity="0"
+                fillRule="evenodd"
                 stroke="#000"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.2"
               />
             </g>
             <g>
               <path
                 d="m0.6 11.975h6.2977"
-                fill-opacity="0"
-                fill-rule="evenodd"
+                fillOpacity="0"
+                fillRule="evenodd"
                 stroke="#000"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.2"
               />
             </g>
           </g>
@@ -551,13 +549,17 @@ const Menu = ({className}) => {
         <Icon displayInfo="mobile" src={shop} />
         <IconsWrapper>
           <Currency className="currency-picker mb-8 lg:mb-0 text-center lg:text-left">
-            <Select className="w-full lg:w-auto" name="currency">
-              <option>AUD</option>
-              <option>CAD</option>
-              <option>EUR</option>
-              <option>GBP</option>
-              <option>NZD</option>
-              <option selected="true">USD</option>
+            <Select
+              defaultValue={'USD'}
+              className="w-full lg:w-auto"
+              name="currency"
+            >
+              <option value="AUD">AUD</option>
+              <option value="CAD">CAD</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+              <option value="NZD">NZD</option>
+              <option value="USD">USD</option>
             </Select>
           </Currency>
           <Ul isAccount>

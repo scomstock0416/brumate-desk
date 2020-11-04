@@ -62,7 +62,7 @@ const Rectangle = styled.div`
   }
 `
 
-const P = styled.p`
+const P = styled.div`
   text-align: center;
   color: #ffffff;
   font-size: 11.25px;
