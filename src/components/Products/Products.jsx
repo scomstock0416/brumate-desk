@@ -60,7 +60,9 @@ const Products = ({className, products}) => {
             <Product
               key={indexKey + 1}
               onClick={() => {
-                navigate('/productInner/', {state: {title: questionType}})
+                navigate(`/productInner?product=${questionType}`, {
+                  state: {title: questionType},
+                })
               }}
             >
               {banner && banner.file && (

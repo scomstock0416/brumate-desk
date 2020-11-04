@@ -16,20 +16,6 @@ const Image = styled.img`
   margin: 0 auto;
 `
 
-const ContainerSpacing = styled.div`
-  padding: 0px;
-  margin: 0 auto;
-  @media (min-width: 640px) {
-    display: flex;
-    -webkit-box-pack: start;
-    justify-content: flex-start;
-    position: relative;
-    padding: 10px 6px;
-    flex: 1 0 0px;
-    margin: 0;
-  }
-`
-
 const InputContainer = styled.div`
   display: flex;
   justify-content: flex-start;

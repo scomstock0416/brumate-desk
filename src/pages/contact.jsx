@@ -35,20 +35,21 @@ const RadioField = styled(RawField)`
   @media (min-width: 768px) {
     background-color: #ffffff;
   }
+  //
 `
 
-const TextField = styled(RawField)`
-  display: inline;
-  width: 50%;
-  border: 1px solid #707070;
-  background-color: #ffffff;
-  color: #a6a6a6;
-  padding: 10px;
+// const TextField = styled(RawField)`
+//   display: inline;
+//   width: 50%;
+//   border: 1px solid #707070;
+//   background-color: #ffffff;
+//   color: #a6a6a6;
+//   padding: 10px;
 
-  @media (min-width: 768px) {
-    background-color: #ffffff;
-  }
-`
+//   @media (min-width: 768px) {
+//     background-color: #ffffff;
+//   }
+// `
 
 const Field = styled(RawField)`
   height: 39px;
@@ -131,11 +132,11 @@ const SpacingDiv = styled.div`
   padding-bottom: 16px;
 `
 
-const Button = styled.input`
-  color: white;
-  padding: 10px;
-  background-color: black;
-`
+// const Button = styled.input`
+//   color: white;
+//   padding: 10px;
+//   background-color: black;
+// `
 
 function IndexPage() {
   const breakpoints = useBreakpoint()

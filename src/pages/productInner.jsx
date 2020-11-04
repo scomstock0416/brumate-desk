@@ -1,7 +1,8 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {graphql, useStaticQuery} from 'gatsby'
 import {useBreakpoint} from 'gatsby-plugin-breakpoints'
 import styled from 'styled-components'
+import withLocation from '../hoc/withLocation'
 import Layout from '../components/Layout/Layout'
 import BaseQuestionList from '../components/QuestionList/QuestionList'
 import BaseProducts from '../components/Products/Products'
@@ -70,8 +71,9 @@ const H2 = styled.h2`
   margin-top: 0;
 `
 
-const ProductInner = ({location}) => {
-  const {title = ''} = location.state || {}
+const ProductInner = ({location, search}) => {
+  debugger
+  const {title = ''} = location.state || search || {}
   const breakpoints = useBreakpoint()
 
   const data = useStaticQuery(graphql`
@@ -185,4 +187,4 @@ const ProductInner = ({location}) => {
     </Layout>
   )
 }
-export default ProductInner
+export default withLocation(ProductInner)

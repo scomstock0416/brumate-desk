@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import {useBreakpoint} from 'gatsby-plugin-breakpoints'
 import {navigate} from 'gatsby'
 import BannerURL from '../../images/productFAQ.png'
 import {
@@ -13,7 +12,6 @@ import {
   BannerImage,
   TypesContainer,
   ProductsContainer,
-  // ProductNameNoLink,
 } from './StyledComponents'
 
 function compare(a, b) {
@@ -27,7 +25,6 @@ function compare(a, b) {
 }
 
 const MobileProductList = ({className, products}) => {
-  const breakpoints = useBreakpoint()
   const [shownProducts, setShownProducts] = useState([])
   const [activeType, setActiveType] = useState([])
   const [productTypes, setProductTypes] = useState([])

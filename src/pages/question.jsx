@@ -1,6 +1,7 @@
 import React from 'react'
 import {graphql, useStaticQuery} from 'gatsby'
 import {useBreakpoint} from 'gatsby-plugin-breakpoints'
+import withLocation from '../hoc/withLocation'
 import styled from 'styled-components'
 import Layout from '../components/Layout/Layout'
 import BaseQuestionList from '../components/QuestionList/QuestionList'
@@ -164,4 +165,4 @@ const Question = ({location}) => {
     </Layout>
   )
 }
-export default Question
+export default withLocation(Question)

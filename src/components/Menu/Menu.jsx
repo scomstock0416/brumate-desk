@@ -4,8 +4,6 @@ import styled from 'styled-components'
 import logo from '../../images/menulogo.svg'
 import search from '../../images/search.png'
 import shop from '../../images/shop.png'
-import user from '../../images/user.svg'
-import menu from '../../images/menu.svg'
 
 const Container = styled.nav`
   max-width: 100%;
@@ -506,7 +504,7 @@ const Menu = ({className}) => {
           <Li>
             <A
               onClick={() => {
-                if (menu == '') {
+                if (menu === '') {
                   showMenu('shop')
                   showInnerMenu('wine')
                   return
@@ -520,7 +518,7 @@ const Menu = ({className}) => {
           <Li>
             <A
               onClick={() => {
-                if (menu == '') {
+                if (menu === '') {
                   showMenu('gift')
                   return
                 }
@@ -533,7 +531,7 @@ const Menu = ({className}) => {
           <Li>
             <A
               onClick={() => {
-                if (menu == '') {
+                if (menu === '') {
                   showMenu('story')
                   return
                 }
@@ -762,7 +760,7 @@ const Menu = ({className}) => {
                     isActive={subinnermenu === 'accesories'}
                     noBold
                     onMouseEnter={() => {
-                      if (subinnermenu == '') {
+                      if (subinnermenu === '') {
                         showSubInnerMenu('accesories')
                         return
                       }
@@ -778,7 +776,7 @@ const Menu = ({className}) => {
                     noBold
                     isActive={subinnermenu === 'parts'}
                     onMouseEnter={() => {
-                      if (subinnermenu == '') {
+                      if (subinnermenu === '') {
                         showSubInnerMenu('parts')
                         return
                       }
