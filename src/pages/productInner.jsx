@@ -72,7 +72,6 @@ const H2 = styled.h2`
 `
 
 const ProductInner = ({location, search}) => {
-  debugger
   const {title = ''} = location.state || search || {}
   const breakpoints = useBreakpoint()
 
@@ -89,6 +88,9 @@ const ProductInner = ({location, search}) => {
               }
               answer {
                 answer
+                childMarkdownRemark {
+                  html
+                }
               }
             }
             title
@@ -98,8 +100,8 @@ const ProductInner = ({location, search}) => {
               }
             }
             banner {
-              file {
-                url
+              fluid(quality: 100) {
+                ...GatsbyContentfulFluid_withWebp
               }
             }
             product {
@@ -126,6 +128,9 @@ const ProductInner = ({location, search}) => {
         nodes {
           answer {
             answer
+            childMarkdownRemark {
+              html
+            }
           }
           question {
             question
@@ -172,13 +177,13 @@ const ProductInner = ({location, search}) => {
           )}
           <ChatBox />
         </Column>
-        <Column>
+        <Column style={{flex: 1}}>
           {breakpoints.sm && (
             <CategoriesMobile isProductFAQ categories={newCategoriesData} />
           )}
           {filteredNode && (
             <QuestionList
-              banner={filteredNode.banner && filteredNode.banner.file.url}
+              banner={filteredNode.banner.fluid}
               questions={filteredNode && filteredNode.questions}
             />
           )}

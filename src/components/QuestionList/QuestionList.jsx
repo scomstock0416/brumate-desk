@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
+import Img from 'gatsby-image'
+
 import {
   Container,
   QuestionWrapper,
   QuestionTitle,
   LinkMenu,
   ImageIcon,
-  Banner,
   AnswerContainer,
 } from './StyledComponents'
 import IconArrow from '../../images/arrowIcon.svg'
@@ -26,10 +27,11 @@ const QuestionList = ({
       setOpen([...open, id])
     }
   }
+
   return (
     <Container isSearching={isSearching} className={className}>
       <QuestionWrapper>
-        {banner && <Banner src={banner} alt="banner" />}
+        {banner && <Img fluid={banner} alt="banner" />}
         {questions &&
           questions.map(({question, answer, typeQuestion}) => (
             <>
@@ -50,9 +52,13 @@ const QuestionList = ({
                 />
               </QuestionTitle>
               {open.includes(question.id) && answer && (
-                <AnswerContainer
-                  dangerouslySetInnerHTML={{__html: answer.answer}}
-                />
+                <>
+                  <AnswerContainer
+                    dangerouslySetInnerHTML={{
+                      __html: answer.childMarkdownRemark.html,
+                    }}
+                  />
+                </>
               )}
             </>
           ))}

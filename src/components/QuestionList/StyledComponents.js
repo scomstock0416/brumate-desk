@@ -59,16 +59,11 @@ const ImageIcon = styled.img`
   transform: ${({opened}) => (opened ? 'rotate(90deg)' : 'rotate(-90deg)')};
 `
 
-const Banner = styled.img`
-  width: 100%;
-`
-
 export {
   Container,
   QuestionWrapper,
   QuestionTitle,
   LinkMenu,
   ImageIcon,
-  Banner,
   AnswerContainer,
 }

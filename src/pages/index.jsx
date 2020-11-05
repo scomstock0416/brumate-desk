@@ -79,6 +79,9 @@ const IndexPage = () => {
               }
               answer {
                 answer
+                childMarkdownRemark {
+                  html
+                }
               }
               featured
               popular
@@ -99,6 +102,9 @@ const IndexPage = () => {
         nodes {
           id
           answer {
+            childMarkdownRemark {
+              html
+            }
             answer
             id
           }

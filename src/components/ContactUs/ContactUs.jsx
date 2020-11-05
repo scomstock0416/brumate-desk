@@ -10,7 +10,7 @@ const infoContact = [
     icon: locationIcon,
     text: '201 NW 22ND AVE, FORT LAUDERDALE, FL 33311',
     url: 'https://goo.gl/maps/HALdwB7seSoXR7Cg9',
-    hyperlink: true,
+    hyperlink: false,
   },
   {
     icon: contactIcon,

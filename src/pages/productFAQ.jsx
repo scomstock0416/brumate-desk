@@ -78,6 +78,9 @@ const ProductFQA = () => {
               }
               answer {
                 answer
+                childMarkdownRemark {
+                  html
+                }
               }
             }
             title
@@ -114,7 +117,11 @@ const ProductFQA = () => {
       allContentfulQuestions {
         nodes {
           answer {
+            childMarkdownRemark {
+              html
+            }
             answer
+            id
           }
           question {
             question

@@ -154,6 +154,9 @@ function IndexPage() {
               }
               answer {
                 answer
+                childMarkdownRemark {
+                  html
+                }
               }
             }
             title
@@ -190,7 +193,9 @@ function IndexPage() {
       allContentfulQuestions {
         nodes {
           answer {
-            answer
+            childMarkdownRemark {
+              html
+            }
           }
           question {
             question

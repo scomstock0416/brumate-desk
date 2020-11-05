@@ -74,7 +74,9 @@ const Question = ({location}) => {
                 id
               }
               answer {
-                answer
+                childMarkdownRemark {
+                  html
+                }
               }
             }
             title
@@ -84,8 +86,8 @@ const Question = ({location}) => {
               }
             }
             banner {
-              file {
-                url
+              fluid(quality: 100) {
+                ...GatsbyContentfulFluid_withWebp
               }
             }
             product {
@@ -98,8 +100,8 @@ const Question = ({location}) => {
         nodes {
           name
           banner {
-            file {
-              url
+            fluid(quality: 100) {
+              ...GatsbyContentfulFluid_withWebp
             }
           }
           type
@@ -111,7 +113,9 @@ const Question = ({location}) => {
       allContentfulQuestions {
         nodes {
           answer {
-            answer
+            childMarkdownRemark {
+              html
+            }
           }
           question {
             question
@@ -138,6 +142,7 @@ const Question = ({location}) => {
       filteredNode = {}
     }
   }
+
   const newCategoriesData = data.allContentfulQuestionType.edges || {}
   return (
     <Layout>
@@ -150,13 +155,13 @@ const Question = ({location}) => {
             </>
           )}
         </Column>
-        <Column>
+        <Column style={{flex: 1}}>
           {breakpoints.sm && (
             <CategoriesMobile categories={newCategoriesData} />
           )}
           {filteredNode && (
             <QuestionList
-              banner={filteredNode.banner && filteredNode.banner.file.url}
+              banner={filteredNode.banner && filteredNode.banner.fluid}
               questions={filteredNode && filteredNode.questions}
             />
           )}
