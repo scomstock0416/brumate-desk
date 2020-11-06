@@ -121,9 +121,9 @@ const H2 = styled.h2`
 `
 
 const Label = styled.label`
-  font-family: 'sharp_sans';
+  font-family: 'architecta';
   display: block;
-  font-size: 14ox;
+  font-size: 24px;
   line-height: 30px;
   margin-top: 0;
 `
@@ -132,11 +132,11 @@ const SpacingDiv = styled.div`
   padding-bottom: 16px;
 `
 
-// const Button = styled.input`
-//   color: white;
-//   padding: 10px;
-//   background-color: black;
-// `
+const Button = styled.input`
+  color: white;
+  padding: 10px;
+  background-color: black;
+`
 
 function IndexPage() {
   const breakpoints = useBreakpoint()
@@ -217,7 +217,6 @@ function IndexPage() {
   ) => {
     const errors = {}
 
-    console.log(values)
     if (values.picked === 'no') {
       if (!values.nameClient) {
         errors.nameClient = 'Required'
@@ -254,7 +253,6 @@ function IndexPage() {
       errors.description = 'Required'
     }
 
-    console.log('errors', errors)
     return errors
   }
 
@@ -357,9 +355,9 @@ function IndexPage() {
 
                 {values.selectType && values.selectType === 'add' && (
                   <SpacingDiv>
-                    <label htmlFor="item">
+                    <Label htmlFor="item">
                       Provide item that needs to be changed or removed:
-                    </label>
+                    </Label>
                     <Field name="item" />
                     <ErrorMessage name="item" />
                   </SpacingDiv>
@@ -367,9 +365,9 @@ function IndexPage() {
 
                 {values.selectType && values.selectType === 'damage' && (
                   <SpacingDiv>
-                    <label htmlFor="imageDamage">
+                    <Label htmlFor="imageDamage">
                       Provide image of damage:{' '}
-                    </label>
+                    </Label>
                     <Field
                       name="image"
                       type="file"
@@ -380,12 +378,12 @@ function IndexPage() {
                 {values.selectType !== 'selecting' && (
                   <>
                     <SpacingDiv>
-                      <label htmlFor="Description">Provide description:</label>
+                      <Label htmlFor="Description">Provide description:</Label>
                       <Field name="description" />
                       <ErrorMessage name="description" />
                     </SpacingDiv>
                     <SpacingDiv>
-                      <button type="submit">Submit</button>
+                      <Button value="Send" type="submit"></Button>
                     </SpacingDiv>
                   </>
                 )}
