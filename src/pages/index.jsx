@@ -89,6 +89,7 @@ const IndexPage = () => {
             title
             product {
               id
+              featured
             }
             icon {
               file {
@@ -136,13 +137,15 @@ const IndexPage = () => {
             const gettingNodesWithProducts = data.allContentfulQuestionType.edges.filter(
               ({node: nodeProducts}) => nodeProducts.product,
             )
-            const questionsFromProducts = gettingNodesWithProducts.map(
-              ({node: nodeProductsFiltered}) => ({
+            const questionsFromProducts = gettingNodesWithProducts
+              .filter(({node}) => {
+                return node.product.featured === true
+              })
+              .map(({node: nodeProductsFiltered}) => ({
                 question: {
                   question: nodeProductsFiltered.title,
                 },
-              }),
-            )
+              }))
             filteredQuestions = questionsFromProducts
           } else {
             filteredQuestions =

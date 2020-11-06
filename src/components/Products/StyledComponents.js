@@ -32,7 +32,7 @@ const ProductsWrapper = styled.div`
 const Title = styled.p`
   font-family: 'sharp_sans';
   color: ${({isActive}) => (isActive ? '#000000' : '#bcbcbc')};
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   cursor: pointer;
 `
