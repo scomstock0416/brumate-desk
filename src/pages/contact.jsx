@@ -5,7 +5,16 @@ import styled from 'styled-components'
 import Layout from '../components/Layout/Layout'
 import CategoriesList from '../components/CategoriesList/CategoriesList'
 import BaseChatBox from '../components/ChatBox/ChatBox'
-import {Formik, Form, Field as UnBlockField, ErrorMessage} from 'formik'
+import {
+  Formik,
+  Form,
+  Field as UnBlockField,
+  ErrorMessage as RawErrorMessage,
+} from 'formik'
+
+const ErrorMessage = styled(RawErrorMessage)`
+  color: #dc3545;
+`
 
 const ChatBox = styled(BaseChatBox)`
   margin-top: 28px;
@@ -35,26 +44,27 @@ const RadioField = styled(RawField)`
   @media (min-width: 768px) {
     background-color: #ffffff;
   }
-  //
 `
 
-// const TextField = styled(RawField)`
-//   display: inline;
-//   width: 50%;
-//   border: 1px solid #707070;
-//   background-color: #ffffff;
-//   color: #a6a6a6;
-//   padding: 10px;
+const SelectField = styled(RawField)`
+  height: 40px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid #efefef;
+  background-color: #ffffff;
+  color: #a6a6a6;
 
-//   @media (min-width: 768px) {
-//     background-color: #ffffff;
-//   }
-// `
+  @media (min-width: 768px) {
+  }
+`
 
 const Field = styled(RawField)`
-  height: 39px;
-  width: 50%;
-  border: 1px solid #707070;
+  height: ${({height}) => (height ? '120px' : '40px')};
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid #efefef;
   background-color: #ffffff;
   color: #a6a6a6;
   padding-left: 10px;
@@ -68,7 +78,8 @@ const Field = styled(RawField)`
 
   @media (min-width: 768px) {
     background-color: #ffffff;
-    width: 50%;
+    max-width: 98%;
+    margin-right: 2%;
   }
 `
 
@@ -118,6 +129,7 @@ const H2 = styled.h2`
   font-weight: 700;
   line-height: 30px;
   margin-top: 0;
+  text-align: center;
 `
 
 const Label = styled.label`
@@ -126,16 +138,44 @@ const Label = styled.label`
   font-size: 24px;
   line-height: 30px;
   margin-top: 0;
+  font-weight: 300;
 `
 
 const SpacingDiv = styled.div`
+  padding-top: 16px;
   padding-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+`
+
+const SpacingDivColumn = styled.div`
+  padding-top: 16px;
+  padding-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+`
+
+const DivCol = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 `
 
 const Button = styled.input`
   color: white;
-  padding: 10px;
-  background-color: black;
+  padding: 10px 30px;
+  background-color: #343a40;
+  border-color: #343a40;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  max-width: 50%;
+  margin: 0 auto;
 `
 
 function IndexPage() {
@@ -231,6 +271,10 @@ function IndexPage() {
       }
     }
 
+    if (values.picked === '') {
+      errors.picked = 'Required'
+    }
+
     if (values.picked === 'yes') {
       if (!values.order) {
         errors.order = 'Required'
@@ -301,31 +345,35 @@ function IndexPage() {
                 data-netlify-honeypot="bot-field"
               >
                 <input type="hidden" name="form-name" value="contact" />
-                <SpacingDiv role="group" aria-labelledby="my-radio-group">
+                <SpacingDivColumn role="group" aria-labelledby="my-radio-group">
                   <Label>Do you have your order number? </Label>
                   <Label>
                     <RadioField type="radio" name="picked" value="yes" />
-                    Yes
+                    yes
                   </Label>
                   <Label>
                     <RadioField type="radio" name="picked" value="no" />
-                    No
+                    no
                   </Label>
-                </SpacingDiv>
+                </SpacingDivColumn>
+                <ErrorMessage name="picked" />
                 {values.picked && values.picked === 'no' && (
-                  <SpacingDiv>
-                    <Label htmlFor="nameClient">Name: </Label>
-                    <Field name="nameClient" />
-                    <ErrorMessage name="nameClient" />
-
-                    <Label htmlFor="emailClient">Email: </Label>
-                    <Field name="emailClient" />
-                    <ErrorMessage name="emailClient" />
-                  </SpacingDiv>
+                  <SpacingDivColumn>
+                    <DivCol>
+                      <Label htmlFor="nameClient">Name </Label>
+                      <Field name="nameClient" />
+                      <ErrorMessage name="nameClient" />
+                    </DivCol>
+                    <DivCol>
+                      <Label htmlFor="emailClient">Email </Label>
+                      <Field name="emailClient" />
+                      <ErrorMessage name="emailClient" />
+                    </DivCol>
+                  </SpacingDivColumn>
                 )}
                 {values.picked && values.picked === 'yes' && (
                   <SpacingDiv>
-                    <Label htmlFor="order">Order number: </Label>
+                    <Label htmlFor="order">Order number </Label>
                     <Field name="order" />
                     <ErrorMessage name="order" />
                   </SpacingDiv>
@@ -333,14 +381,14 @@ function IndexPage() {
 
                 <SpacingDiv>
                   <Label>What’s the problem? </Label>
-                  <UnBlockField as="select" name="selectType">
+                  <SelectField component="select" name="selectType">
                     <option value="selecting">--Select--</option>
                     <option value="cancel">Cancel</option>
                     <option value="change">Change address</option>
                     <option value="add">Add/remove item</option>
                     <option value="damage">Damage</option>
                     <option value="other">Other</option>
-                  </UnBlockField>
+                  </SelectField>
                 </SpacingDiv>
 
                 {values.selectType && values.selectType === 'change' && (
@@ -365,9 +413,7 @@ function IndexPage() {
 
                 {values.selectType && values.selectType === 'damage' && (
                   <SpacingDiv>
-                    <Label htmlFor="imageDamage">
-                      Provide image of damage:{' '}
-                    </Label>
+                    <Label htmlFor="imageDamage">Provide image of damage</Label>
                     <Field
                       name="image"
                       type="file"
@@ -378,8 +424,12 @@ function IndexPage() {
                 {values.selectType !== 'selecting' && (
                   <>
                     <SpacingDiv>
-                      <Label htmlFor="Description">Provide description:</Label>
-                      <Field name="description" />
+                      <Label htmlFor="Description">Provide description</Label>
+                      <Field
+                        height={3}
+                        component="textarea"
+                        name="description"
+                      />
                       <ErrorMessage name="description" />
                     </SpacingDiv>
                     <SpacingDiv>
