@@ -183,7 +183,7 @@ const ProductInner = ({location, search}) => {
           )}
           {filteredNode && (
             <QuestionList
-              banner={filteredNode.banner.fluid}
+              banner={filteredNode.banner && filteredNode.banner.fluid}
               questions={filteredNode && filteredNode.questions}
             />
           )}
