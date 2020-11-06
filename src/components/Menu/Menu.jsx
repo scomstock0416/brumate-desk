@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import logo from '../../images/menulogo.svg'
 import search from '../../images/search.png'
@@ -108,7 +108,7 @@ const A = styled.a`
   font-size: 13.5px;
   font-weight: 700;
   letter-spacing: 1.4px;
-  font-family: 'sharp_sans';
+  font-family: 'arquitecta';
 `
 
 const Select = styled.select`
@@ -190,7 +190,7 @@ const ImageLegend = styled.p`
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 1.4px;
-  font-family: 'sharp_sans';
+  font-family: 'arquitecta';
   padding: 0;
   margin: 0;
 `
@@ -284,7 +284,7 @@ const AScrolleable = styled.a`
   font-size: 2.25rem;
   font-weight: 700;
   letter-spacing: 1.4px;
-  font-family: 'sharp_sans';
+  font-family: 'arquitecta';
 `
 
 const ProductContainer = styled.div`
@@ -425,7 +425,7 @@ const ColorContainer = styled.div`
   height: 36px;
 `
 
-const Menu = ({className}) => {
+const Menu = ({className, closeMenuFxn}) => {
   const [active, setActive] = useState('')
   const [menu, setMenu] = useState('')
   const [subinnermenu, setSubInnerMenu] = useState('')
@@ -446,11 +446,17 @@ const Menu = ({className}) => {
   const showInnerMenu = exp => {
     setActive(exp)
   }
+
+  useEffect(() => {
+    closeMenu('')
+    setIsMenuActive(false)
+    setActive('')
+  }, [closeMenuFxn])
   return (
     <Container>
       <Nav className={className}>
         <SVG
-          onClick={() => setIsMenuActive(true)}
+          onMouseEnter={() => setIsMenuActive(true)}
           viewBox="0 0 14.2 12.9"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -503,7 +509,7 @@ const Menu = ({className}) => {
         <Ul>
           <Li>
             <A
-              onClick={() => {
+              onMouseEnter={() => {
                 if (menu === '') {
                   showMenu('shop')
                   showInnerMenu('wine')
@@ -517,7 +523,7 @@ const Menu = ({className}) => {
           </Li>
           <Li>
             <A
-              onClick={() => {
+              onMouseEnter={() => {
                 if (menu === '') {
                   showMenu('gift')
                   return
@@ -530,7 +536,7 @@ const Menu = ({className}) => {
           </Li>
           <Li>
             <A
-              onClick={() => {
+              onMouseEnter={() => {
                 if (menu === '') {
                   showMenu('story')
                   return
@@ -576,7 +582,7 @@ const Menu = ({className}) => {
               <SubLinksLi isActive={active === 'wine'}>
                 <SubLinksA
                   isActive={active === 'wine'}
-                  onClick={() => {
+                  onMouseEnter={() => {
                     if (active === '' || active !== 'wine') {
                       showInnerMenu('wine')
                       return
@@ -592,7 +598,7 @@ const Menu = ({className}) => {
               <SubLinksLi isActive={active === 'beer'}>
                 <SubLinksA
                   isActive={active === 'beer'}
-                  onClick={() => {
+                  onMouseEnter={() => {
                     if (active === '' || active !== 'beer') {
                       showInnerMenu('beer')
                       return
@@ -608,7 +614,7 @@ const Menu = ({className}) => {
               <SubLinksLi isActive={active === 'spirits'}>
                 <SubLinksA
                   isActive={active === 'spirits'}
-                  onClick={() => {
+                  onMouseEnter={() => {
                     if (active === '' || active !== 'spirits') {
                       showInnerMenu('spirits')
                       return
@@ -624,7 +630,7 @@ const Menu = ({className}) => {
               <SubLinksLi isActive={active === 'coolers'}>
                 <SubLinksA
                   isActive={active === 'coolers'}
-                  onClick={() => {
+                  onMouseEnter={() => {
                     if (active === '' || active !== 'coolers') {
                       showInnerMenu('coolers')
                       return
@@ -640,7 +646,7 @@ const Menu = ({className}) => {
               <SubLinksLi isActive={active === 'accesories'}>
                 <SubLinksA
                   isActive={active === 'accesories'}
-                  onClick={() => {
+                  onMouseEnter={() => {
                     if (active === '' || active !== 'accesories') {
                       showInnerMenu('accesories')
                       return
@@ -655,7 +661,7 @@ const Menu = ({className}) => {
               <SubLinksLi isActive={active === 'shop'}>
                 <SubLinksA
                   isActive={active === 'shop'}
-                  onClick={() => {
+                  onMouseEnter={() => {
                     if (active === '' || active !== 'shop') {
                       showInnerMenu('shop')
                       return
@@ -884,7 +890,7 @@ const Menu = ({className}) => {
             aria-label="Close Menu"
             aria-hidden="true"
           >
-            <span onClick={() => setIsMenuActive(false)} class="relative">
+            <span onMouseEnter={() => setIsMenuActive(false)} class="relative">
               CLOSE
             </span>{' '}
             <CloseSVG

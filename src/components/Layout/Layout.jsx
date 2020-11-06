@@ -8,6 +8,7 @@ import Menu from '../Menu/Menu'
 import Banner from '../Banner/Banner'
 import GlobalStyle, {theme} from '../../theme/theme'
 import QuestionList from '../QuestionList/QuestionList'
+import OutsideAlerter from './OutsideAlerter'
 import 'normalize.css'
 
 const Container = styled.div`
@@ -39,6 +40,12 @@ const Main = styled.main`
 
 const Layout = ({children}) => {
   const [questionList, setQuestionsList] = useState([])
+  const [menu, setMenu] = useState('opened')
+
+  const closeMenu = () => {
+    setMenu('')
+  }
+
   const data = useStaticQuery(graphql`
     {
       allContentfulQuestionType(sort: {fields: order}) {
@@ -91,17 +98,19 @@ const Layout = ({children}) => {
         />
       </Helmet>
       <GlobalStyle />
-      <header>
-        <TopMenu />
-        <Menu />
-        {data && (
-          <Banner
-            setQuestionsList={setQuestionsList}
-            questions={data.allContentfulQuestions.nodes}
-            title="Help Center"
-          />
-        )}
-      </header>
+      <OutsideAlerter fxn={closeMenu}>
+        <header>
+          <TopMenu />
+          <Menu closeMenuFxn={menu} />
+          {data && (
+            <Banner
+              setQuestionsList={setQuestionsList}
+              questions={data.allContentfulQuestions.nodes}
+              title="Help Center"
+            />
+          )}
+        </header>
+      </OutsideAlerter>
       <Main>
         {questionList.length > 0 && (
           <Container>

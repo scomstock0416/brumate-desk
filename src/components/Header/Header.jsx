@@ -35,7 +35,7 @@ const Rectangle = styled.div`
   background-color: #303030;
   padding: 20px 0;
   font-size: 11px;
-  font-family: 'sharp_sans';
+  font-family: 'architecta';
   box-sizing: border-box;
   @media (min-width: 769px) {
     display: block;
@@ -65,8 +65,8 @@ const Rectangle = styled.div`
 const P = styled.div`
   text-align: center;
   color: #ffffff;
-  font-size: 11.25px;
-  font-family: 'Montserrat', sans-serif;
+  font-size: 13.5px;
+  font-family: 'architecta';
   text-transform: uppercase;
   letter-spacing: 0.1em;
   line-height: 16.875px;
@@ -79,9 +79,8 @@ const TopMenu = ({className}) => (
   <Container>
     <Wrapper className={className}>
       <P>
-        FREE SHIPPING & RETURNS ON ALL U.S. ORDERS OVER $60. ORDERS SHIP WITHIN
-        24-48 HOURS.
-        <Rectangle>BUY A GIFT CARD</Rectangle>
+        FREE SHIPPING & RETURNS ON US ORDERS OVER $60
+        <Rectangle>SHOP NOW</Rectangle>
       </P>
     </Wrapper>
   </Container>

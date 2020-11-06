@@ -147,12 +147,12 @@ const LI = styled.li`
 const A = styled.a`
   color: white;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   letter-spacing: 0.48px;
   line-height: 29px;
   text-transform: uppercase;
-  font-family: 'sharp_sans';
+  font-family: 'architecta';
 `
 
 const CopyRight = styled.p`
@@ -190,7 +190,7 @@ const LogoContainer = styled.div`
 `
 
 const H4 = styled.h4`
-  font-family: 'sharp_sans';
+  font-family: 'architecta';
   font-size: 20.25px;
   text-align: left;
   margin-top: 2rem;
@@ -228,7 +228,7 @@ const SignUpText = styled.a`
   font-size: 1.6rem;
   line-height: 30px;
   color: white;
-  font-family: 'sharp_sans';
+  font-family: 'architecta';
   font-weight: 400;
   font-style: normal;
 `
