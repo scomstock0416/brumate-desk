@@ -23,7 +23,6 @@ const ContactUs = ({className}) => (
           key={index + 1}
           href={hyperlink ? url : ''}
           hyperlink={hyperlink}
-          target="_blank"
         >
           <ImageIcon src={icon} alt="arrow" />
           <P>{text}</P>
