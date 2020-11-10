@@ -1,10 +1,12 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {graphql, useStaticQuery} from 'gatsby'
 import {useBreakpoint} from 'gatsby-plugin-breakpoints'
 import styled from 'styled-components'
 import Layout from '../components/Layout/Layout'
 import CategoriesList from '../components/CategoriesList/CategoriesList'
 import BaseChatBox from '../components/ChatBox/ChatBox'
+import BannerURL from '../images/contactUs.png'
+import {navigate} from 'gatsby'
 import {
   Formik,
   Form,
@@ -16,6 +18,18 @@ const ErrorMessage = styled(RawErrorMessage)`
   color: #dc3545;
 `
 
+const FormContainer = styled.div`
+  padding: 30px;
+`
+
+const ShadowContainer = styled.div`
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.16);
+`
+
+const BannerImage = styled.img`
+  max-width: 100%;
+`
+
 const ChatBox = styled(BaseChatBox)`
   margin-top: 28px;
 `
@@ -23,6 +37,7 @@ const ChatBox = styled(BaseChatBox)`
 const RawField = styled(UnBlockField)`
   display: block;
   box-sizing: content-box;
+  border: 1px solid #cccccc;
 `
 
 const RadioField = styled(RawField)`
@@ -31,11 +46,11 @@ const RadioField = styled(RawField)`
   width: 50px;
   border: 1px solid #707070;
   background-color: #ffffff;
-  color: #a6a6a6;
+  color: #000;
   padding-left: 10px;
 
   ::placeholder {
-    color: #a6a6a6;
+    color: #707070;
     font-family: 'sharp_sans';
     font-size: 10px;
     font-weight: 600;
@@ -51,9 +66,9 @@ const SelectField = styled(RawField)`
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
-  border: 1px solid #efefef;
-  background-color: #ffffff;
-  color: #a6a6a6;
+  border: 1px solid #cccccc;
+  background-color: #fff;
+  color: #000;
 
   @media (min-width: 768px) {
   }
@@ -64,13 +79,13 @@ const Field = styled(RawField)`
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
-  border: 1px solid #efefef;
+  border: 1px solid #cccccc;
   background-color: #ffffff;
-  color: #a6a6a6;
+  color: ##000;
   padding-left: 10px;
 
   ::placeholder {
-    color: #a6a6a6;
+    color: #000;
     font-family: 'sharp_sans';
     font-size: 10px;
     font-weight: 600;
@@ -118,11 +133,6 @@ const Column = styled.div`
   }
 `
 
-// const FormikForm = styled(Form)`
-//   display: flex;
-//   flex-direction: column;
-// `
-
 const H2 = styled.h2`
   font-family: 'sharp_sans';
   font-size: 20px;
@@ -133,9 +143,20 @@ const H2 = styled.h2`
 `
 
 const Label = styled.label`
-  font-family: 'architecta';
+  font-family: 'sharp_sans';
   display: block;
-  font-size: 24px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 30px;
+  margin-top: 0;
+  font-weight: 300;
+`
+
+const SubTitle = styled.p`
+  font-family: 'sharp_sans';
+  display: block;
+  font-size: 12px;
+  font-weight: 300;
   line-height: 30px;
   margin-top: 0;
   font-weight: 300;
@@ -168,17 +189,60 @@ const DivCol = styled.div`
 const Button = styled.input`
   color: white;
   padding: 10px 30px;
-  background-color: #343a40;
-  border-color: #343a40;
+  background-color: #000;
+  border: 1px solid #cccccc;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   border: 1px solid transparent;
+  border-radius: 28px;
+  max-width: 30%;
+`
+
+const Title = styled.p`
+  color: #000000;
+  font-family: 'sharp_sans';
+  font-size: 23px;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 26px;
+  text-align: left;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: normal;
+`
+
+const LabelType = styled.label`
+  display: block;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  background: #fff;
+  color: #000;
   border-radius: 5px;
-  max-width: 50%;
-  margin: 0 auto;
+  font-size: 1em;
+  transition: all 0.4s;
+  cursor: pointer;
+  width: 50%;
+`
+
+const FieldImage = styled(Field)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  padding: 14px 0;
+  cursor: pointer;
+`
+
+const FileContainer = styled.div`
+  position: relative;
+  width: 100%;
 `
 
 function IndexPage() {
+  const [files, setFiles] = useState('')
+  const [displayFormStatus, setDisplayFormStatus] = useState(false)
   const breakpoints = useBreakpoint()
 
   const data = useStaticQuery(graphql`
@@ -287,6 +351,12 @@ function IndexPage() {
       }
     }
 
+    if (values.selectType === 'damage') {
+      if (!values.file) {
+        errors.imageDamage = 'Required'
+      }
+    }
+
     if (values.selectType === 'add') {
       if (!values.item) {
         errors.item = 'Required'
@@ -297,6 +367,7 @@ function IndexPage() {
       errors.description = 'Required'
     }
 
+    console.log(errors)
     return errors
   }
 
@@ -306,15 +377,28 @@ function IndexPage() {
       .join('&')
   }
 
-  const handleSubmit = values => {
-    console.log('values', values)
+  const handleSubmit = (
+    values,
+    {setSubmitting, setErrors, setStatus, resetForm},
+  ) => {
     fetch('/', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: encode({'form-name': 'contact', ...values}),
     })
-      .then(() => alert('Success!'))
-      .catch(error => alert(error))
+      .then(() => {
+        resetForm({
+          picked: '',
+          description: '',
+        })
+        setStatus({success: true})
+        setDisplayFormStatus(true)
+      })
+      .catch(error => {
+        setStatus({success: false})
+        setSubmitting(false)
+        setErrors({submit: error.message})
+      })
   }
 
   return (
@@ -330,116 +414,161 @@ function IndexPage() {
           <ChatBox />
         </Column>
         <Column isSecond>
-          <H2>Contact Form</H2>
-          <Formik
-            initialValues={{
-              picked: '',
-            }}
-            validate={validate}
-            onSubmit={handleSubmit}
-          >
-            {({values, isValid}) => (
-              <Form
-                name="contact"
-                data-netlify="true"
-                data-netlify-honeypot="bot-field"
+          <ShadowContainer>
+            <BannerImage src={BannerURL} alt="BannerURL" />
+            <FormContainer>
+              <Title>Report your Problem</Title>
+              <Formik
+                initialValues={{
+                  picked: '',
+                  description: '',
+                  selectType: '',
+                  order: '',
+                }}
+                validate={validate}
+                onSubmit={handleSubmit}
               >
-                <input type="hidden" name="form-name" value="contact" />
-                <SpacingDivColumn role="group" aria-labelledby="my-radio-group">
-                  <Label>Do you have your order number? </Label>
-                  <Label>
-                    <RadioField type="radio" name="picked" value="yes" />
-                    yes
-                  </Label>
-                  <Label>
-                    <RadioField type="radio" name="picked" value="no" />
-                    no
-                  </Label>
-                </SpacingDivColumn>
-                <ErrorMessage name="picked" />
-                {values.picked && values.picked === 'no' && (
-                  <SpacingDivColumn>
-                    <DivCol>
-                      <Label htmlFor="nameClient">Name </Label>
-                      <Field name="nameClient" />
-                      <ErrorMessage name="nameClient" />
-                    </DivCol>
-                    <DivCol>
-                      <Label htmlFor="emailClient">Email </Label>
-                      <Field name="emailClient" />
-                      <ErrorMessage name="emailClient" />
-                    </DivCol>
-                  </SpacingDivColumn>
-                )}
-                {values.picked && values.picked === 'yes' && (
-                  <SpacingDiv>
-                    <Label htmlFor="order">Order number </Label>
-                    <Field name="order" />
-                    <ErrorMessage name="order" />
-                  </SpacingDiv>
-                )}
+                {({
+                  values,
+                  isValid,
+                  setFieldValue,
+                  errors,
+                  handleSubmit,
+                  handleChange,
+                  isSubmitting,
+                  status,
+                }) => (
+                  <Form
+                    loading={isSubmitting}
+                    success={!!status && !!status.success}
+                    error={!!errors.submit}
+                    name="contact"
+                    data-netlify="true"
+                    data-netlify-honeypot="bot-field"
+                  >
+                    <input type="hidden" name="form-name" value="contact" />
 
-                <SpacingDiv>
-                  <Label>What’s the problem? </Label>
-                  <SelectField component="select" name="selectType">
-                    <option value="selecting">--Select--</option>
-                    <option value="cancel">Cancel</option>
-                    <option value="change">Change address</option>
-                    <option value="add">Add/remove item</option>
-                    <option value="damage">Damage</option>
-                    <option value="other">Other</option>
-                  </SelectField>
-                </SpacingDiv>
+                    <Label>Do you have your order number? </Label>
+                    <SpacingDivColumn
+                      role="group"
+                      aria-labelledby="my-radio-group"
+                    >
+                      <Label>
+                        <RadioField type="radio" name="picked" value="yes" />
+                        Yes
+                      </Label>
+                      <Label>
+                        <RadioField type="radio" name="picked" value="no" />
+                        No
+                      </Label>
+                    </SpacingDivColumn>
+                    <ErrorMessage component="span" name="picked" />
+                    {values.picked && values.picked === 'no' && (
+                      <SpacingDivColumn>
+                        <DivCol>
+                          <Label htmlFor="nameClient">Name </Label>
+                          <Field name="nameClient" />
+                          <ErrorMessage component="span" name="nameClient" />
+                        </DivCol>
+                        <DivCol>
+                          <Label htmlFor="emailClient">Email </Label>
+                          <Field name="emailClient" />
+                          <ErrorMessage component="span" name="emailClient" />
+                        </DivCol>
+                      </SpacingDivColumn>
+                    )}
+                    {values.picked && values.picked === 'yes' && (
+                      <SpacingDiv>
+                        <Label htmlFor="order">Order Number </Label>
+                        <Field name="order" />
+                        <ErrorMessage component="span" name="order" />
+                      </SpacingDiv>
+                    )}
 
-                {values.selectType && values.selectType === 'change' && (
-                  <SpacingDiv>
-                    <Label htmlFor="address">
-                      Provide new/updated address:{' '}
-                    </Label>
-                    <Field name="address" />
-                    <ErrorMessage name="address" />
-                  </SpacingDiv>
-                )}
-
-                {values.selectType && values.selectType === 'add' && (
-                  <SpacingDiv>
-                    <Label htmlFor="item">
-                      Provide item that needs to be changed or removed:
-                    </Label>
-                    <Field name="item" />
-                    <ErrorMessage name="item" />
-                  </SpacingDiv>
-                )}
-
-                {values.selectType && values.selectType === 'damage' && (
-                  <SpacingDiv>
-                    <Label htmlFor="imageDamage">Provide image of damage</Label>
-                    <Field
-                      name="image"
-                      type="file"
-                      placeholder="Please upload an image"
-                    />
-                  </SpacingDiv>
-                )}
-                {values.selectType !== 'selecting' && (
-                  <>
                     <SpacingDiv>
-                      <Label htmlFor="Description">Provide description</Label>
-                      <Field
-                        height={3}
-                        component="textarea"
-                        name="description"
-                      />
-                      <ErrorMessage name="description" />
+                      <Label>How can we help you today?</Label>
+                      <SelectField component="select" name="selectType">
+                        <option value="selecting">--Select--</option>
+                        <option value="cancel">Cancel</option>
+                        <option value="change">Change address</option>
+                        <option value="add">Add/remove item</option>
+                        <option value="damage">Damage</option>
+                        <option value="other">Other</option>
+                      </SelectField>
                     </SpacingDiv>
-                    <SpacingDiv>
-                      <Button value="Send" type="submit"></Button>
-                    </SpacingDiv>
-                  </>
+
+                    {values.selectType && values.selectType === 'change' && (
+                      <SpacingDiv>
+                        <Label htmlFor="address">
+                          Provide new/updated address:{' '}
+                        </Label>
+                        <Field name="address" />
+                        <ErrorMessage component="span" name="address" />
+                      </SpacingDiv>
+                    )}
+
+                    {values.selectType && values.selectType === 'add' && (
+                      <SpacingDiv>
+                        <Label htmlFor="item">
+                          Provide item that needs to be changed or removed:
+                        </Label>
+                        <Field name="item" />
+                        <ErrorMessage component="span" name="item" />
+                      </SpacingDiv>
+                    )}
+
+                    {values.selectType && values.selectType === 'damage' && (
+                      <SpacingDiv>
+                        <FileContainer>
+                          <FieldImage
+                            name="imageDamage"
+                            multiple
+                            type="file"
+                            onChange={event => {
+                              setFiles('')
+                              const filesEvent = event.currentTarget.files
+                              for (var i = 0; i < filesEvent.length; i++) {
+                                setFiles(files + ' ' + filesEvent[i].name)
+                              }
+
+                              setFieldValue('file', event.currentTarget.files)
+                            }}
+                          />
+                          <LabelType htmlFor="imageDamage">
+                            {files ? files : 'Choose files...'}
+                          </LabelType>
+                          <ErrorMessage component="span" name="imageDamage" />
+                        </FileContainer>
+                      </SpacingDiv>
+                    )}
+                    {values.selectType !== 'selecting' && (
+                      <>
+                        <SpacingDiv>
+                          <Label htmlFor="Description">
+                            Provide description
+                          </Label>
+                          <Field
+                            height={3}
+                            component="textarea"
+                            name="description"
+                          />
+                          <ErrorMessage component="span" name="description" />
+                        </SpacingDiv>
+                        <SpacingDiv>
+                          <Button value="Send" type="submit"></Button>
+                        </SpacingDiv>
+                        {displayFormStatus && (
+                          <SubTitle>
+                            Thanks for contacting us and report your problem.
+                          </SubTitle>
+                        )}
+                      </>
+                    )}
+                  </Form>
                 )}
-              </Form>
-            )}
-          </Formik>
+              </Formik>
+            </FormContainer>
+          </ShadowContainer>
         </Column>
       </Container>
     </Layout>
