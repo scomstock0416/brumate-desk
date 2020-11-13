@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import {useBreakpoint} from 'gatsby-plugin-breakpoints'
-import user from '../../images/Header.png'
-import tablet from '../../images/HeaderTablet.png'
+import user from '../../images/Header.jpg'
 import SearchBox from '../SearchBox/SearchBox'
 
 const Image = styled.div`
@@ -36,7 +35,7 @@ const Title = styled.a`
 const Banner = ({className, title, setQuestionsList, questions}) => {
   const breakpoints = useBreakpoint()
   return (
-    <Image url={breakpoints.md ? tablet : user} className={className}>
+    <Image url={user} className={className}>
       <Title href="/">{title}</Title>
       <SearchBox setQuestionsList={setQuestionsList} questions={questions} />
     </Image>
