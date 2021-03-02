@@ -28,6 +28,7 @@ module.exports = {
       options: {
         useMozJpeg: false,
         stripMetadata: true,
+        failOnError: false,
         defaultQuality: 100,
       },
     },
@@ -38,6 +39,7 @@ module.exports = {
         name: 'gatsby-starter-default',
         short_name: 'starter',
         start_url: '/',
+        icon: `src/images/Header.png`,
         display: 'minimal-ui',
       },
     },
