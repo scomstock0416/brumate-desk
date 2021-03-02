@@ -172,7 +172,7 @@ const IndexPage = () => {
           )}
         </LineContainer>
         <LineContainer>
-          <H2>Contact us</H2>
+          <H2>Contact Us</H2>
           <ContactUs />
         </LineContainer>
       </Container>

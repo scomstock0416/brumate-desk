@@ -5,7 +5,7 @@ import {Container, InformationField, ImageIcon, P} from './StyledComponents'
 const infoContact = [
   {
     icon: contactIcon,
-    text: 'Contact US',
+    text: 'Contact Us',
     url: '/contact',
     hyperlink: true,
   },
