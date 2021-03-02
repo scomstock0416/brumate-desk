@@ -6,7 +6,6 @@ import Layout from '../components/Layout/Layout'
 import CategoriesList from '../components/CategoriesList/CategoriesList'
 import BaseChatBox from '../components/ChatBox/ChatBox'
 import BannerURL from '../images/contactUs.png'
-import {navigate} from 'gatsby'
 import {
   Formik,
   Form,

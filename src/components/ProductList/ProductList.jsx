@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-// import { useBreakpoint } from 'gatsby-plugin-breakpoints';
 import {navigate} from 'gatsby'
 import BannerURL from '../../images/productFAQ.png'
 import {

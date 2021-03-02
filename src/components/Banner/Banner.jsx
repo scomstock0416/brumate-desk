@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import {useBreakpoint} from 'gatsby-plugin-breakpoints'
 import user from '../../images/Header.jpg'
 import SearchBox from '../SearchBox/SearchBox'
 
@@ -33,7 +32,6 @@ const Title = styled.a`
 `
 
 const Banner = ({className, title, setQuestionsList, questions}) => {
-  const breakpoints = useBreakpoint()
   return (
     <Image url={user} className={className}>
       <Title href="/">{title}</Title>

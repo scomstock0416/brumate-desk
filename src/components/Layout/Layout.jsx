@@ -59,6 +59,9 @@ const Layout = ({children}) => {
               }
               answer {
                 answer
+                childMarkdownRemark {
+                  html
+                }
               }
             }
             title
@@ -77,6 +80,9 @@ const Layout = ({children}) => {
         nodes {
           answer {
             answer
+            childMarkdownRemark {
+              html
+            }
           }
           question {
             question

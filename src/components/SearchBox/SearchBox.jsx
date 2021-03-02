@@ -12,6 +12,7 @@ const Search = ({className, questions, setQuestionsList}) => {
         answer.answer.toLowerCase().includes(loweCaserValue) ||
         typeQuestion.title.toLowerCase().includes(loweCaserValue),
     )
+    console.log(filteredQuestions)
     setQuestionsList(filteredQuestions)
   }
   return (

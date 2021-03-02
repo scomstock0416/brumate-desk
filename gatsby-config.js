@@ -34,16 +34,6 @@ module.exports = {
     },
     'gatsby-plugin-sharp',
     {
-      resolve: 'gatsby-plugin-manifest',
-      options: {
-        name: 'gatsby-starter-default',
-        short_name: 'starter',
-        start_url: '/',
-        icon: `src/images/Header.png`,
-        display: 'minimal-ui',
-      },
-    },
-    {
       resolve: 'gatsby-source-contentful',
       options: {
         spaceId: 'b1jnxgqy6w4b',
