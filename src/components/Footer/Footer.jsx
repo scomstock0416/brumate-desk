@@ -298,27 +298,35 @@ const Footer = () => {
               {(!breakpoints.md || isActiveShop) && (
                 <UL isShop className="uppercase ">
                   <LI>
-                    <A href="/collections">Collections</A>
+                    <A href="https://www.brumate.com/collections">
+                      Collections
+                    </A>
                   </LI>
 
                   <LI>
-                    <A href="/collections/wine">Wine</A>
+                    <A href="https://www.brumate.com//collections/wine">Wine</A>
                   </LI>
 
                   <LI>
-                    <A href="/collections/beer">Beer</A>
+                    <A href="https://www.brumate.com//collections/beer">Beer</A>
                   </LI>
 
                   <LI>
-                    <A href="/collections/spirits">Spirits</A>
+                    <A href="https://www.brumate.com//collections/spirits">
+                      Spirits
+                    </A>
                   </LI>
 
                   <LI>
-                    <A href="/pAges/custom-gift-set">Gift Sets</A>
+                    <A href="https://www.brumate.com/pages/custom-gift-set">
+                      Gift Sets
+                    </A>
                   </LI>
 
                   <LI>
-                    <A href="/products/brumate-e-gift-card">GIFT CARDS</A>
+                    <A href="https://www.brumate.com/products/brumate-e-gift-card">
+                      GIFT CARDS
+                    </A>
                   </LI>
                 </UL>
               )}
@@ -341,19 +349,25 @@ const Footer = () => {
               {(!breakpoints.md || isActiveHelp) && (
                 <UL>
                   <LI>
-                    <A href="/pages/faq">FAQ</A>
+                    <A href="https://www.brumate.com/pages/faq">FAQ</A>
                   </LI>
 
                   <LI>
-                    <A href="/apps/store-locator/">STORE LOCATOR</A>
+                    <A href="https://www.brumate.com/apps/store-locator/">
+                      STORE LOCATOR
+                    </A>
                   </LI>
 
                   <LI>
-                    <A href="/pages/media-inquiries">MEDIA INQUIRIES</A>
+                    <A href="https://www.brumate.com/pages/media-inquiries">
+                      MEDIA INQUIRIES
+                    </A>
                   </LI>
 
                   <LI>
-                    <A href="/pages/contact">Contact Us</A>
+                    <A href="https://www.brumate.com/pages/contact">
+                      Contact Us
+                    </A>
                   </LI>
 
                   <LI>
@@ -361,7 +375,9 @@ const Footer = () => {
                   </LI>
 
                   <LI>
-                    <A href="/pages/miLItary-discount">MILITARY DISCOUNT</A>
+                    <A href="https://www.brumate.com/pages/miLItary-discount">
+                      MILITARY DISCOUNT
+                    </A>
                   </LI>
                 </UL>
               )}
@@ -384,34 +400,48 @@ const Footer = () => {
               {(!breakpoints.md || isActiveBrand) && (
                 <UL>
                   <LI>
-                    <A href="/pages/our-story">About Us</A>
+                    <A href="https://www.brumate.com/pages/our-story">
+                      About Us
+                    </A>
                   </LI>
                   <LI>
-                    <A href="/pages/brumate-vip">VIP</A>
-                  </LI>
-
-                  <LI>
-                    <A href="/pages/become-a-dealer">become a dealer</A>
+                    <A href="https://www.brumate.com/pages/brumate-vip">VIP</A>
                   </LI>
 
                   <LI>
-                    <A href="/blogs/articles">Blog</A>
+                    <A href="https://www.brumate.com/pages/become-a-dealer">
+                      become a dealer
+                    </A>
                   </LI>
 
                   <LI>
-                    <A href="/pages/warranty">Warranty</A>
+                    <A href="https://www.brumate.com/blogs/articles">Blog</A>
+                  </LI>
+
+                  <LI>
+                    <A href="https://www.brumate.com/pages/warranty">
+                      Warranty
+                    </A>
                   </LI>
                   <LI>
-                    <A href="/pages/warranty">PRIVACY POLICY</A>
+                    <A href="https://www.brumate.com/pages/warranty">
+                      PRIVACY POLICY
+                    </A>
                   </LI>
                   <LI>
-                    <A href="/pages/warranty">TERMS AND CONDITIONS</A>
+                    <A href="https://www.brumate.com/pages/warranty">
+                      TERMS AND CONDITIONS
+                    </A>
                   </LI>
                   <LI>
-                    <A href="/pages/warranty">INTEREST BASED ADVERTISING</A>
+                    <A href="https://www.brumate.com/pages/warranty">
+                      INTEREST BASED ADVERTISING
+                    </A>
                   </LI>
                   <LI>
-                    <A href="/pages/warranty">DO NOT SHARE MY INFORMATION</A>
+                    <A href="https://www.brumate.com/pages/warranty">
+                      DO NOT SHARE MY INFORMATION
+                    </A>
                   </LI>
                 </UL>
               )}
