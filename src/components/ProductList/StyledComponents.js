@@ -98,7 +98,7 @@ const Product = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
+  cursor: pointer;
   width: 100px;
   height: 88px;
   border: 1px solid #dadada;

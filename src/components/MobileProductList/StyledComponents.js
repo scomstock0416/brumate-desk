@@ -48,6 +48,7 @@ const ProductName = styled(Link)`
   font-family: 'sharp_sans';
   color: #000000;
   font-size: 10px;
+  cursor: pointer;
   font-weight: 600;
   margin: 0;
   text-decoration: none;
