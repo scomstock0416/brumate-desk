@@ -467,12 +467,11 @@ function IndexPage() {
                         <DivCol>
                           <Label htmlFor="name">Name </Label>
                           <Field name="name" />
-                          <ErrorMessage component="span" />
+                          <ErrorMessage component="span" name="name" />
                         </DivCol>
                         <DivCol>
                           <Label htmlFor="email">Email </Label>
                           <Field name="email" />
-                          <ErrorMessage component="span" />
                         </DivCol>
                       </SpacingDivColumn>
                     )}
@@ -480,7 +479,7 @@ function IndexPage() {
                       <SpacingDiv>
                         <Label htmlFor="order">Order Number </Label>
                         <Field name="order" />
-                        <ErrorMessage component="span" />
+                        <ErrorMessage component="span" name="order" />
                       </SpacingDiv>
                     )}
 
