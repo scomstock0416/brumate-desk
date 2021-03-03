@@ -162,13 +162,14 @@ const SubTitle = styled.p`
 `
 
 const SpacingDiv = styled.div`
+  display: ${({hidden}) => (hidden ? 'none' : 'flex')};
   padding-top: 16px;
   padding-bottom: 16px;
-  display: flex;
   flex-direction: column;
 `
 
 const SpacingDivColumn = styled.div`
+  display: ${({hidden}) => (hidden ? 'none' : 'flex')};
   padding-top: 16px;
   padding-bottom: 16px;
   display: flex;
@@ -180,7 +181,7 @@ const SpacingDivColumn = styled.div`
 `
 
 const DivCol = styled.div`
-  display: flex;
+  display: ${({hidden}) => (hidden ? 'none' : 'flex')};
   flex-direction: column;
   flex: 1;
 `
@@ -462,7 +463,9 @@ function IndexPage() {
                       </Label>
                     </SpacingDivColumn>
                     <ErrorMessage component="span" name="picked" />
-                    <SpacingDivColumn>
+                    <SpacingDivColumn
+                      hidden={values.picked && values.picked === 'no'}
+                    >
                       <DivCol>
                         <Label htmlFor="name">Name </Label>
                         <Field name="name" />
@@ -473,13 +476,13 @@ function IndexPage() {
                         <Field name="email" />
                       </DivCol>
                     </SpacingDivColumn>
-                    {values.picked && values.picked === 'yes' && (
-                      <SpacingDiv>
-                        <Label htmlFor="order">Order Number </Label>
-                        <Field name="order" />
-                        <ErrorMessage component="span" name="order" />
-                      </SpacingDiv>
-                    )}
+                    <SpacingDiv
+                      hidden={values.picked && values.picked === 'yes'}
+                    >
+                      <Label htmlFor="order">Order Number </Label>
+                      <Field name="order" />
+                      <ErrorMessage component="span" name="order" />
+                    </SpacingDiv>
 
                     <SpacingDiv>
                       <Label>How can we help you today?</Label>
@@ -493,73 +496,73 @@ function IndexPage() {
                       </SelectField>
                     </SpacingDiv>
 
-                    {values.selectType && values.selectType === 'change' && (
-                      <SpacingDiv>
-                        <Label htmlFor="address">
-                          Provide new/updated address:{' '}
-                        </Label>
-                        <Field name="address" />
-                        <ErrorMessage component="span" name="address" />
-                      </SpacingDiv>
-                    )}
+                    <SpacingDiv
+                      hidden={
+                        values.selectType && values.selectType === 'change'
+                      }
+                    >
+                      <Label htmlFor="address">
+                        Provide new/updated address:{' '}
+                      </Label>
+                      <Field name="address" />
+                      <ErrorMessage component="span" name="address" />
+                    </SpacingDiv>
 
-                    {values.selectType && values.selectType === 'add' && (
-                      <SpacingDiv>
-                        <Label htmlFor="item">
-                          Provide item that needs to be changed or removed:
-                        </Label>
-                        <Field name="item" />
-                        <ErrorMessage component="span" name="item" />
-                      </SpacingDiv>
-                    )}
+                    <SpacingDiv
+                      hidden={values.selectType && values.selectType === 'add'}
+                    >
+                      <Label htmlFor="item">
+                        Provide item that needs to be changed or removed:
+                      </Label>
+                      <Field name="item" />
+                      <ErrorMessage component="span" name="item" />
+                    </SpacingDiv>
 
-                    {values.selectType && values.selectType === 'damage' && (
-                      <SpacingDiv>
-                        <FileContainer>
-                          <FieldImage
-                            name="imageDamage"
-                            multiple
-                            type="file"
-                            onChange={event => {
-                              setFiles('')
-                              const filesEvent = event.currentTarget.files
-                              for (var i = 0; i < filesEvent.length; i++) {
-                                setFiles(files + ' ' + filesEvent[i].name)
-                              }
+                    <SpacingDiv
+                      hidden={
+                        values.selectType && values.selectType === 'damage'
+                      }
+                    >
+                      <FileContainer>
+                        <FieldImage
+                          name="imageDamage"
+                          multiple
+                          type="file"
+                          onChange={event => {
+                            setFiles('')
+                            const filesEvent = event.currentTarget.files
+                            for (var i = 0; i < filesEvent.length; i++) {
+                              setFiles(files + ' ' + filesEvent[i].name)
+                            }
 
-                              setFieldValue('file', event.currentTarget.files)
-                            }}
-                          />
-                          <LabelType htmlFor="imageDamage">
-                            {files ? files : 'Choose files...'}
-                          </LabelType>
-                          <ErrorMessage component="span" name="imageDamage" />
-                        </FileContainer>
+                            setFieldValue('file', event.currentTarget.files)
+                          }}
+                        />
+                        <LabelType htmlFor="imageDamage">
+                          {files ? files : 'Choose files...'}
+                        </LabelType>
+                        <ErrorMessage component="span" name="imageDamage" />
+                      </FileContainer>
+                    </SpacingDiv>
+                    <>
+                      <SpacingDiv hidden={values.selectType !== 'selecting'}>
+                        <Label htmlFor="Description">Provide description</Label>
+                        <Field
+                          height={3}
+                          component="textarea"
+                          name="description"
+                        />
+                        <ErrorMessage component="span" name="description" />
                       </SpacingDiv>
-                    )}
-                    {values.selectType !== 'selecting' && (
-                      <>
-                        <SpacingDiv>
-                          <Label htmlFor="Description">
-                            Provide description
-                          </Label>
-                          <Field
-                            height={3}
-                            component="textarea"
-                            name="description"
-                          />
-                          <ErrorMessage component="span" name="description" />
-                        </SpacingDiv>
-                        <SpacingDiv>
-                          <Button value="Send" type="submit"></Button>
-                        </SpacingDiv>
-                        {displayFormStatus && (
-                          <SubTitle>
-                            Thanks for contacting us and report your problem.
-                          </SubTitle>
-                        )}
-                      </>
-                    )}
+                      <SpacingDiv>
+                        <Button value="Send" type="submit"></Button>
+                      </SpacingDiv>
+                      {displayFormStatus && (
+                        <SubTitle>
+                          Thanks for contacting us and report your problem.
+                        </SubTitle>
+                      )}
+                    </>
                   </Form>
                 )}
               </Formik>
