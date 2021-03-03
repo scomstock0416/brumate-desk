@@ -321,16 +321,16 @@ function IndexPage() {
     const errors = {}
 
     if (values.picked === 'no') {
-      if (!values.nameClient) {
-        errors.nameClient = 'Required'
+      if (!values.name) {
+        errors.name = 'Required'
       }
 
-      if (!values.emailClient) {
-        errors.emailClient = 'Required'
+      if (!values.email) {
+        errors.email = 'Required'
       } else if (
         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.emailClient)
       ) {
-        errors.emailClient = 'Invalid email address'
+        errors.email = 'Invalid email address'
       }
     }
 
@@ -423,6 +423,8 @@ function IndexPage() {
                   description: '',
                   selectType: '',
                   order: '',
+                  name: '',
+                  email: '',
                 }}
                 validate={validate}
                 onSubmit={handleSubmit}
@@ -465,14 +467,14 @@ function IndexPage() {
                     {values.picked && values.picked === 'no' && (
                       <SpacingDivColumn>
                         <DivCol>
-                          <Label htmlFor="nameClient">Name </Label>
-                          <Field name="nameClient" />
-                          <ErrorMessage component="span" name="nameClient" />
+                          <Label htmlFor="name">Name </Label>
+                          <Field name="name" />
+                          <ErrorMessage component="span" name="name" />
                         </DivCol>
                         <DivCol>
-                          <Label htmlFor="emailClient">Email </Label>
-                          <Field name="emailClient" />
-                          <ErrorMessage component="span" name="emailClient" />
+                          <Label htmlFor="email">Email </Label>
+                          <Field name="email" />
+                          <ErrorMessage component="span" name="email" />
                         </DivCol>
                       </SpacingDivColumn>
                     )}
