@@ -381,10 +381,7 @@ function IndexPage() {
     fetch('/', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: encode({
-        'form-name': 'contact-improved',
-        ...values,
-      }),
+      body: encode({'form-name': 'contact', ...values}),
     })
       .then(() => {
         resetForm({
@@ -420,12 +417,12 @@ function IndexPage() {
               <Title>Report your Problem</Title>
               <Formik
                 initialValues={{
-                  order: '',
-                  name: '',
-                  email: '',
                   picked: '',
                   description: '',
                   selectType: '',
+                  order: '',
+                  name: '',
+                  email: '',
                 }}
                 validate={validate}
                 onSubmit={handleSubmit}
@@ -444,15 +441,11 @@ function IndexPage() {
                     loading={isSubmitting}
                     success={!!status && !!status.success}
                     error={!!errors.submit}
-                    name="contact-improved"
+                    name="contact"
                     data-netlify="true"
-                    netlify-honeypot="bot-field"
+                    data-netlify-honeypot="bot-field"
                   >
-                    <input
-                      type="hidden"
-                      name="form-name"
-                      value="contact-improved"
-                    />
+                    <input type="hidden" name="form-name" value="contact" />
 
                     <Label>Do you have your order number? </Label>
                     <SpacingDivColumn
@@ -474,12 +467,12 @@ function IndexPage() {
                         <DivCol>
                           <Label htmlFor="name">Name </Label>
                           <Field name="name" />
-                          <ErrorMessage component="span" name="name" />
+                          <ErrorMessage component="span" />
                         </DivCol>
                         <DivCol>
                           <Label htmlFor="email">Email </Label>
                           <Field name="email" />
-                          <ErrorMessage component="span" name="email" />
+                          <ErrorMessage component="span" />
                         </DivCol>
                       </SpacingDivColumn>
                     )}
@@ -487,7 +480,7 @@ function IndexPage() {
                       <SpacingDiv>
                         <Label htmlFor="order">Order Number </Label>
                         <Field name="order" />
-                        <ErrorMessage component="span" name="order" />
+                        <ErrorMessage component="span" />
                       </SpacingDiv>
                     )}
 
