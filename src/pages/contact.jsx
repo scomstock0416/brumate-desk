@@ -463,7 +463,11 @@ function IndexPage() {
                     </SpacingDivColumn>
                     <ErrorMessage component="span" name="picked" />
                     <SpacingDivColumn
-                      hidden={values.picked && values.picked === 'no'}
+                      hidden={
+                        values.picked &&
+                        values.picked === 'no' &&
+                        values.picked !== ''
+                      }
                     >
                       <DivCol>
                         <Label htmlFor="name">Name </Label>
@@ -476,7 +480,11 @@ function IndexPage() {
                       </DivCol>
                     </SpacingDivColumn>
                     <SpacingDiv
-                      hidden={values.picked && values.picked === 'yes'}
+                      hidden={
+                        values.picked &&
+                        values.picked === 'yes' &&
+                        values.picked !== ''
+                      }
                     >
                       <Label htmlFor="order">Order Number </Label>
                       <Field name="order" />
@@ -497,7 +505,9 @@ function IndexPage() {
 
                     <SpacingDiv
                       hidden={
-                        values.selectType && values.selectType === 'change'
+                        values.selectType &&
+                        values.selectType === 'change' &&
+                        values.selectType !== ''
                       }
                     >
                       <Label htmlFor="address">
@@ -508,7 +518,11 @@ function IndexPage() {
                     </SpacingDiv>
 
                     <SpacingDiv
-                      hidden={values.selectType && values.selectType === 'add'}
+                      hidden={
+                        values.selectType &&
+                        values.selectType === 'add' &&
+                        values.selectType !== ''
+                      }
                     >
                       <Label htmlFor="item">
                         Provide item that needs to be changed or removed:
@@ -519,7 +533,9 @@ function IndexPage() {
 
                     <SpacingDiv
                       hidden={
-                        values.selectType && values.selectType === 'damage'
+                        values.selectType &&
+                        values.selectType === 'damage' &&
+                        values.selectType !== ''
                       }
                     >
                       <FileContainer>
@@ -544,7 +560,12 @@ function IndexPage() {
                       </FileContainer>
                     </SpacingDiv>
                     <>
-                      <SpacingDiv hidden={values.selectType !== 'selecting'}>
+                      <SpacingDiv
+                        hidden={
+                          values.selectType !== 'selecting' &&
+                          values.selectType !== ''
+                        }
+                      >
                         <Label htmlFor="Description">Provide description</Label>
                         <Field
                           height={3}
