@@ -444,11 +444,15 @@ function IndexPage() {
                     loading={isSubmitting}
                     success={!!status && !!status.success}
                     error={!!errors.submit}
-                    name="contact"
+                    name="contact-improved"
                     data-netlify="true"
                     netlify-honeypot="bot-field"
                   >
-                    <input type="hidden" name="form-name" value="contact" />
+                    <input
+                      type="hidden"
+                      name="form-name"
+                      value="contact-improved"
+                    />
 
                     <Label>Do you have your order number? </Label>
                     <SpacingDivColumn
