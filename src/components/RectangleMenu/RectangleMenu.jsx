@@ -112,7 +112,9 @@ const RectangleMenu = ({className, title, questions, icon}) => {
       <Wrapper isSelectable={isSelectable}>
         <QuestionWrapper>
           {questions.slice(0, 3).map(({question}) => (
-            <LinkMenu>{question.question}</LinkMenu>
+            <LinkMenu to={isProductFAQ} state={{title, opened: question}}>
+              {question.question}
+            </LinkMenu>
           ))}
         </QuestionWrapper>
         <LinkAll to={isProductFAQ} state={{title}}>

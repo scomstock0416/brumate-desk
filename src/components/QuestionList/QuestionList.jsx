@@ -13,11 +13,14 @@ import IconArrow from '../../images/arrowIcon.svg'
 
 const QuestionList = ({
   className,
+  opened = {id: null},
   questions = [],
   banner,
   isSearching = false,
 }) => {
-  const [open, setOpen] = useState([])
+  const {id: openedId} = opened
+  const openFirst = openedId ? [openedId] : []
+  const [open, setOpen] = useState(openFirst)
 
   const handleClick = id => {
     if (open.includes(id)) {

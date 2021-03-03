@@ -60,7 +60,8 @@ const H2 = styled.h2`
 `
 
 const Question = ({location}) => {
-  const {title = ''} = location.state || {}
+  const {title = '', opened} = location.state || {}
+  console.log(opened)
   const breakpoints = useBreakpoint()
   const data = useStaticQuery(graphql`
     {
@@ -161,6 +162,7 @@ const Question = ({location}) => {
           )}
           {filteredNode && (
             <QuestionList
+              opened={opened}
               banner={filteredNode.banner && filteredNode.banner.fluid}
               questions={filteredNode && filteredNode.questions}
             />

@@ -46,6 +46,7 @@ const Header = styled(Link)`
 `
 
 const HeaderMobile = styled.div`
+  cursor: pointer;
   max-width: 100%;
   display: flex;
   align-items: center;

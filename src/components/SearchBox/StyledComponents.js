@@ -5,10 +5,10 @@ const Input = styled.input`
   width: 285px;
   height: 39px;
   border: 1px solid #707070;
-  background-color: #ffffff;
   color: #a6a6a6;
   padding-left: 10px;
   background: url(${searchIcon}) no-repeat scroll 90% 50%;
+  background-color: #ffffff;
 
   ::placeholder {
     color: #a6a6a6;
