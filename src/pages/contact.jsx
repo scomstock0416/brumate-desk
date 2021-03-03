@@ -380,7 +380,7 @@ function IndexPage() {
   ) => {
     fetch('/', {
       method: 'POST',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      headers: {'Content-Type': 'multipart/form-data'},
       body: encode({'form-name': 'contact', ...values}),
     })
       .then(() => {
@@ -462,12 +462,9 @@ function IndexPage() {
                       </Label>
                     </SpacingDivColumn>
                     <ErrorMessage component="span" name="picked" />
+                    {console.log(values)}
                     <SpacingDivColumn
-                      hidden={
-                        values.picked &&
-                        values.picked === 'no' &&
-                        values.picked !== ''
-                      }
+                      hidden={values.picked === 'no' || values.picked === ''}
                     >
                       <DivCol>
                         <Label htmlFor="name">Name </Label>
@@ -480,11 +477,7 @@ function IndexPage() {
                       </DivCol>
                     </SpacingDivColumn>
                     <SpacingDiv
-                      hidden={
-                        values.picked &&
-                        values.picked === 'yes' &&
-                        values.picked !== ''
-                      }
+                      hidden={values.picked === 'yes' || values.picked === ''}
                     >
                       <Label htmlFor="order">Order Number </Label>
                       <Field name="order" />
@@ -505,9 +498,8 @@ function IndexPage() {
 
                     <SpacingDiv
                       hidden={
-                        values.selectType &&
-                        values.selectType === 'change' &&
-                        values.selectType !== ''
+                        values.selectType === 'change' ||
+                        values.selectType === ''
                       }
                     >
                       <Label htmlFor="address">
@@ -519,9 +511,7 @@ function IndexPage() {
 
                     <SpacingDiv
                       hidden={
-                        values.selectType &&
-                        values.selectType === 'add' &&
-                        values.selectType !== ''
+                        values.selectType === 'add' || values.selectType === ''
                       }
                     >
                       <Label htmlFor="item">
@@ -533,9 +523,8 @@ function IndexPage() {
 
                     <SpacingDiv
                       hidden={
-                        values.selectType &&
-                        values.selectType === 'damage' &&
-                        values.selectType !== ''
+                        values.selectType === 'damage' ||
+                        values.selectType === ''
                       }
                     >
                       <FileContainer>
@@ -560,12 +549,7 @@ function IndexPage() {
                       </FileContainer>
                     </SpacingDiv>
                     <>
-                      <SpacingDiv
-                        hidden={
-                          values.selectType !== 'selecting' &&
-                          values.selectType !== ''
-                        }
-                      >
+                      <SpacingDiv hidden={values.selectType !== ''}>
                         <Label htmlFor="Description">Provide description</Label>
                         <Field
                           height={3}
