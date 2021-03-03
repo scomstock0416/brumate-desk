@@ -462,19 +462,17 @@ function IndexPage() {
                       </Label>
                     </SpacingDivColumn>
                     <ErrorMessage component="span" name="picked" />
-                    {values.picked && values.picked === 'no' && (
-                      <SpacingDivColumn>
-                        <DivCol>
-                          <Label htmlFor="name">Name </Label>
-                          <Field name="name" />
-                          <ErrorMessage component="span" name="name" />
-                        </DivCol>
-                        <DivCol>
-                          <Label htmlFor="email">Email </Label>
-                          <Field name="email" />
-                        </DivCol>
-                      </SpacingDivColumn>
-                    )}
+                    <SpacingDivColumn>
+                      <DivCol>
+                        <Label htmlFor="name">Name </Label>
+                        <Field name="name" />
+                        <ErrorMessage component="span" name="name" />
+                      </DivCol>
+                      <DivCol>
+                        <Label htmlFor="email">Email </Label>
+                        <Field name="email" />
+                      </DivCol>
+                    </SpacingDivColumn>
                     {values.picked && values.picked === 'yes' && (
                       <SpacingDiv>
                         <Label htmlFor="order">Order Number </Label>
