@@ -378,16 +378,13 @@ function IndexPage() {
     values,
     {setSubmitting, setErrors, setStatus, resetForm},
   ) => {
-    const encodedValues = encode({
-      'form-name': 'contact',
-      name: values.name,
-      email: values.email,
-    })
-    console.log(encodedValues)
     fetch('/', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: encodedValues,
+      body: encode({
+        'form-name': 'contact-improved',
+        ...values,
+      }),
     })
       .then(() => {
         resetForm({
