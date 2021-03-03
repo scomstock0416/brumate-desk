@@ -99,7 +99,10 @@ const IndexPage = () => {
           }
         }
       }
-      allContentfulQuestions(filter: {popular: {eq: true}}) {
+      allContentfulQuestions(
+        sort: {fields: order}
+        filter: {popular: {eq: true}}
+      ) {
         nodes {
           id
           answer {

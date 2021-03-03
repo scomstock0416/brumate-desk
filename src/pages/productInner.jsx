@@ -124,7 +124,7 @@ const ProductInner = ({location, search}) => {
           }
         }
       }
-      allContentfulQuestions {
+      allContentfulQuestions(sort: {fields: order}) {
         nodes {
           answer {
             answer

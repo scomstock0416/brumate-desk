@@ -76,7 +76,7 @@ const Layout = ({children}) => {
           }
         }
       }
-      allContentfulQuestions {
+      allContentfulQuestions(sort: {fields: order}) {
         nodes {
           answer {
             answer
@@ -91,6 +91,7 @@ const Layout = ({children}) => {
           typeQuestion {
             title
           }
+          order
         }
       }
     }

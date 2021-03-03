@@ -293,7 +293,7 @@ function IndexPage() {
           }
         }
       }
-      allContentfulQuestions {
+      allContentfulQuestions(sort: {fields: order}) {
         nodes {
           answer {
             childMarkdownRemark {

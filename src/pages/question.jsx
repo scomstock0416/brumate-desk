@@ -111,7 +111,7 @@ const Question = ({location}) => {
           }
         }
       }
-      allContentfulQuestions {
+      allContentfulQuestions(sort: {fields: order}) {
         nodes {
           answer {
             childMarkdownRemark {

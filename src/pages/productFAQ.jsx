@@ -114,7 +114,7 @@ const ProductFQA = () => {
           }
         }
       }
-      allContentfulQuestions {
+      allContentfulQuestions(sort: {fields: order}) {
         nodes {
           answer {
             childMarkdownRemark {
