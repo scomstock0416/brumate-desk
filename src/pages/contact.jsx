@@ -380,7 +380,8 @@ function IndexPage() {
   ) => {
     const encodedValues = encode({
       'form-name': 'contact',
-      ...values,
+      name: values.name,
+      email: values.email,
     })
     console.log(encodedValues)
     fetch('/', {
