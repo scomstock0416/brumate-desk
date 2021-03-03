@@ -365,8 +365,6 @@ function IndexPage() {
     if (values.description === '') {
       errors.description = 'Required'
     }
-
-    console.log(errors)
     return errors
   }
 
@@ -422,9 +420,6 @@ function IndexPage() {
                   picked: '',
                   description: '',
                   selectType: '',
-                  order: '',
-                  name: '',
-                  email: '',
                 }}
                 validate={validate}
                 onSubmit={handleSubmit}
