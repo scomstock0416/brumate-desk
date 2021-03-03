@@ -369,19 +369,28 @@ function IndexPage() {
   }
 
   const encode = data => {
-    return Object.keys(data)
-      .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-      .join('&')
+    const formData = new FormData()
+
+    for (const key of Object.keys(data)) {
+      formData.append(key, data[key])
+    }
+
+    return formData
   }
 
   const handleSubmit = (
     values,
     {setSubmitting, setErrors, setStatus, resetForm},
   ) => {
+    const encodedValues = encode({
+      'form-name': 'contact',
+      ...values,
+    })
+    console.log(encodedValues)
     fetch('/', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: encode({'form-name': 'contact', ...values}),
+      body: encodedValues,
     })
       .then(() => {
         resetForm({
@@ -417,6 +426,9 @@ function IndexPage() {
               <Title>Report your Problem</Title>
               <Formik
                 initialValues={{
+                  order: '',
+                  name: '',
+                  email: '',
                   picked: '',
                   description: '',
                   selectType: '',
@@ -440,7 +452,7 @@ function IndexPage() {
                     error={!!errors.submit}
                     name="contact"
                     data-netlify="true"
-                    data-netlify-honeypot="bot-field"
+                    netlify-honeypot="bot-field"
                   >
                     <input type="hidden" name="form-name" value="contact" />
 
