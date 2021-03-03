@@ -1,7 +1,7 @@
 import React from 'react'
 import {Container, Header, IconTitle, Title} from './StyledComponents'
 
-const CategoriesList = ({className, categories}) => (
+const CategoriesList = ({className, categories, product}) => (
   <Container className={className}>
     {categories.map(({node}) => {
       const urlValidation =

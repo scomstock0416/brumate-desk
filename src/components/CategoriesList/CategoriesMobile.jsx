@@ -11,6 +11,7 @@ import {
 const CategoriesMobile = ({
   className,
   isProductFAQ,
+  product,
   categories: initialCategories,
 }) => {
   const [isOpen, setIsOpen] = useState(true)
@@ -41,6 +42,7 @@ const CategoriesMobile = ({
         categoryInfo.map(({node}, idx) => {
           const urlValidation =
             node.title === 'Product FAQ' ? '/productFAQ' : '/question'
+
           return (
             <Li>
               <Header>
@@ -51,7 +53,9 @@ const CategoriesMobile = ({
                     navigate(urlValidation, {state: {title: node.title}})
                   }}
                 >
-                  {node.title}
+                  {node.title === 'Product FAQ' && product
+                    ? node.title + ' - ' + product.title
+                    : node.title}
                 </Title>
               </Header>
             </Li>

@@ -159,6 +159,7 @@ const ProductInner = ({location, search}) => {
   }
 
   const newCategoriesData = data.allContentfulQuestionType.edges || {}
+
   return (
     <Layout>
       <Container>
@@ -179,7 +180,11 @@ const ProductInner = ({location, search}) => {
         </Column>
         <Column style={{flex: 1}}>
           {breakpoints.sm && (
-            <CategoriesMobile isProductFAQ categories={newCategoriesData} />
+            <CategoriesMobile
+              isProductFAQ
+              categories={newCategoriesData}
+              product={filteredNode}
+            />
           )}
           {filteredNode && (
             <QuestionList
