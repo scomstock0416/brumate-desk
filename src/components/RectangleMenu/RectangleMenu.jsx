@@ -96,6 +96,8 @@ const LinkAll = styled(BaseLink)`
 const RectangleMenu = ({className, title, questions, icon}) => {
   const [isSelectable, setSelectable] = useState(false)
   const isProductFAQ = title === 'Product FAQ' ? '/productFAQ' : '/question'
+  const isProductQuestionFAQ =
+    title === 'Product FAQ' ? '/productInner' : '/question'
   return (
     <Container className={className}>
       <Header to={isProductFAQ} state={{title}} isSelectable={isSelectable}>
@@ -112,7 +114,13 @@ const RectangleMenu = ({className, title, questions, icon}) => {
       <Wrapper isSelectable={isSelectable}>
         <QuestionWrapper>
           {questions.slice(0, 3).map(({question}) => (
-            <LinkMenu to={isProductFAQ} state={{title, opened: question}}>
+            <LinkMenu
+              to={isProductQuestionFAQ}
+              state={{
+                title: isProductQuestionFAQ ? question.question : title,
+                opened: question,
+              }}
+            >
               {question.question}
             </LinkMenu>
           ))}

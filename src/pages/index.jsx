@@ -83,6 +83,9 @@ const IndexPage = () => {
                   html
                 }
               }
+              typeQuestion {
+                title
+              }
               featured
               popular
             }
@@ -140,6 +143,7 @@ const IndexPage = () => {
             const gettingNodesWithProducts = data.allContentfulQuestionType.edges.filter(
               ({node: nodeProducts}) => nodeProducts.product,
             )
+            console.log(gettingNodesWithProducts)
             const questionsFromProducts = gettingNodesWithProducts
               .filter(({node}) => {
                 return node.product.featured === true
@@ -147,6 +151,7 @@ const IndexPage = () => {
               .map(({node: nodeProductsFiltered}) => ({
                 question: {
                   question: nodeProductsFiltered.title,
+                  to: '/productInner?product=' + nodeProductsFiltered.title,
                 },
               }))
             filteredQuestions = questionsFromProducts
