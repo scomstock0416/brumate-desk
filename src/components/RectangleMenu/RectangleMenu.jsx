@@ -117,7 +117,7 @@ const RectangleMenu = ({className, title, questions, icon}) => {
             <LinkMenu
               to={isProductQuestionFAQ}
               state={{
-                title: isProductQuestionFAQ ? question.question : title,
+                title: title === 'Product FAQ' ? question.question : title,
                 opened: question,
               }}
             >
