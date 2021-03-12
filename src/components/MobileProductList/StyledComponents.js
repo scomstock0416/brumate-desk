@@ -34,7 +34,7 @@ const Title = styled.p`
   color: ${({active}) => (active ? '#000000' : '#D9D9D9')};
   cursor: pointer;
   text-align: center;
-  font-size: 14px;
+  font-size: 10px;
   font-weight: 600;
   @media (min-width: 768px) {
     line-height: 28px;
@@ -129,6 +129,9 @@ const TypesContainer = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-content: space-around;
+  @media (min-width: 1024px) {
+    width: 88vw;
+  }
 `
 
 const ProductsContainer = styled.div`

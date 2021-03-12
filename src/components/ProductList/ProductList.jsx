@@ -10,7 +10,6 @@ import {
   Product,
   ProductName,
   BannerImage,
-  // ProductNameNoLink,
 } from './StyledComponents'
 
 function compare(a, b) {
@@ -36,9 +35,8 @@ const ProductList = ({ className, products }) => {
 
     const setTypes = new Set(newTypes)
     const typesArr = [...setTypes]
-    const filteredTypes = typesArr.filter(type => type !== 'Cooler')
-    const coolers = [...filteredTypes, 'Cooler']
-    setProductTypes([...coolers])
+    const coolers = [...typesArr]
+    setProductTypes([...coolers].reverse())
 
     const organizedProducts = products.sort(compare)
     setShownProducts(organizedProducts)
