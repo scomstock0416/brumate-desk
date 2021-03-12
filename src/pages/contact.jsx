@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
-import {graphql, useStaticQuery} from 'gatsby'
-import {useBreakpoint} from 'gatsby-plugin-breakpoints'
+import React, { useState } from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import styled from 'styled-components'
 import Layout from '../components/Layout/Layout'
 import CategoriesList from '../components/CategoriesList/CategoriesList'
 import BaseChatBox from '../components/ChatBox/ChatBox'
-import BannerURL from '../images/contactUs.png'
+import BannerURL from '../images/contactUs.jpg'
 import {
   Formik,
   Form,
@@ -74,7 +74,7 @@ const SelectField = styled(RawField)`
 `
 
 const Field = styled(RawField)`
-  height: ${({height}) => (height ? '120px' : '40px')};
+  height: ${({ height }) => (height ? '120px' : '40px')};
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
@@ -162,14 +162,14 @@ const SubTitle = styled.p`
 `
 
 const SpacingDiv = styled.div`
-  display: ${({hidden}) => (hidden ? 'none' : 'flex')};
+  display: ${({ hidden }) => (hidden ? 'none' : 'flex')};
   padding-top: 16px;
   padding-bottom: 16px;
   flex-direction: column;
 `
 
 const SpacingDivColumn = styled.div`
-  display: ${({hidden}) => (hidden ? 'none' : 'flex')};
+  display: ${({ hidden }) => (hidden ? 'none' : 'flex')};
   padding-top: 16px;
   padding-bottom: 16px;
   flex-direction: column;
@@ -180,7 +180,7 @@ const SpacingDivColumn = styled.div`
 `
 
 const DivCol = styled.div`
-  display: ${({hidden}) => (hidden ? 'none' : 'flex')};
+  display: ${({ hidden }) => (hidden ? 'none' : 'flex')};
   flex-direction: column;
   flex: 1;
 `
@@ -376,25 +376,25 @@ function IndexPage() {
 
   const handleSubmit = (
     values,
-    {setSubmitting, setErrors, setStatus, resetForm},
+    { setSubmitting, setErrors, setStatus, resetForm },
   ) => {
     fetch('/', {
       method: 'POST',
-      headers: {'Content-Type': 'multipart/form-data'},
-      body: encode({'form-name': 'contact', ...values}),
+      headers: { 'Content-Type': 'multipart/form-data' },
+      body: encode({ 'form-name': 'contact', ...values }),
     })
       .then(() => {
         resetForm({
           picked: '',
           description: '',
         })
-        setStatus({success: true})
+        setStatus({ success: true })
         setDisplayFormStatus(true)
       })
       .catch(error => {
-        setStatus({success: false})
+        setStatus({ success: false })
         setSubmitting(false)
-        setErrors({submit: error.message})
+        setErrors({ submit: error.message })
       })
   }
 
