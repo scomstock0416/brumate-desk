@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react'
-import {navigate} from 'gatsby'
-import BannerURL from '../../images/productFAQ.png'
+import React, { useState, useEffect } from 'react'
+import { navigate } from 'gatsby'
+import BannerURL from '../../images/productFAQ.jpg'
 import {
   ProductsWrapper,
   Container,
@@ -23,7 +23,7 @@ function compare(a, b) {
   return 0
 }
 
-const ProductList = ({className, products}) => {
+const ProductList = ({ className, products }) => {
   const [shownProducts, setShownProducts] = useState([])
   const [productTypes, setProductTypes] = useState([])
 
@@ -52,20 +52,20 @@ const ProductList = ({className, products}) => {
           <ProductsWrapper moreWidth={index === 1}>
             <Title>{type}</Title>
             {shownProducts
-              .filter(({type: typeProduct}) => type === typeProduct[0])
-              .map(({name, banner, questiontype}) => {
+              .filter(({ type: typeProduct }) => type === typeProduct[0])
+              .map(({ name, banner, questiontype }) => {
                 const questionType = questiontype ? questiontype[0].title : ''
                 return (
                   <Product
                     onClick={() => {
-                      navigate('/productInner/', {state: {title: questionType}})
+                      navigate('/productInner/', { state: { title: questionType } })
                     }}
                   >
                     {banner && banner.file && (
                       <Icon
                         onClick={() => {
                           navigate('/productInner/', {
-                            state: {title: questionType},
+                            state: { title: questionType },
                           })
                         }}
                         alt={name}

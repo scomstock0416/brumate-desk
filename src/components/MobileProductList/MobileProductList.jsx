@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react'
-import {navigate} from 'gatsby'
-import BannerURL from '../../images/productFAQ.png'
+import React, { useState, useEffect } from 'react'
+import { navigate } from 'gatsby'
+import BannerURL from '../../images/productFAQ.jpg'
 import {
   ProductsWrapper,
   Container,
@@ -24,7 +24,7 @@ function compare(a, b) {
   return 0
 }
 
-const MobileProductList = ({className, products}) => {
+const MobileProductList = ({ className, products }) => {
   const [shownProducts, setShownProducts] = useState([])
   const [activeType, setActiveType] = useState([])
   const [productTypes, setProductTypes] = useState([])
@@ -72,16 +72,16 @@ const MobileProductList = ({className, products}) => {
             <ProductsWrapper>
               {shownProducts
                 .filter(
-                  ({type: typeProduct}) =>
+                  ({ type: typeProduct }) =>
                     type === typeProduct[0] && activeType === typeProduct[0],
                 )
-                .map(({name, banner, questiontype}) => {
+                .map(({ name, banner, questiontype }) => {
                   const questionType = questiontype ? questiontype[0].title : ''
                   return (
                     <Product
                       onClick={() => {
                         navigate('/productInner/', {
-                          state: {title: questionType},
+                          state: { title: questionType },
                         })
                       }}
                     >
@@ -89,7 +89,7 @@ const MobileProductList = ({className, products}) => {
                         <Icon
                           onClick={() => {
                             navigate('/productInner/', {
-                              state: {title: questionType},
+                              state: { title: questionType },
                             })
                           }}
                           alt={name}
