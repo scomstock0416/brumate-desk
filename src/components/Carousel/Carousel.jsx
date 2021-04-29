@@ -1,0 +1,181 @@
+import React, { useState, useEffect } from 'react'
+import { navigate } from 'gatsby'
+import BannerURL from '../../images/productFAQ.jpg'
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "./carousel.css";
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+
+import {
+    ProductsWrapper,
+    Container,
+    Header,
+    Title,
+    Icon,
+    Product,
+    ProductName,
+    BannerImage,
+} from './StyledComponents'
+
+function compare(a, b) {
+    if (a.type[0] < b.type[0]) {
+        return -1
+    }
+    if (a.type[0] > b.type[0]) {
+        return 1
+    }
+    return 0
+}
+
+const ProductsSlider = ({ header, products }) => {
+
+    const [shownProducts, setShownProducts] = useState([])
+    const [productTypes, setProductTypes] = useState([])
+    const [carouselItems, setCarouselItems] = useState([])
+
+    function SampleNextArrow(props) {
+        const { className, style, onClick } = props;
+        return (
+            <div
+                className={className}
+                onClick={onClick}
+            >
+                <svg fill="#000000" viewBox="0 0 129 129"><path d="M121.3 34.6c-1.6-1.6-4.2-1.6-5.8 0l-51 51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8 0-1.6 1.6-1.6 4.2 0 5.8l53.9 53.9c.8.8 1.8 1.2 2.9 1.2 1 0 2.1-.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2.1-5.8z" /></svg>
+            </div>
+        );
+    }
+
+    function SamplePrevArrow(props) {
+        const { className, style, onClick } = props;
+        return (
+            <div
+                className={className}
+                onClick={onClick}
+            >
+                <svg fill="#000000" viewBox="0 0 129 129"><path d="M121.3 34.6c-1.6-1.6-4.2-1.6-5.8 0l-51 51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8 0-1.6 1.6-1.6 4.2 0 5.8l53.9 53.9c.8.8 1.8 1.2 2.9 1.2 1 0 2.1-.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2.1-5.8z" /></svg>
+            </div>
+        );
+    }
+    const breakpoints = useBreakpoint()
+    const settings = {
+        dots: false,
+        infinite: true,
+        centerMode: true,
+        centerPadding: '40px',
+        speed: 500,
+        slidesToScroll: 1,
+        prevArrow: <SamplePrevArrow className="slick-prev" />,
+        nextArrow: <SampleNextArrow className="slick-next" />,
+        responsive: [
+            {
+                breakpoint: 2000,
+                settings: {
+                    centerPadding: '80px'
+                }
+            },
+            {
+                breakpoint: 1400,
+                settings: {
+                    centerPadding: '0px'
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    centerPadding: '0px',
+                    slidesToScroll: 1
+                }
+            },
+        ]
+    };
+
+    useEffect(() => {
+        const newTypes = products.reduce(
+            (acc, product) =>
+                Array.isArray(product.type) ? acc.concat(product.type) : acc,
+            [],
+        )
+
+        const setTypes = new Set(newTypes)
+        const typesArr = [...setTypes]
+        let sortedArray = [...typesArr]
+        const priority = ["Beer", "Wine", "Spirits", "Coffee", "ReHydration", "Cooler"]
+        sortedArray.sort((a, b) => {
+            if (priority.indexOf(a) > priority.indexOf(b)) {
+                return 1
+            } else {
+                return -1
+            }
+        });
+        setProductTypes(sortedArray)
+        const organizedProducts = products.sort(compare)
+        setShownProducts(organizedProducts)
+    }, [])
+
+    useEffect(() => {
+        const carousels = {}
+        productTypes.map((type, index) => {
+            carousels[type] = []
+            return shownProducts
+                .filter(({ type: typeProduct }) => type === typeProduct[0])
+                .map(({ name, banner, questiontype }) => {
+                    const questionType = questiontype ? questiontype[0].title : ''
+                    carousels[type].push(
+                        <Product key={name}
+                            onClick={() => {
+                                navigate('/productInner/', { state: { title: questionType } })
+                            }}
+                        >
+                            {banner && banner.file && (
+                                <Icon
+                                    onClick={() => {
+                                        navigate('/productInner/', {
+                                            state: { title: questionType },
+                                        })
+                                    }}
+                                    alt={name}
+                                    src={banner.file.url}
+                                />
+                            )}
+                            <ProductName
+                                to="/productInner/"
+                                state={{
+                                    title: questionType,
+                                }}
+                            >
+                                {name}
+                            </ProductName>
+                        </Product>
+                    )
+                })
+        })
+
+        setCarouselItems(carousels)
+    }, [productTypes])
+
+    return (
+        <Container>
+            <BannerImage src={BannerURL} alt="BannerURL" />
+            <ProductsWrapper>
+                {productTypes.map((type, index) => (
+                    <div key={type}>
+                        <Title>{type}</Title>
+                        {carouselItems[type] && !breakpoints.sm && !breakpoints.md && <Slider
+                            {...settings}
+                            slidesToShow={carouselItems[type].length >= 4 ? 4 : carouselItems[type].length}>
+                            {carouselItems[type]}
+                        </Slider>}
+                        {carouselItems[type] && (breakpoints.sm || breakpoints.md) && <Slider
+                            {...settings}
+                            slidesToShow={carouselItems[type].length >= 2 ? 2 : carouselItems[type].length}>
+                            {carouselItems[type]}
+                        </Slider>}
+                    </div>
+                ))}
+            </ProductsWrapper>
+        </Container >
+    )
+}
+
+export default ProductsSlider;
