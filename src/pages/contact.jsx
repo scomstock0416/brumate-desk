@@ -15,6 +15,7 @@ import {
 
 const ErrorMessage = styled(RawErrorMessage)`
   color: #dc3545;
+  margin-top: 10px;
 `
 
 const FormContainer = styled.div`
@@ -332,6 +333,9 @@ function IndexPage() {
       ) {
         errors.email = 'Invalid email address'
       }
+      if (!values.selectType) {
+        errors.selectType = 'Required'
+      }
     }
 
     if (values.picked === '') {
@@ -341,6 +345,10 @@ function IndexPage() {
     if (values.picked === 'yes') {
       if (!values.order) {
         errors.order = 'Required'
+      }
+
+      if (!values.selectType) {
+        errors.selectType = 'Required'
       }
     }
 
@@ -362,7 +370,7 @@ function IndexPage() {
       }
     }
 
-    if (values.description === '') {
+    if (values.description === '' && values.selectType !== 'change') {
       errors.description = 'Required'
     }
     return errors
@@ -376,7 +384,7 @@ function IndexPage() {
 
   const handleSubmit = (
     values,
-    { setSubmitting, setErrors, setStatus, resetForm },
+    { setSubmitting, setErrors, setStatus, resetForm }
   ) => {
     fetch('/', {
       method: 'POST',
@@ -417,7 +425,7 @@ function IndexPage() {
               <Title>Report your Problem</Title>
               <Formik
                 initialValues={{
-                  picked: '',
+                  picked: 'yes',
                   description: '',
                   selectType: '',
                   order: '',
@@ -462,9 +470,8 @@ function IndexPage() {
                       </Label>
                     </SpacingDivColumn>
                     <ErrorMessage component="span" name="picked" />
-                    {console.log(values)}
                     <SpacingDivColumn
-                      hidden={values.picked === 'no' || values.picked === ''}
+                      hidden={values.picked === 'yes' || values.picked === ''}
                     >
                       <DivCol>
                         <Label htmlFor="name">Name </Label>
@@ -477,7 +484,7 @@ function IndexPage() {
                       </DivCol>
                     </SpacingDivColumn>
                     <SpacingDiv
-                      hidden={values.picked === 'yes' || values.picked === ''}
+                      hidden={values.picked === 'no' || values.picked === ''}
                     >
                       <Label htmlFor="order">Order Number </Label>
                       <Field name="order" />
@@ -494,12 +501,12 @@ function IndexPage() {
                         <option value="damage">Damage</option>
                         <option value="other">Other</option>
                       </SelectField>
+                      <ErrorMessage component="span" name="selectType" />
                     </SpacingDiv>
 
                     <SpacingDiv
                       hidden={
-                        values.selectType === 'change' ||
-                        values.selectType === ''
+                        values.selectType !== 'change'
                       }
                     >
                       <Label htmlFor="address">
@@ -511,7 +518,11 @@ function IndexPage() {
 
                     <SpacingDiv
                       hidden={
-                        values.selectType === 'add' || values.selectType === ''
+                        values.selectType === 'cancel' ||
+                        values.selectType === 'change' ||
+                        values.selectType === 'damage' ||
+                        values.selectType === 'other' ||
+                        values.selectType === ''
                       }
                     >
                       <Label htmlFor="item">
@@ -523,40 +534,54 @@ function IndexPage() {
 
                     <SpacingDiv
                       hidden={
-                        values.selectType === 'damage' ||
-                        values.selectType === ''
+                        values.selectType !== 'damage'
                       }
                     >
-                      <FileContainer>
-                        <FieldImage
-                          name="imageDamage"
-                          multiple
-                          type="file"
-                          onChange={event => {
-                            setFiles('')
-                            const filesEvent = event.currentTarget.files
-                            for (var i = 0; i < filesEvent.length; i++) {
-                              setFiles(files + ' ' + filesEvent[i].name)
-                            }
-
-                            setFieldValue('file', event.currentTarget.files)
-                          }}
-                        />
-                        <LabelType htmlFor="imageDamage">
-                          {files ? files : 'Choose files...'}
-                        </LabelType>
-                        <ErrorMessage component="span" name="imageDamage" />
-                      </FileContainer>
+                      <Label htmlFor="damagedItem">
+                        What item is damaged?
+                      </Label>
+                      <Field name="damagedItem" />
+                      <ErrorMessage component="span" name="damagedItem" />
                     </SpacingDiv>
                     <>
-                      <SpacingDiv hidden={values.selectType !== ''}>
-                        <Label htmlFor="Description">Provide description</Label>
+                      <SpacingDiv hidden={
+                        values.selectType === '' ||
+                        values.selectType === 'change'
+                      }>
+                        <Label htmlFor="Description">Provide additional details</Label>
                         <Field
                           height={3}
                           component="textarea"
                           name="description"
                         />
                         <ErrorMessage component="span" name="description" />
+                      </SpacingDiv>
+                      <SpacingDiv
+                        hidden={
+                          values.selectType === 'change' ||
+                          values.selectType === ''
+                        }
+                      >
+                        <FileContainer>
+                          <FieldImage
+                            name="imageDamage"
+                            multiple
+                            type="file"
+                            onChange={event => {
+                              setFiles('')
+                              const filesEvent = event.currentTarget.files
+                              for (var i = 0; i < filesEvent.length; i++) {
+                                setFiles(files + ' ' + filesEvent[i].name)
+                              }
+
+                              setFieldValue('file', event.currentTarget.files)
+                            }}
+                          />
+                          <LabelType htmlFor="imageDamage">
+                            {files ? files : 'Choose files...'}
+                          </LabelType>
+                          <ErrorMessage component="span" name="imageDamage" />
+                        </FileContainer>
                       </SpacingDiv>
                       <SpacingDiv>
                         <Button value="Send" type="submit"></Button>

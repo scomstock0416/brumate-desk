@@ -85,6 +85,16 @@ const ProductNameNoLink = styled.p`
 const Icon = styled.img`
   max-height: 120px;
   margin: 15px auto 12px;
+
+  @media (max-width: 1024px) {
+    max-width: 12vw;
+    padding: 0 8px;
+  }
+
+  @media (max-width: 767px) {
+    max-width: 20vw;
+    padding: 0 8px;
+  }
 `
 
 const BannerImage = styled.img`
@@ -102,6 +112,17 @@ const Product = styled.div`
   background-color: #ffffff;
   max-width: 190px;
   margin: 0 12px;
+
+  @media (max-width: 1024px) {
+    max-width: 16vw;
+    min-height: 165px;
+    height: auto;
+  }
+
+  @media (max-width: 767px) {
+    max-width: 24vw;
+    min-height: 155px;
+  }
 `
 
 export {

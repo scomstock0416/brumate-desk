@@ -62,32 +62,11 @@ const ProductsSlider = ({ header, products }) => {
         dots: false,
         infinite: true,
         centerMode: true,
-        centerPadding: '40px',
+        centerPadding: '0',
         speed: 500,
         slidesToScroll: 1,
         prevArrow: <SamplePrevArrow className="slick-prev" />,
-        nextArrow: <SampleNextArrow className="slick-next" />,
-        responsive: [
-            {
-                breakpoint: 2000,
-                settings: {
-                    centerPadding: '80px'
-                }
-            },
-            {
-                breakpoint: 1400,
-                settings: {
-                    centerPadding: '0px'
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    centerPadding: '0px',
-                    slidesToScroll: 1
-                }
-            },
-        ]
+        nextArrow: <SampleNextArrow className="slick-next" />
     };
 
     useEffect(() => {
@@ -100,7 +79,7 @@ const ProductsSlider = ({ header, products }) => {
         const setTypes = new Set(newTypes)
         const typesArr = [...setTypes]
         let sortedArray = [...typesArr]
-        const priority = ["Beer", "Wine", "Spirits", "Coffee", "ReHydration", "Cooler"]
+        const priority = ["Beer", "Spirits", "Wine", "Coffee", "ReHydration", "Cooler"]
         sortedArray.sort((a, b) => {
             if (priority.indexOf(a) > priority.indexOf(b)) {
                 return 1
@@ -163,12 +142,13 @@ const ProductsSlider = ({ header, products }) => {
                         <Title>{type}</Title>
                         {carouselItems[type] && !breakpoints.sm && !breakpoints.md && <Slider
                             {...settings}
-                            slidesToShow={carouselItems[type].length >= 4 ? 4 : carouselItems[type].length}>
+                            slidesToShow={carouselItems[type].length >= 4 ? 4 : carouselItems[type].length}
+                            centerPadding={carouselItems[type].length < 4 ? '115px' : '0px'}>
                             {carouselItems[type]}
                         </Slider>}
                         {carouselItems[type] && (breakpoints.sm || breakpoints.md) && <Slider
                             {...settings}
-                            slidesToShow={carouselItems[type].length >= 2 ? 2 : carouselItems[type].length}>
+                            slidesToShow={carouselItems[type].length >= 3 ? 3 : carouselItems[type].length}>
                             {carouselItems[type]}
                         </Slider>}
                     </div>
