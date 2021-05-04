@@ -155,8 +155,8 @@ const Label = styled.label`
 const SubTitle = styled.p`
   font-family: 'sharp_sans';
   display: block;
-  font-size: 12px;
-  font-weight: 300;
+  font-size: 18px;
+  font-weight: 600;
   line-height: 30px;
   margin-top: 0;
   font-weight: 300;
@@ -359,6 +359,9 @@ function IndexPage() {
     }
 
     if (values.selectType === 'damage') {
+      if (!values.damagedItem) {
+        errors.damagedItem = 'Required'
+      }
       if (!values.file) {
         errors.imageDamage = 'Required'
       }
@@ -373,6 +376,7 @@ function IndexPage() {
     if (values.description === '' && values.selectType !== 'change') {
       errors.description = 'Required'
     }
+    console.log(errors)
     return errors
   }
 
@@ -431,6 +435,8 @@ function IndexPage() {
                   order: '',
                   name: '',
                   email: '',
+                  damagedItem: '',
+                  imageDamage: ''
                 }}
                 validate={validate}
                 onSubmit={handleSubmit}
@@ -481,6 +487,7 @@ function IndexPage() {
                       <DivCol>
                         <Label htmlFor="email">Email </Label>
                         <Field name="email" />
+                        <ErrorMessage component="span" name="email" />
                       </DivCol>
                     </SpacingDivColumn>
                     <SpacingDiv
@@ -580,8 +587,8 @@ function IndexPage() {
                           <LabelType htmlFor="imageDamage">
                             {files ? files : 'Choose files...'}
                           </LabelType>
-                          <ErrorMessage component="span" name="imageDamage" />
                         </FileContainer>
+                        <ErrorMessage component="span" name="imageDamage" />
                       </SpacingDiv>
                       <SpacingDiv>
                         <Button value="Send" type="submit"></Button>
