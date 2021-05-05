@@ -61,6 +61,9 @@ const ProductName = styled(Link)`
   display: inline-block;
   width: 100%;
   font-size: 15px;
+  padding: 0 5px;
+  display: inline-block;
+  box-sizing: border-box;
 
   @media (min-width: 768px) {
     font-weight: 700;
@@ -94,6 +97,9 @@ const Icon = styled.img`
   @media (max-width: 767px) {
     max-width: 20vw;
     padding: 0 8px;
+  }
+  @media (min-width: 1024px) and (max-width: 1340px) {
+    max-height: 110px;
   }
 `
 
