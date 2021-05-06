@@ -143,7 +143,8 @@ const ProductsSlider = ({ header, products }) => {
                         {carouselItems[type] && !breakpoints.sm && !breakpoints.md && <Slider
                             {...settings}
                             slidesToShow={carouselItems[type].length >= 4 ? 4 : carouselItems[type].length}
-                            centerPadding={carouselItems[type].length < 4 ? '115px' : '0px'}>
+                            centerPadding={carouselItems[type].length < 4 ? '115px' : '0px'}
+                            className={carouselItems[type].length < 4 ? 'no-arrows' : ''}>
                             {carouselItems[type]}
                         </Slider>}
                         {carouselItems[type] && (breakpoints.sm || breakpoints.md) && <Slider
