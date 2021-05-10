@@ -27,7 +27,34 @@ function compare(a, b) {
     }
     return 0
 }
-
+function beerItemsCompare(a, b) {
+    let beerPriority = []
+    if(window.innerWidth > 1024) {
+        beerPriority = [ "Hopsulator Duo", "Imperial Pint", "Hopsulator Bott'l", "Hopsulator Juggernaut", "Hopsulator Twist", "Growl'r", "Hopsulator Trio", "Hopsulator Slim"]
+    }
+    else {
+        beerPriority = ["Hopsulator Slim", "Hopsulator Duo", "Imperial Pint", "Hopsulator Bott'l", "Hopsulator Juggernaut", "Hopsulator Twist", "Growl'r", "Hopsulator Trio"]
+    }
+    if (beerPriority.indexOf(a.key) > beerPriority.indexOf(b.key)) {
+        return 1
+    } else {
+        return -1
+    }
+}
+function spiritsItemsCompare(a, b) {
+    let spiritsPriority = []
+    if(window.innerWidth > 1024) {
+        spiritsPriority = [ "Shaker Pint", "Fifth", "MargTini", "Liquor Canteen","Glitter Flask", "NOS'R", "Highball Tumbler", "Rocks Tumbler"]
+    }
+    else {
+        spiritsPriority = [ "Rocks Tumbler", "Shaker Pint", "Fifth", "MargTini", "Liquor Canteen","Glitter Flask", "NOS'R", "Highball Tumbler"]
+    }
+    if (spiritsPriority.indexOf(a.key) > spiritsPriority.indexOf(b.key)) {
+        return 1
+    } else {
+        return -1
+    }
+}
 const ProductsSlider = ({ header, products }) => {
 
     const [shownProducts, setShownProducts] = useState([])
@@ -129,7 +156,12 @@ const ProductsSlider = ({ header, products }) => {
                     )
                 })
         })
-
+        if(carousels && carousels["Beer"]) {
+            carousels["Beer"].sort(beerItemsCompare)
+        }
+        if (carousels && carousels["Spirits"]) {
+            carousels["Spirits"].sort(spiritsItemsCompare)
+        }
         setCarouselItems(carousels)
     }, [productTypes])
 

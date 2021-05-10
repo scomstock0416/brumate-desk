@@ -29,7 +29,6 @@ const ProductsWrapper = styled.div`
 const Title = styled.p`
   font-family: 'sharp_sans';
   color: #000000;
-  cursor: pointer;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   text-align: center;
   font-weight: 600;

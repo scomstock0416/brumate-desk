@@ -43,11 +43,10 @@ const RawField = styled(UnBlockField)`
 const RadioField = styled(RawField)`
   display: inline;
   height: 14px;
-  width: 50px;
   border: 1px solid #707070;
   background-color: #ffffff;
   color: #000;
-  padding-left: 10px;
+  padding-left: 8px;
 
   ::placeholder {
     color: #707070;
@@ -151,6 +150,20 @@ const Label = styled.label`
   margin-top: 0;
   font-weight: 300;
 `
+const RadioLabel = styled.label`
+  font-family: 'sharp_sans';
+  display: block;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 30px;
+  margin-top: 0;
+  margin-left: 6px;
+  font-weight: 300;
+  width: 72px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`
 
 const SubTitle = styled.p`
   font-family: 'sharp_sans';
@@ -196,6 +209,7 @@ const Button = styled.input`
   border: 1px solid transparent;
   border-radius: 28px;
   max-width: 30%;
+  cursor: pointer;
 `
 
 const Title = styled.p`
@@ -466,14 +480,14 @@ function IndexPage() {
                       role="group"
                       aria-labelledby="my-radio-group"
                     >
-                      <Label>
+                      <RadioLabel>
                         <RadioField type="radio" name="picked" value="yes" />
                         Yes
-                      </Label>
-                      <Label>
+                      </RadioLabel>
+                      <RadioLabel>
                         <RadioField type="radio" name="picked" value="no" />
                         No
-                      </Label>
+                      </RadioLabel>
                     </SpacingDivColumn>
                     <ErrorMessage component="span" name="picked" />
                     <SpacingDivColumn
@@ -595,7 +609,7 @@ function IndexPage() {
                       </SpacingDiv>
                       {displayFormStatus && (
                         <SubTitle>
-                          Thanks for contacting us and report your problem.
+                          Thank you for contacting us.
                         </SubTitle>
                       )}
                     </>
