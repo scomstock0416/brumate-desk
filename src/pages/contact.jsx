@@ -390,7 +390,6 @@ function IndexPage() {
     if (values.description === '' && values.selectType !== 'change') {
       errors.description = 'Required'
     }
-    console.log(errors)
     return errors
   }
 
@@ -404,10 +403,19 @@ function IndexPage() {
     values,
     { setSubmitting, setErrors, setStatus, resetForm }
   ) => {
+
+    const valuesMap = Object.fromEntries(
+      Object.entries(values).filter(
+        ([k, v]) => {
+          if(v !== "")
+            return [k, v];
+          }
+      )
+    )
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'multipart/form-data' },
-      body: encode({ 'form-name': 'contact', ...values }),
+      body: encode({ 'form-name': 'contact', ...valuesMap }),
     })
       .then(() => {
         resetForm({
