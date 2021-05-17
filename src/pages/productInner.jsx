@@ -164,12 +164,12 @@ const ProductInner = ({location, search}) => {
     <Layout>
       <Container>
         <Column>
-          {/* {data && (
+          {data && (
             <>
               <H2>Choose other products</H2>
               <Products products={data.allContentfulProduct.nodes} />
             </>
-          )} */}
+          )}
           {!breakpoints.sm && (
             <>
               <H2>Categories</H2>
