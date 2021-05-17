@@ -103,6 +103,7 @@ const Product = styled.div`
   flex-direction: row;
   justify-content: start;
   align-items: center;
+  min-height: 98px;
 `
 
 export { Product, ProductName, ProductsWrapper, Header, Container, Title, Icon }
