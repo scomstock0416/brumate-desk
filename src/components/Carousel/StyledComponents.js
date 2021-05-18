@@ -24,7 +24,15 @@ const ProductsWrapper = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   max-width: 100%;
+
+  & > div {
+    display       : flex;
+    flex-direction: column;
+    max-width     : 100%;
+    width         : 100%;
+  }
 `
+
 
 const Title = styled.p`
   font-family: 'sharp_sans';

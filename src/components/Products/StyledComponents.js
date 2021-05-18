@@ -45,7 +45,7 @@ const ProductsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   max-height: 270px;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   &::-webkit-scrollbar-track
   {
@@ -85,13 +85,14 @@ const ProductName = styled(Link)`
   margin: 0;
   text-decoration: none;
   cursor: pointer;
-  margin: 9px 0 18px;
+  margin: auto;
 `
 
 const Icon = styled.div`
     background-image: url(${({ src }) => src})};
-    width:53px;
-    height: 53px;
+    width:42px;
+    height: 42px;
+    margin-left: 16px;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -103,7 +104,14 @@ const Product = styled.div`
   flex-direction: row;
   justify-content: start;
   align-items: center;
-  min-height: 98px;
+  min-height: 56px;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 8px;
+
+  &:last-child {
+    border-bottom: 0;
+  }
 `
 
 export { Product, ProductName, ProductsWrapper, Header, Container, Title, Icon }
