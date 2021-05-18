@@ -80,7 +80,7 @@ const Title = styled.p`
 const ProductName = styled(Link)`
   font-family: 'sharp_sans';
   color: #000000;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 700;
   margin: 0;
   text-decoration: none;
