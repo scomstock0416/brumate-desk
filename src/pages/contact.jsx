@@ -20,6 +20,37 @@ const ErrorMessage = styled(RawErrorMessage)`
 
 const FormContainer = styled.div`
   padding: 30px;
+  position: relative;
+`
+
+const LoaderContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: black;
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+`
+
+const Loader = styled.div`
+  color: #ffffff;
+  font-size: 20px;
+  margin: 100px auto;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: relative;
+  text-indent: -9999em;
+  -webkit-animation: load4 1.3s infinite linear;
+  animation: loader 1.3s infinite linear;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
 `
 
 const ShadowContainer = styled.div`
@@ -393,19 +424,10 @@ function IndexPage() {
     }
     return errors
   }
-
-  // const encode = data => {
-  //   return Object.keys(data)
-  //     .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-  //     .join('&')
-  // }
-
   const handleSubmit = (
     values,
     { setSubmitting, setErrors, setStatus, resetForm }
   ) => {
-    console.log("values", values)
-
     const valuesMap = Object.fromEntries(
       Object.entries(values).filter(
         ([k, v]) => {
@@ -414,8 +436,6 @@ function IndexPage() {
         }
       )
     )
-
-
     const formData = new FormData()
     formData.append("form-name", "contact-test")
     Object.keys(valuesMap)
@@ -426,10 +446,6 @@ function IndexPage() {
     if (selectedFile) {
       formData.append("imageDamage", selectedFile, selectedFile.name)
     }
-
-    // console.log("valuesMap", valuesMap)
-    // let myForm = document.getElementById('contact-test');
-    // let formData = new FormData(myForm)
 
     fetch('/', {
       method: 'POST',
@@ -497,7 +513,6 @@ function IndexPage() {
                   status,
                 }) => (
                   <Form
-                    // loading={isSubmitting}
                     // success={!!status && !!status.success}
                     // error={!!errors.submit}
                     id="contact-test"
@@ -505,6 +520,11 @@ function IndexPage() {
                     data-netlify="true"
                     data-netlify-honeypot="bot-field"
                   >
+                    {isSubmitting && (
+                      <LoaderContainer>
+                        <Loader></Loader>
+                      </LoaderContainer>
+                    )}
                     <input type="hidden" name="form-name" value="contact-test" />
 
                     <Label>Do you have your order number? </Label>
