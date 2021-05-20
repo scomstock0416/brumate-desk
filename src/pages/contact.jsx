@@ -400,24 +400,12 @@ function IndexPage() {
   //     .join('&')
   // }
 
-  const encode = (data) => {
-    const formData = new FormData()
-    Object.keys(data)
-      .map(key => {
-        formData.append(key, data[key])
-      })
-
-    if (selectedFile) {
-      formData.append("imageDamage", selectedFile, selectedFile.name)
-    }
-    return formData
-  }
-
   const handleSubmit = (
     values,
     { setSubmitting, setErrors, setStatus, resetForm }
   ) => {
     console.log("values", values)
+
     const valuesMap = Object.fromEntries(
       Object.entries(values).filter(
         ([k, v]) => {
@@ -426,14 +414,25 @@ function IndexPage() {
         }
       )
     )
-    console.log("valuesMap", valuesMap)
-    let myForm = document.getElementById('contact-test');
-    let formData = new FormData(myForm)
+
+    const formData = new FormData()
+    Object.keys(valuesMap)
+      .map(key => {
+        formData.append(key, valuesMap[key])
+      })
+
+    if (selectedFile) {
+      formData.append("imageDamage", selectedFile)
+    }
+
+    // console.log("valuesMap", valuesMap)
+    // let myForm = document.getElementById('contact-test');
+    // let formData = new FormData(myForm)
 
     fetch('/', {
       method: 'POST',
-      headers: { 'Content-Type': 'multipart/form-data' },
-      body: new URLSearchParams(formData)
+      //headers: { 'Content-Type': 'multipart/form-data' },
+      body: formData
     })
       .then(() => {
         resetForm({
@@ -615,7 +614,7 @@ function IndexPage() {
                         }
                       >
                         <FileContainer>
-                          <input
+                          <FieldImage
                             name="imageDamage"
                             accept="image/png, image/jpeg"
                             type="file"
