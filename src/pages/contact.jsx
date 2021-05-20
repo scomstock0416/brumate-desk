@@ -404,14 +404,7 @@ function IndexPage() {
     const formData = new FormData()
     Object.keys(data)
       .map(key => {
-        // if (key === 'imageDamage') {
-        //   for (const file of data[key]) {
-        //     formData.append(key, file, file.name)
-        //   }
-        // } 
-        // else {
         formData.append(key, data[key])
-        // }
       })
 
     if (selectedFile) {
@@ -622,19 +615,11 @@ function IndexPage() {
                         }
                       >
                         <FileContainer>
-                          <FieldImage
+                          <input
                             name="imageDamage"
                             accept="image/png, image/jpeg"
                             type="file"
                             onChange={changeHandler}
-                          // onChange={event => {
-                          //   setFiles('')
-                          //   const filesEvent = event.currentTarget.files
-                          //   for (var i = 0; i < filesEvent.length; i++) {
-                          //     setFiles(files + ' ' + filesEvent[i].name)
-                          //   }
-                          //   setFieldValue('file', event.currentTarget.files)
-                          // }}
                           />
                           {isFilePicked ? (
                             <LabelType htmlFor="imageDamage">
