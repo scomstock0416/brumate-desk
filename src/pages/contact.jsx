@@ -377,7 +377,7 @@ function IndexPage() {
       if (!values.damagedItem) {
         errors.damagedItem = 'Required'
       }
-      if (!values.file) {
+      if (!selectedFile) {
         errors.imageDamage = 'Required'
       }
     }
@@ -434,10 +434,13 @@ function IndexPage() {
       )
     )
     console.log("valuesMap", valuesMap)
+    let myForm = document.getElementById('contact-test');
+    let formData = new FormData(myForm)
+
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'multipart/form-data' },
-      body: encode({ 'form-name': 'contact', ...valuesMap }),
+      body: new URLSearchParams(formData).toString()
     })
       .then(() => {
         resetForm({
@@ -503,11 +506,12 @@ function IndexPage() {
                     // loading={isSubmitting}
                     // success={!!status && !!status.success}
                     // error={!!errors.submit}
-                    name="contact"
+                    id="contact-test"
+                    name="contact-test"
                     data-netlify="true"
                     data-netlify-honeypot="bot-field"
                   >
-                    <input type="hidden" name="form-name" value="contact" />
+                    <input type="hidden" name="form-name" value="contact-test" />
 
                     <Label>Do you have your order number? </Label>
                     <SpacingDivColumn
