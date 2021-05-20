@@ -415,14 +415,16 @@ function IndexPage() {
       )
     )
 
+
     const formData = new FormData()
+    formData.append("form-name", "contact-test")
     Object.keys(valuesMap)
       .map(key => {
         formData.append(key, valuesMap[key])
       })
 
     if (selectedFile) {
-      formData.append("imageDamage", selectedFile)
+      formData.append("imageDamage", selectedFile, selectedFile.name)
     }
 
     // console.log("valuesMap", valuesMap)
