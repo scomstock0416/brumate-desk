@@ -440,7 +440,7 @@ function IndexPage() {
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'multipart/form-data' },
-      body: new URLSearchParams(formData).toString()
+      body: new URLSearchParams(formData)
     })
       .then(() => {
         resetForm({
@@ -624,7 +624,7 @@ function IndexPage() {
                         <FileContainer>
                           <FieldImage
                             name="imageDamage"
-                            multiple
+                            accept="image/png, image/jpeg"
                             type="file"
                             onChange={changeHandler}
                           // onChange={event => {
