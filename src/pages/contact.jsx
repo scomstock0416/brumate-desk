@@ -431,7 +431,7 @@ function IndexPage() {
 
     fetch('/', {
       method: 'POST',
-      //headers: { 'Content-Type': 'multipart/form-data' },
+      headers: { 'Content-Type': 'multipart/form-data' },
       body: formData
     })
       .then(() => {
