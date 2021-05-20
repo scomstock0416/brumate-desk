@@ -255,7 +255,8 @@ const FileContainer = styled.div`
 `
 
 function IndexPage() {
-  const [files, setFiles] = useState('')
+  const [selectedFile, setSelectedFile] = useState();
+  const [isFilePicked, setIsFilePicked] = useState(false);
   const [displayFormStatus, setDisplayFormStatus] = useState(false)
   const breakpoints = useBreakpoint()
 
@@ -393,25 +394,46 @@ function IndexPage() {
     return errors
   }
 
-  const encode = data => {
-    return Object.keys(data)
-      .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-      .join('&')
+  // const encode = data => {
+  //   return Object.keys(data)
+  //     .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+  //     .join('&')
+  // }
+
+  const encode = (data) => {
+    const formData = new FormData()
+    Object.keys(data)
+      .map(key => {
+        // if (key === 'imageDamage') {
+        //   for (const file of data[key]) {
+        //     formData.append(key, file, file.name)
+        //   }
+        // } 
+        // else {
+        formData.append(key, data[key])
+        // }
+      })
+
+    if (selectedFile) {
+      formData.append("imageDamage", selectedFile, selectedFile.name)
+    }
+    return formData
   }
 
   const handleSubmit = (
     values,
     { setSubmitting, setErrors, setStatus, resetForm }
   ) => {
-
+    console.log("values", values)
     const valuesMap = Object.fromEntries(
       Object.entries(values).filter(
         ([k, v]) => {
-          if(v !== "")
+          if (v !== "")
             return [k, v];
-          }
+        }
       )
     )
+    console.log("valuesMap", valuesMap)
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'multipart/form-data' },
@@ -431,6 +453,10 @@ function IndexPage() {
         setErrors({ submit: error.message })
       })
   }
+  const changeHandler = (event) => {
+    setSelectedFile(event.target.files[0]);
+    setIsFilePicked(true);
+  };
 
   return (
     <Layout>
@@ -474,9 +500,9 @@ function IndexPage() {
                   status,
                 }) => (
                   <Form
-                    loading={isSubmitting}
-                    success={!!status && !!status.success}
-                    error={!!errors.submit}
+                    // loading={isSubmitting}
+                    // success={!!status && !!status.success}
+                    // error={!!errors.submit}
                     name="contact"
                     data-netlify="true"
                     data-netlify-honeypot="bot-field"
@@ -596,19 +622,26 @@ function IndexPage() {
                             name="imageDamage"
                             multiple
                             type="file"
-                            onChange={event => {
-                              setFiles('')
-                              const filesEvent = event.currentTarget.files
-                              for (var i = 0; i < filesEvent.length; i++) {
-                                setFiles(files + ' ' + filesEvent[i].name)
-                              }
-
-                              setFieldValue('file', event.currentTarget.files)
-                            }}
+                            onChange={changeHandler}
+                          // onChange={event => {
+                          //   setFiles('')
+                          //   const filesEvent = event.currentTarget.files
+                          //   for (var i = 0; i < filesEvent.length; i++) {
+                          //     setFiles(files + ' ' + filesEvent[i].name)
+                          //   }
+                          //   setFieldValue('file', event.currentTarget.files)
+                          // }}
                           />
-                          <LabelType htmlFor="imageDamage">
-                            {files ? files : 'Choose files...'}
-                          </LabelType>
+                          {isFilePicked ? (
+                            <LabelType htmlFor="imageDamage">
+                              { selectedFile.name}
+                            </LabelType>
+                          ) : (
+                            <LabelType htmlFor="imageDamage">
+                              Choose files...
+                            </LabelType>
+                          )
+                          }
                         </FileContainer>
                         <ErrorMessage component="span" name="imageDamage" />
                       </SpacingDiv>
