@@ -1,12 +1,12 @@
-import React, {useState} from 'react'
-import {graphql, useStaticQuery} from 'gatsby'
-import {Helmet} from 'react-helmet'
-import styled, {ThemeProvider} from 'styled-components'
+import React, { useState, useEffect } from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
+import { Helmet } from 'react-helmet'
+import styled, { ThemeProvider } from 'styled-components'
 import Footer from '../Footer/Footer'
 import TopMenu from '../Header/Header'
 import Menu from '../Menu/Menu'
 import Banner from '../Banner/Banner'
-import GlobalStyle, {theme} from '../../theme/theme'
+import GlobalStyle, { theme } from '../../theme/theme'
 import QuestionList from '../QuestionList/QuestionList'
 import OutsideAlerter from './OutsideAlerter'
 import 'normalize.css'
@@ -38,9 +38,40 @@ const Main = styled.main`
   }
 `
 
-const Layout = ({children}) => {
+const Layout = ({ children }) => {
   const [questionList, setQuestionsList] = useState([])
   const [menu, setMenu] = useState('opened')
+
+  useEffect(() => {
+    // eslint-disable
+    (function (_) {
+      _.GORGIAS_CHAT_APP_ID = "338";
+      _.GORGIAS_CHAT_BASE_URL = "us-east1-898b.production.gorgias.chat";
+      _.GORGIAS_API_BASE_URL = "config.gorgias.chat";
+      var e = new XMLHttpRequest;
+      e.open("GET", "https://config.gorgias.chat/applications/338", !0);
+      e.onload = function (t) {
+        if (4 === e.readyState)
+          if (200 === e.status) {
+            var n = JSON.parse(e.responseText);
+            if (!n.application || !n.bundleVersion)
+              throw new Error("Missing fields in the response body - https://config.gorgias.chat/applications/338");
+            if (_.GORGIAS_CHAT_APP = n.application, _.GORGIAS_CHAT_BUNDLE_VERSION = n.bundleVersion, n && n.texts && (_.GORGIAS_CHAT_TEXTS = n.texts), !document.getElementById("gorgias-chat-container")) {
+              var o = document.createElement("div");
+              o.id = "gorgias-chat-container";
+              document.body.appendChild(o);
+              const _ = document.createElement("script");
+              _.setAttribute("defer", !0);
+              _.src = "https://storage.googleapis.com/gorgias-chat-production-client-builds/{bundleVersion}/static/js/main.js".replace("{bundleVersion}", n.bundleVersion);
+              document.body.appendChild(_)
+            }
+          } else
+            console.error("Failed request GET - https://config.gorgias.chat/applications/338")
+      };
+      e.onerror = function (_) { console.error(_) };
+      e.send();
+    })(window || {});
+  }, [])
 
   const closeMenu = () => {
     setMenu('')
