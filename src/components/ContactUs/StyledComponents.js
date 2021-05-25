@@ -15,13 +15,18 @@ const Container = styled.div`
   }
 `
 
-const InformationField = styled.a`
+const InformationField = styled.button`
   align-items: center;
   margin: 0 30px;
   display: flex;
   text-decoration: none;
   cursor: ${({hyperlink}) => (hyperlink ? 'pointer' : ' initial')};
-  pointer-events: ${({hyperlink}) => (hyperlink ? 'auto' : ' none')};
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  max-height: 47px;
+  padding: 0;
+
 `
 
 const ImageIcon = styled.img`
