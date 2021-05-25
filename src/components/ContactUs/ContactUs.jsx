@@ -15,15 +15,14 @@ const ContactUs = ({ className }) => (
     <>
       {infoContact.map(({ icon, text, url, hyperlink }, index) => (
         // eslint-disable-next-line react/no-array-index-key
-        <form action="mailto:sales@brumate.com" method="post" encType="text/plain">
-          <InformationField
-            key={index + 1}
-            type="submit"
-          >
-            <ImageIcon src={icon} alt="arrow" />
-            <P>{text}</P>
-          </InformationField>
-        </form>
+        <InformationField
+          key={index + 1}
+          href="mailto:sales@brumate.com"
+          target="_top"
+        >
+          <ImageIcon src={icon} alt="arrow" />
+          <P>{text}</P>
+        </InformationField>
       ))}
     </>
   </Container>

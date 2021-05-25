@@ -15,12 +15,11 @@ const Container = styled.div`
   }
 `
 
-const InformationField = styled.button`
+const InformationField = styled.a`
   align-items: center;
   margin: 0 30px;
   display: flex;
   text-decoration: none;
-  cursor: ${({hyperlink}) => (hyperlink ? 'pointer' : ' initial')};
   background: transparent;
   border: 0;
   cursor: pointer;
