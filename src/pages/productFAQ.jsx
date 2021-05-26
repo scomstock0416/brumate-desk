@@ -1,17 +1,12 @@
 import React from 'react'
-import {graphql, useStaticQuery} from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import styled from 'styled-components'
-import {useBreakpoint} from 'gatsby-plugin-breakpoints'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import Layout from '../components/Layout/Layout'
 import CategoriesList from '../components/CategoriesList/CategoriesList'
 import BaseCategoriesMobile from '../components/CategoriesList/CategoriesMobile'
 import BaseChatBox from '../components/ChatBox/ChatBox'
-import BaseProductList from '../components/ProductList/ProductList'
-import MobileProductList from '../components/MobileProductList/MobileProductList'
-
-const ProductList = styled(BaseProductList)`
-  flex: 1;
-`
+import Carousel from '../components/Carousel/Carousel'
 
 const CategoriesMobile = styled(BaseCategoriesMobile)`
   margin-bottom: 28px;
@@ -27,6 +22,7 @@ const Container = styled.div`
   padding: 0 20px;
   padding-top: 0;
   flex-direction: column-reverse;
+  overflow: hidden;
 
   @media (min-width: 767px) {
     display: flex;
@@ -38,18 +34,37 @@ const Container = styled.div`
 `
 
 const Column = styled.div`
+  :last-of-type {
+    width: 100%;
+  }
   @media (min-width: 768px) {
     :first-of-type {
       flex-shrink: 0;
-      margin-right: 50px;
-      width: 217px;
+      margin-right: 5%;
+      width: 28%;
+    }
+    :last-of-type {
+      width: 67%;
     }
   }
   @media (min-width: 1024px) {
     :first-of-type {
       flex-shrink: 0;
-      margin-right: 50px;
-      width: 407px;
+      margin-right: 5%;
+      width: 33%;
+    }
+
+    :last-of-type {
+      width: 60%;
+    }
+  }
+  @media (min-width: 1366px) {
+    :first-of-type {
+      width: 30%;
+    }
+
+    :last-of-type {
+      width: 65%;
     }
   }
 `
@@ -152,17 +167,8 @@ const ProductFQA = () => {
           {breakpoints.sm && (
             <CategoriesMobile categories={newCategoriesData} isProductFAQ />
           )}
-          {data && breakpoints.sm && (
-            <MobileProductList
-              categories={newCategoriesData}
-              products={data.allContentfulProduct.nodes}
-            />
-          )}
-          {data && !breakpoints.sm && (
-            <ProductList
-              categories={newCategoriesData}
-              products={data.allContentfulProduct.nodes}
-            />
+          {data && (
+            <Carousel header={'header'} products={data.allContentfulProduct.nodes}></Carousel>
           )}
         </Column>
       </Container>

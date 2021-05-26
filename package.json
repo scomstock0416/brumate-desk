@@ -33,7 +33,9 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-helmet": "^6.0.0",
+    "react-slick": "^0.28.1",
     "reactstrap": "^8.6.0",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^5.1.0"
   },
   "devDependencies": {
