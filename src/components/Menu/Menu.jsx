@@ -93,6 +93,17 @@ const Image = styled.img`
   }
 `
 
+const LogoLink = styled.a`
+  margin: 0 auto;
+  max-width: 130px;
+  @media (min-width: 375px) {
+    max-width: auto;
+  }
+  @media (min-width: 1024px) {
+    max-width: 160px;
+  }
+`
+
 const ImageMenuMobile = styled.img`
   margin: 0 auto;
   max-width: 130px;
@@ -548,7 +559,9 @@ const Menu = ({className, closeMenuFxn}) => {
             </A>
           </Li>
         </Ul>
-        <Image src={logo} />
+        <LogoLink href="https://brumate.com/">
+          <Image src={logo} />
+        </LogoLink>
         <Icon displayInfo="mobile" src={search} />
         <Icon displayInfo="mobile" src={shop} />
         <IconsWrapper>
