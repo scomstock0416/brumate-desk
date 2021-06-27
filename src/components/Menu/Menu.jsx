@@ -160,10 +160,18 @@ const MenuContainer = styled.a`
   text-decoration: none;
 `
 
+const MenuContainerCollection = styled.a`
+  max-width: calc(100% / 4);
+  display: inline-block;
+  padding-left: 3rem;
+  text-decoration: none;
+`
+
 const MenuContainerTitle = styled.div`
   display: flex;
   width: calc(100% / 8);
   align-items: center;
+  min-width: 290px;
 `
 
 const MenuContainerTitleGift = styled.div`
@@ -867,7 +875,7 @@ const Menu = ({ className, closeMenuFxn }) => {
           )}
 
           {active === 'collections' && (
-            <MenuContainer>
+            <MenuContainerCollection>
               <SubLinks>
                 <SubLinksLi isActive={subinnermenu === 'newReleases'}>
                   <SubLinksA
@@ -1000,7 +1008,7 @@ const Menu = ({ className, closeMenuFxn }) => {
                 </SubLinksLi>
               </SubLinks>
 
-            </MenuContainer>
+            </MenuContainerCollection>
           )}
 
           {active === 'accesories' && (
