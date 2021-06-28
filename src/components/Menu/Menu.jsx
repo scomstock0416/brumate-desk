@@ -557,7 +557,7 @@ const Menu = ({ className, closeMenuFxn }) => {
             </A>
           </Li>
           <Li>
-            <A
+            <A href="https://brumate.com/pages/our-story"
               onMouseEnter={() => {
                 if (menu === '') {
                   showMenu('story')
@@ -592,11 +592,15 @@ const Menu = ({ className, closeMenuFxn }) => {
           </Currency>
           <Ul isAccount>
             <Li>
-              <A href="www.brumate.com#">ACCOUNT</A>
+              <A href="https://brumate.com/account">ACCOUNT</A>
             </Li>
           </Ul>
-          <Icon displayInfo="desktop" isSearch src={search} />
-          <Icon displayInfo="desktop" src={shop} />
+          <A href="https://brumate.com/search">
+            <Icon displayInfo="desktop" isSearch src={search} />
+          </A>
+          <A href="https://brumate.com/cart">
+            <Icon displayInfo="desktop" src={shop} />
+          </A>
         </IconsWrapper>
       </Nav>
       {menu === 'shop' && (
