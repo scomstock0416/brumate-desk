@@ -738,6 +738,22 @@ const Menu = ({ className, closeMenuFxn }) => {
                   Accessories
                 </SubLinksA>
               </SubLinksLi>
+
+              <SubLinksLi isActive={active === 'giftCards'}>
+                <SubLinksA
+                  href="https://www.brumate.com/products/brumate-e-gift-card"
+                  isActive={active === 'giftCards'}
+                  onMouseEnter={() => {
+                    if (active === '' || active !== 'giftCards') {
+                      showInnerMenu('giftCards')
+                      return
+                    }
+                    showInnerMenu('')
+                  }}
+                >
+                  Gift Cards
+                </SubLinksA>
+              </SubLinksLi>
             </SubLinks>
           </MenuContainerTitle>
           {active === 'wine' && (
@@ -1053,6 +1069,15 @@ const Menu = ({ className, closeMenuFxn }) => {
                 </SubLinksLi>
               </SubLinks>
             </MenuContainer>
+          )}
+
+          {active === 'giftCards' && (
+            <>
+              <MenuContainer href="https://brumate.com/products/brumate-e-gift-card">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-GiftCards_360x.jpg?v=1619738401" />
+                <ImageLegend>GIFT CARDS</ImageLegend>
+              </MenuContainer>
+            </>
           )}
         </Heading>
       )}
