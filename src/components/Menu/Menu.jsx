@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import logo from '../../images/menulogo.svg'
 import search from '../../images/search.png'
@@ -42,7 +42,7 @@ const Ul = styled.ul`
     list-style-type: none;
     padding: 0px;
     margin: 0px;
-    margin-right: ${({isAccount}) => (isAccount ? '45px' : '0')};
+    margin-right: ${({ isAccount }) => (isAccount ? '45px' : '0')};
   }
 `
 
@@ -57,11 +57,11 @@ const IconsWrapper = styled.div`
 
 const Icon = styled.img`
   max-width: 11px;
-  display: ${({displayInfo}) => (displayInfo === 'mobile' ? 'flex' : 'none')};
+  display: ${({ displayInfo }) => (displayInfo === 'mobile' ? 'flex' : 'none')};
   margin-right: 1.5rem;
   @media (min-width: 1024px) {
-    display: ${({displayInfo}) => (displayInfo !== 'mobile' ? 'flex' : 'none')};
-    margin-right: ${({isSearch}) => (isSearch ? '45px' : '0')};
+    display: ${({ displayInfo }) => (displayInfo !== 'mobile' ? 'flex' : 'none')};
+    margin-right: ${({ isSearch }) => (isSearch ? '45px' : '0')};
     max-width: 14px;
   }
 `
@@ -153,16 +153,25 @@ const Currency = styled.div`
   align-items: center;
 `
 
-const MenuContainer = styled.div`
+const MenuContainer = styled.a`
   max-width: calc(100% / 8);
   display: inline-block;
   padding-left: 3rem;
+  text-decoration: none;
+`
+
+const MenuContainerCollection = styled.a`
+  max-width: calc(100% / 4);
+  display: inline-block;
+  padding-left: 3rem;
+  text-decoration: none;
 `
 
 const MenuContainerTitle = styled.div`
   display: flex;
   width: calc(100% / 8);
   align-items: center;
+  min-width: 290px;
 `
 
 const MenuContainerTitleGift = styled.div`
@@ -204,6 +213,8 @@ const ImageLegend = styled.p`
   font-family: 'arquitecta';
   padding: 0;
   margin: 0;
+  text-align: center;
+  color: black;
 `
 
 const SVG = styled.svg`
@@ -401,7 +412,7 @@ const SubLinks = styled.ul`
 `
 
 const SubLinksLi = styled.li`
-  background: ${({isActive}) => (isActive ? 'black' : 'white')};
+  background: ${({ isActive }) => (isActive ? 'black' : 'white')};
 `
 
 const ShopContainer = styled.div`
@@ -415,7 +426,7 @@ const ShopContainer = styled.div`
 `
 
 const SubLinksA = styled.a`
-  color: ${({isActive}) => (isActive ? 'white' : 'black')};
+  color: ${({ isActive }) => (isActive ? 'white' : 'black')};
   font-weight: 700;
   display: block;
   padding: 1.5rem;
@@ -436,7 +447,7 @@ const ColorContainer = styled.div`
   height: 36px;
 `
 
-const Menu = ({className, closeMenuFxn}) => {
+const Menu = ({ className, closeMenuFxn }) => {
   const [active, setActive] = useState('')
   const [menu, setMenu] = useState('')
   const [subinnermenu, setSubInnerMenu] = useState('')
@@ -523,7 +534,7 @@ const Menu = ({className, closeMenuFxn}) => {
               onMouseEnter={() => {
                 if (menu === '') {
                   showMenu('shop')
-                  showInnerMenu('wine')
+                  showInnerMenu('beer')
                   return
                 }
                 closeMenu('')
@@ -546,7 +557,7 @@ const Menu = ({className, closeMenuFxn}) => {
             </A>
           </Li>
           <Li>
-            <A
+            <A href="https://brumate.com/pages/our-story"
               onMouseEnter={() => {
                 if (menu === '') {
                   showMenu('story')
@@ -581,35 +592,24 @@ const Menu = ({className, closeMenuFxn}) => {
           </Currency>
           <Ul isAccount>
             <Li>
-              <A href="www.brumate.com#">ACCOUNT</A>
+              <A href="https://brumate.com/account">ACCOUNT</A>
             </Li>
           </Ul>
-          <Icon displayInfo="desktop" isSearch src={search} />
-          <Icon displayInfo="desktop" src={shop} />
+          <A href="https://brumate.com/search">
+            <Icon displayInfo="desktop" isSearch src={search} />
+          </A>
+          <A href="https://brumate.com/cart">
+            <Icon displayInfo="desktop" src={shop} />
+          </A>
         </IconsWrapper>
       </Nav>
       {menu === 'shop' && (
         <Heading>
           <MenuContainerTitle>
             <SubLinks>
-              <SubLinksLi isActive={active === 'wine'}>
-                <SubLinksA
-                  isActive={active === 'wine'}
-                  onMouseEnter={() => {
-                    if (active === '' || active !== 'wine') {
-                      showInnerMenu('wine')
-                      return
-                    }
-                    showInnerMenu('')
-                  }}
-                  data-target="wine"
-                >
-                  Wine
-                </SubLinksA>
-              </SubLinksLi>
-
               <SubLinksLi isActive={active === 'beer'}>
                 <SubLinksA
+                  href="https://brumate.com/collections/beer"
                   isActive={active === 'beer'}
                   onMouseEnter={() => {
                     if (active === '' || active !== 'beer') {
@@ -620,12 +620,30 @@ const Menu = ({className, closeMenuFxn}) => {
                   }}
                   data-target="beer"
                 >
-                  Beer
+                  Beer & Can Coolers
+                </SubLinksA>
+              </SubLinksLi>
+
+              <SubLinksLi isActive={active === 'wine'}>
+                <SubLinksA
+                  href="https://brumate.com/collections/wine"
+                  isActive={active === 'wine'}
+                  onMouseEnter={() => {
+                    if (active === '' || active !== 'wine') {
+                      showInnerMenu('wine')
+                      return
+                    }
+                    showInnerMenu('')
+                  }}
+                  data-target="wine"
+                >
+                  Wine & Tumblers
                 </SubLinksA>
               </SubLinksLi>
 
               <SubLinksLi isActive={active === 'spirits'}>
                 <SubLinksA
+                  href="https://brumate.com/collections/spirits"
                   isActive={active === 'spirits'}
                   onMouseEnter={() => {
                     if (active === '' || active !== 'spirits') {
@@ -636,12 +654,45 @@ const Menu = ({className, closeMenuFxn}) => {
                   }}
                   data-target="spirits"
                 >
-                  Spirits
+                  Spirits & Barware
+                </SubLinksA>
+              </SubLinksLi>
+
+              <SubLinksLi isActive={active === 'coffee'}>
+                <SubLinksA
+                  href="https://brumate.com/collections/toddy"
+                  isActive={active === 'coffee'}
+                  onMouseEnter={() => {
+                    if (active === '' || active !== 'coffee') {
+                      showInnerMenu('coffee')
+                      return
+                    }
+                    showInnerMenu('')
+                  }}
+                >
+                  Coffee & Mugs
+                </SubLinksA>
+              </SubLinksLi>
+
+              <SubLinksLi isActive={active === 'rehydration'}>
+                <SubLinksA
+                  href="https://brumate.com/collections/brumate-rehydration-bottle"
+                  isActive={active === 'rehydration'}
+                  onMouseEnter={() => {
+                    if (active === '' || active !== 'rehydration') {
+                      showInnerMenu('rehydration')
+                      return
+                    }
+                    showInnerMenu('')
+                  }}
+                >
+                  Rehydration & Water Bottles
                 </SubLinksA>
               </SubLinksLi>
 
               <SubLinksLi isActive={active === 'coolers'}>
                 <SubLinksA
+                  href="https://brumate.com/products/meet-backtap"
                   isActive={active === 'coolers'}
                   onMouseEnter={() => {
                     if (active === '' || active !== 'coolers') {
@@ -656,8 +707,25 @@ const Menu = ({className, closeMenuFxn}) => {
                 </SubLinksA>
               </SubLinksLi>
 
+              <SubLinksLi isActive={active === 'collections'}>
+                <SubLinksA
+                  href="#"
+                  isActive={active === 'collections'}
+                  onMouseEnter={() => {
+                    if (active === '' || active !== 'collections') {
+                      showInnerMenu('collections')
+                      return
+                    }
+                    showInnerMenu('')
+                  }}
+                >
+                  Collections
+                </SubLinksA>
+              </SubLinksLi>
+
               <SubLinksLi isActive={active === 'accesories'}>
                 <SubLinksA
+                  href="https://brumate.com/collections/accessories"
                   isActive={active === 'accesories'}
                   onMouseEnter={() => {
                     if (active === '' || active !== 'accesories') {
@@ -671,38 +739,43 @@ const Menu = ({className, closeMenuFxn}) => {
                 </SubLinksA>
               </SubLinksLi>
 
-              <SubLinksLi isActive={active === 'shop'}>
+              <SubLinksLi isActive={active === 'giftCards'}>
                 <SubLinksA
-                  isActive={active === 'shop'}
+                  href="https://www.brumate.com/products/brumate-e-gift-card"
+                  isActive={active === 'giftCards'}
                   onMouseEnter={() => {
-                    if (active === '' || active !== 'shop') {
-                      showInnerMenu('shop')
+                    if (active === '' || active !== 'giftCards') {
+                      showInnerMenu('giftCards')
                       return
                     }
                     showInnerMenu('')
                   }}
                 >
-                  Shop by color
+                  Gift Cards
                 </SubLinksA>
               </SubLinksLi>
             </SubLinks>
           </MenuContainerTitle>
           {active === 'wine' && (
             <>
-              <MenuContainer>
-                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/1_nav-gift_set_2x_1_3cc78cd3-a5f4-4dfc-a878-bb93c9088b5d_360x.png?v=1570796950" />
+              <MenuContainer href="https://brumate.com/collections/winesulator">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-Winesulator_360x.jpg?v=1618160092" />
                 <ImageLegend>WINESULATOR</ImageLegend>
               </MenuContainer>
-              <MenuContainer>
-                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/0Y0A54872_360x.jpg?v=1575579975" />
+              <MenuContainer href="https://brumate.com/collections/gift-sets">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-WineGiftSet_96580fd7-fd4c-4367-bdf7-ade174a8a894_360x.jpg?v=1618163997" />
                 <ImageLegend>GIFT SET</ImageLegend>
               </MenuContainer>
-              <MenuContainer>
-                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/1_nav-gift_set_2x_2_360x.png?v=1570796845" />
+              <MenuContainer href="https://brumate.com/collections/infinity-collection">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/infinity_360x.jpg?v=1618941934" />
+                <ImageLegend>Winesulator Infinity</ImageLegend>
+              </MenuContainer>
+              <MenuContainer href="https://brumate.com/collections/uncorkd-xl">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-Uncorkd_360x.jpg?v=1618160183" />
                 <ImageLegend>UNCORK&#39;D</ImageLegend>
               </MenuContainer>
-              <MenuContainer>
-                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/1_nav-gift_set_2x_3_360x.png?v=1570796834" />
+              <MenuContainer href="https://brumate.com/collections/champagne-flute">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-Flute_360x.jpg?v=1618160218" />
                 <ImageLegend>CHAMPAGNE FLUTE</ImageLegend>
               </MenuContainer>
             </>
@@ -710,65 +783,252 @@ const Menu = ({className, closeMenuFxn}) => {
 
           {active === 'beer' && (
             <>
-              <MenuContainer>
-                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/1_nav-gift_set_2x_1_3cc78cd3-a5f4-4dfc-a878-bb93c9088b5d_360x.png?v=1570796950" />
+              <MenuContainer href="https://brumate.com/collections/hopsulator-slim">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-Slim_8f220a25-2318-4b76-aa61-e96deaf4eb78_360x.jpg?v=1618159502" />
                 <ImageLegend>HOPSULATOR SLIM</ImageLegend>
               </MenuContainer>
-              <MenuContainer>
-                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/5_nav-slim_2x_47d4fde2-bf63-402f-ad92-e8206efce914_360x.png?v=1570797714" />
+              <MenuContainer href="https://brumate.com/collections/hopsulator-trio">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/trio-nav_360x.jpg?v=1621445181" />
                 <ImageLegend>HOPSULATOR TRIO</ImageLegend>
               </MenuContainer>
-              <MenuContainer>
-                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/5_nav-slim_2x_2_360x.png?v=1570797850" />
-                <ImageLegend>HOPSULATOR BOTTL</ImageLegend>
+              <MenuContainer href="https://brumate.com/collections/hopsulator-duo">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/DUO_Nav_360x.jpg?v=1605250711" />
+                <ImageLegend>HOPSULATOR DUO</ImageLegend>
               </MenuContainer>
-              <MenuContainer>
-                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/5_nav-slim_2x_3_360x.png?v=1570797872" />
+              <MenuContainer href="https://brumate.com/collections/hopsulator-bott-l">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-Bottl_360x.jpg?v=1618159399" />
+                <ImageLegend>HOPSULATOR BOTT&#39;L</ImageLegend>
+              </MenuContainer>
+              <MenuContainer href="https://brumate.com/collections/juggernaut">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-Juggernaut_360x.jpg?v=1618159582" />
                 <ImageLegend>HOPSULATOR JUGGERNAUT</ImageLegend>
               </MenuContainer>
-              <MenuContainer>
-                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/5_nav-slim_2x_4_360x.png?v=1570797927" />
+              <MenuContainer href="https://brumate.com/collections/hopsulator-twist">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/TwistLedge_360x.jpg?v=1594848706" />
+                <ImageLegend>TWIST</ImageLegend>
+              </MenuContainer>
+              <MenuContainer href="https://brumate.com/collections/growl-r">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-Growlr_246392ca-cd3a-4b61-8718-c2f7a39ac8ec_360x.jpg?v=1618159659" />
                 <ImageLegend>GROWL&#39;R</ImageLegend>
               </MenuContainer>
-              <MenuContainer>
-                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/5_nav-slim_2x_5_360x.png?v=1570797953" />
+              <MenuContainer href="https://brumate.com/collections/imperial-pint">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/pint_5cff0065-c635-4beb-898d-a711c91a534b_360x.jpg?v=1618942122" />
                 <ImageLegend>IMPERIAL PINT</ImageLegend>
+              </MenuContainer>
+              <MenuContainer href="https://brumate.com/collections/growlr-gift-sets">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-GrowlrGiftSet_360x.jpg?v=1618164050" />
+                <ImageLegend>GROWL&#39;R GIFT SET</ImageLegend>
               </MenuContainer>
             </>
           )}
 
           {active === 'spirits' && (
             <>
-              <MenuContainer>
-                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/10_nav-margtini_2x_98817161-a458-4abb-9371-05758314d824_360x.png?v=1570798691" />
+              <MenuContainer href="https://brumate.com/collections/margtini-10oz-tumbler">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-Margtini_4d1abca1-5fe3-4e3a-9fb4-43ac9bc89406_360x.jpg?v=1618163476" />
                 <ImageLegend>MARGTINI</ImageLegend>
               </MenuContainer>
-              <MenuContainer>
-                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/Shaker_360x.jpg?v=1571066363" />
+              <MenuContainer href="https://brumate.com/collections/shaker-pint">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-ShakerPint_360x.jpg?v=1618163339" />
                 <ImageLegend>SHAKER PINT</ImageLegend>
               </MenuContainer>
-              <MenuContainer>
-                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/5_nav-slim_2x_2_360x.png?v=1570797850" />
+              <MenuContainer href="https://brumate.com/collections/nosr-the-unbreakable-whiskey-glass">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-Nosr_360x.jpg?v=1618163402" />
                 <ImageLegend>NOS&#39;R</ImageLegend>
               </MenuContainer>
-              <MenuContainer>
-                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/imperial-pint_360x.jpg?v=1561221533" />
+              <MenuContainer href="https://brumate.com/collections/imperial-pint-spirit">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/5_nav-slim_2x_5_360x_94c983b5-173f-48b8-ad2b-613c46b3efa9_360x.png?v=1608711784" />
                 <ImageLegend>IMPERIAL PINT</ImageLegend>
               </MenuContainer>
-              <MenuContainer>
-                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/5_nav-slim_2x_4_360x.png?v=1570797927" />
+              <MenuContainer href="https://brumate.com/collections/glitter-flask">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/13_nav-glitterflask_2x_da9a96fc-b1b8-4a6d-a459-c85976639a3d_360x.png?v=1570798838" />
                 <ImageLegend>GLITTER FLASK</ImageLegend>
+              </MenuContainer>
+              <MenuContainer href="https://brumate.com/collections/high-ball">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-Highball_360x.jpg?v=1618163665" />
+                <ImageLegend>Highball</ImageLegend>
+              </MenuContainer>
+              <MenuContainer href="https://brumate.com/collections/rocks">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-Rocks_360x.jpg?v=1618163697" />
+                <ImageLegend>Rocks</ImageLegend>
+              </MenuContainer>
+              <MenuContainer href="https://brumate.com/collections/fifth">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-Fifth_360x.jpg?v=1618163733" />
+                <ImageLegend>Fifth</ImageLegend>
+              </MenuContainer>
+              <MenuContainer href="https://brumate.com/collections/brumate-rehydration-bottle">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-ReHydration_360x.jpg?v=1618163959" />
+                <ImageLegend>REHYDRATION & WATER BOTTLES</ImageLegend>
+              </MenuContainer>
+              <MenuContainer href="https://brumate.com/collections/liquor-canteen">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-LiquorCanteen_360x.jpg?v=1618163773" />
+                <ImageLegend>Liquor Canteen</ImageLegend>
+              </MenuContainer>
+            </>
+          )}
+
+          {active === 'coffee' && (
+            <>
+              <MenuContainer href="https://brumate.com/collections/toddy">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-Toddy_360x.jpg?v=1619738418" />
+                <ImageLegend>Toddy</ImageLegend>
+              </MenuContainer>
+            </>
+          )}
+
+          {active === 'rehydration' && (
+            <>
+              <MenuContainer href="https://brumate.com/collections/brumate-rehydration-bottle">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-ReHydration_360x.jpg?v=1618163959" />
+                <ImageLegend>Rehydration & Water Bottles</ImageLegend>
               </MenuContainer>
             </>
           )}
 
           {active === 'coolers' && (
             <>
-              <MenuContainer>
-                <ImageMenu src="//cdn.shopify.com/s/files/1/1114/2308/files/BackTapImage_e191ad6c-8b68-48d5-a65c-64aaee274a98_360x.jpg?v=1594935448" />
-                <ImageLegend>COOLERS</ImageLegend>
+              <MenuContainer href="https://brumate.com/collections/backtap">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-Coolers_360x.jpg?v=1618875509" />
+                <ImageLegend>BackTap</ImageLegend>
               </MenuContainer>
             </>
+          )}
+
+          {active === 'collections' && (
+            <MenuContainerCollection>
+              <SubLinks>
+                <SubLinksLi isActive={subinnermenu === 'newReleases'}>
+                  <SubLinksA
+                    href="https://brumate.com/collections/new-releases"
+                    isActive={subinnermenu === 'newReleases'}
+                    noBold
+                    onMouseEnter={() => {
+                      if (subinnermenu === '') {
+                        showSubInnerMenu('newReleases')
+                        return
+                      }
+                      showSubInnerMenu('')
+                    }}
+                  >
+                    New Releases
+                  </SubLinksA>
+                </SubLinksLi>
+
+                <SubLinksLi isActive={subinnermenu === 'muv'}>
+                  <SubLinksA
+                    href="https://brumate.com/pages/muv-collection"
+                    noBold
+                    isActive={subinnermenu === 'muv'}
+                    onMouseEnter={() => {
+                      if (subinnermenu === '') {
+                        showSubInnerMenu('muv')
+                        return
+                      }
+                      showSubInnerMenu('')
+                    }}
+                  >
+                    Müv Collection
+                  </SubLinksA>
+                </SubLinksLi>
+                <SubLinksLi isActive={subinnermenu === 'bestSellers'}>
+                  <SubLinksA
+                    href="https://brumate.com/collections/best-sellers"
+                    noBold
+                    isActive={subinnermenu === 'bestSellers'}
+                    onMouseEnter={() => {
+                      if (subinnermenu === '') {
+                        showSubInnerMenu('bestSellers')
+                        return
+                      }
+                      showSubInnerMenu('')
+                    }}
+                  >
+                    Best Sellers
+                  </SubLinksA>
+                </SubLinksLi>
+                <SubLinksLi isActive={subinnermenu === 'deals'}>
+                  <SubLinksA
+                    href="https://brumate.com/collections/deals-and-steals"
+                    noBold
+                    isActive={subinnermenu === 'deals'}
+                    onMouseEnter={() => {
+                      if (subinnermenu === '') {
+                        showSubInnerMenu('deals')
+                        return
+                      }
+                      showSubInnerMenu('')
+                    }}
+                  >
+                    Deals & Steals
+                  </SubLinksA>
+                </SubLinksLi>
+                <SubLinksLi isActive={subinnermenu === 'botanicals'}>
+                  <SubLinksA
+                    href="https://brumate.com/collections/botanicals"
+                    noBold
+                    isActive={subinnermenu === 'botanicals'}
+                    onMouseEnter={() => {
+                      if (subinnermenu === '') {
+                        showSubInnerMenu('botanicals')
+                        return
+                      }
+                      showSubInnerMenu('')
+                    }}
+                  >
+                    Botanicals Collection
+                  </SubLinksA>
+                </SubLinksLi>
+                <SubLinksLi isActive={subinnermenu === 'tailgate'}>
+                  <SubLinksA
+                    href="https://brumate.com/collections/tailgate"
+                    noBold
+                    isActive={subinnermenu === 'tailgate'}
+                    onMouseEnter={() => {
+                      if (subinnermenu === '') {
+                        showSubInnerMenu('tailgate')
+                        return
+                      }
+                      showSubInnerMenu('')
+                    }}
+                  >
+                    Tailgate Collection
+                  </SubLinksA>
+                </SubLinksLi>
+                <SubLinksLi isActive={subinnermenu === 'wedding'}>
+                  <SubLinksA
+                    href="https://brumate.com/pages/wedding-gift-guide"
+                    noBold
+                    isActive={subinnermenu === 'wedding'}
+                    onMouseEnter={() => {
+                      if (subinnermenu === '') {
+                        showSubInnerMenu('wedding')
+                        return
+                      }
+                      showSubInnerMenu('')
+                    }}
+                  >
+                    Wedding Gift Guide
+                  </SubLinksA>
+                </SubLinksLi>
+                <SubLinksLi isActive={subinnermenu === 'glitter'}>
+                  <SubLinksA
+                    href="https://brumate.com/collections/glitter-rainbow"
+                    noBold
+                    isActive={subinnermenu === 'glitter'}
+                    onMouseEnter={() => {
+                      if (subinnermenu === '') {
+                        showSubInnerMenu('glitter')
+                        return
+                      }
+                      showSubInnerMenu('')
+                    }}
+                  >
+                    Glitter Rainbow
+                  </SubLinksA>
+                </SubLinksLi>
+              </SubLinks>
+
+            </MenuContainerCollection>
           )}
 
           {active === 'accesories' && (
@@ -776,6 +1036,7 @@ const Menu = ({className, closeMenuFxn}) => {
               <SubLinks>
                 <SubLinksLi isActive={subinnermenu === 'accesories'}>
                   <SubLinksA
+                    href="https://brumate.com/collections/accessories"
                     isActive={subinnermenu === 'accesories'}
                     noBold
                     onMouseEnter={() => {
@@ -792,6 +1053,7 @@ const Menu = ({className, closeMenuFxn}) => {
 
                 <SubLinksLi isActive={subinnermenu === 'parts'}>
                   <SubLinksA
+                    href="https://brumate.com/collections/replacement-parts"
                     noBold
                     isActive={subinnermenu === 'parts'}
                     onMouseEnter={() => {
@@ -809,65 +1071,12 @@ const Menu = ({className, closeMenuFxn}) => {
             </MenuContainer>
           )}
 
-          {active === 'shop' && (
+          {active === 'giftCards' && (
             <>
-              <ShopContainer id="nav_shop_by_colors">
-                <ColorContainer class="w-1/4">
-                  <a href="/collections/shop-by-color?data-id=9&amp;data-themeid=1">
-                    <ImageColor src="https://custom-app.s3.amazonaws.com/uploads/swatch_image/merdiot_f90e4436-2c4c-4046-8276-8a90d3188954.png" />
-                  </a>
-                </ColorContainer>
-                <ColorContainer class="w-1/4">
-                  <a href="/collections/shop-by-color?data-id=10&amp;data-themeid=1">
-                    <ImageColor src="https://custom-app.s3.amazonaws.com/uploads/swatch_image/Rose_Gold_a8a9cf15-cf41-44b5-941f-3eddae46e9b3.png" />
-                  </a>
-                </ColorContainer>
-                <ColorContainer class="w-1/4">
-                  <a href="/collections/shop-by-color?data-id=11&amp;data-themeid=1">
-                    <ImageColor src="https://custom-app.s3.amazonaws.com/uploads/swatch_image/Peacock_dec3e425-379b-434d-9e8d-2600cb451d79.png" />
-                  </a>
-                </ColorContainer>
-                <ColorContainer class="w-1/4">
-                  <a href="/collections/shop-by-color?data-id=12&amp;data-themeid=1">
-                    <ImageColor src="https://custom-app.s3.amazonaws.com/uploads/swatch_image/Charcoal_9dc00feb-8f65-45de-825f-7a28b17f4265.png" />
-                  </a>
-                </ColorContainer>
-                <ColorContainer class="w-1/4">
-                  <a href="/collections/shop-by-color?data-id=13&amp;data-themeid=1">
-                    <ImageColor src="https://custom-app.s3.amazonaws.com/uploads/swatch_image/aqva_d1fb9f6d-dfca-4273-978b-9f813a8e3d49.png" />
-                  </a>
-                </ColorContainer>
-                <ColorContainer class="w-1/4">
-                  <a href="/collections/shop-by-color?data-id=14&amp;data-themeid=1">
-                    <ImageColor src="https://custom-app.s3.amazonaws.com/uploads/swatch_image/purple_2abee730-f1e9-47b3-9e07-28752823e1d9.png" />
-                  </a>
-                </ColorContainer>
-                <ColorContainer class="w-1/4">
-                  <a href="/collections/shop-by-color?data-id=16&amp;data-themeid=1">
-                    <ImageColor src="https://custom-app.s3.amazonaws.com/uploads/swatch_image/carara-gliter_c4a382ec-de68-43b7-aa00-2cc5f1d7a505.png" />
-                  </a>
-                </ColorContainer>
-                <ColorContainer class="w-1/4">
-                  <a href="/collections/shop-by-color?data-id=17&amp;data-themeid=1">
-                    <ImageColor src="https://custom-app.s3.amazonaws.com/uploads/swatch_image/roes-gold_a0b5131b-a4f8-4ed7-bb3d-42e68333dc97.png" />
-                  </a>
-                </ColorContainer>
-                <ColorContainer class="w-1/4">
-                  <a href="/collections/shop-by-color?data-id=18&amp;data-themeid=1">
-                    <ImageColor src="https://custom-app.s3.amazonaws.com/uploads/swatch_image/pink_a576d936-6491-434e-b60a-2c0d76006833.png" />
-                  </a>
-                </ColorContainer>
-                <ColorContainer class="w-1/4">
-                  <a href="/collections/shop-by-color?data-id=19&amp;data-themeid=1">
-                    <ImageColor src="https://custom-app.s3.amazonaws.com/uploads/swatch_image/gold_cfeba9dd-f42f-43b6-9110-b8e2169b7d93.png" />
-                  </a>
-                </ColorContainer>
-                <ColorContainer class="w-1/4">
-                  <a href="/collections/shop-by-color?data-id=48&amp;data-themeid=1">
-                    <ImageColor src="https://custom-app.s3.amazonaws.com/uploads/swatch_image/MERLOT_83b3c61a-dca7-4697-8423-e393310bddf3.png" />
-                  </a>
-                </ColorContainer>
-              </ShopContainer>
+              <MenuContainer href="https://brumate.com/products/brumate-e-gift-card">
+                <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-GiftCards_360x.jpg?v=1619738401" />
+                <ImageLegend>GIFT CARDS</ImageLegend>
+              </MenuContainer>
             </>
           )}
         </Heading>
@@ -879,17 +1088,21 @@ const Menu = ({className, closeMenuFxn}) => {
             <MenuTitle>GIFT SETS</MenuTitle>
           </MenuContainerTitleGift>
           <>
-            <MenuContainer>
-              <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/gift-img_360x_e72df0e0-0f53-4857-8c96-b2cfdd6681a4_360x.jpg?v=1572887573" />
+            <MenuContainer href="https://brumate.com/pages/custom-gift-set">
+              <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-WineGiftSet_96580fd7-fd4c-4367-bdf7-ade174a8a894_360x.jpg?v=1618163997" />
               <ImageLegend>WINE GIFT SETS</ImageLegend>
             </MenuContainer>
-            <MenuContainer>
-              <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/growl_360x_93465b4b-5d3b-4b11-ad10-842272e8875b_360x.jpg?v=1572887303https://cdn.shopify.com/s/files/1/1114/2308/files/0Y0A54872_360x.jpg?v=1575579975" />
+            <MenuContainer href="https://brumate.com/pages/growler-custom-gift-set">
+              <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-GrowlrGiftSet_360x.jpg?v=1618164050" />
               <ImageLegend>GROWL'R GIFT SET</ImageLegend>
             </MenuContainer>
-            <MenuContainer>
-              <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/MargTini_360x_46ceb45e-56fe-4f12-96c8-ce01ead64b9f_360x.jpg?v=1572887373" />
+            <MenuContainer href="https://brumate.com/pages/margtini-gift-set">
+              <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-Web-Q1-Nav-MargtiniSet_360x.jpg?v=1618160444" />
               <ImageLegend>MARGTINI GIFT SET</ImageLegend>
+            </MenuContainer>
+            <MenuContainer href="https://www.brumate.com/pages/create-your-own">
+              <ImageMenu src="https://cdn.shopify.com/s/files/1/1114/2308/files/BruMate-CreateYourOwn-FifthRocks-Nav-1000x1000_360x.jpg?v=1611673012" />
+              <ImageLegend>Rocks Gift Set</ImageLegend>
             </MenuContainer>
           </>
         </Heading>
