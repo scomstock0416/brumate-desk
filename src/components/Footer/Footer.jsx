@@ -353,7 +353,7 @@ const Footer = () => {
                   </LI>
 
                   <LI>
-                    <A href="https://www.brumate.com/apps/store-locator/">
+                    <A href="https://brumate.com/pages/store-locator/">
                       STORE LOCATOR
                     </A>
                   </LI>
@@ -365,7 +365,7 @@ const Footer = () => {
                   </LI>
 
                   <LI>
-                    <A href="https://www.brumate.com/pages/contact">
+                    <A href="https://brumate.gorgias.help/en-US">
                       Contact Us
                     </A>
                   </LI>
